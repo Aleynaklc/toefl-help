@@ -1,0 +1,62 @@
+[
+  {
+    "id": "email-housing",
+    "title": "Yurt gürültüsü şikayeti",
+    "scenario": "You live in a university dormitory. For the past two weeks, construction noise near your building has made it very difficult to study or sleep. Write an email to the Housing Office.",
+    "bullets": [
+      "Explain the problem clearly",
+      "Explain how it has been affecting you",
+      "Propose a specific solution you would like"
+    ]
+  },
+  {
+    "id": "email-extension",
+    "title": "Ödev süresi uzatma talebi",
+    "scenario": "You are unable to submit a major course assignment by the deadline due to a family emergency. Write an email to your professor.",
+    "bullets": [
+      "Explain briefly why you need more time",
+      "Propose a specific new deadline",
+      "Reassure the professor about the quality of your work"
+    ]
+  },
+  {
+    "id": "email-registration",
+    "title": "Kayıt sorunu",
+    "scenario": "You tried to register for a required course online, but the system shows it is full, even though you were told there would be space reserved for your major. Write an email to the registrar's office.",
+    "bullets": [
+      "Describe the problem clearly",
+      "Mention what you were told, and by whom",
+      "Request specific action from the office"
+    ]
+  },
+  {
+    "id": "email-group",
+    "title": "Grup projesi zamanlama çakışması",
+    "scenario": "You are part of a group project team. One of your regular meeting times no longer works for you because of a new schedule conflict. Write an email to your teammates.",
+    "bullets": [
+      "Explain the conflict",
+      "Propose at least one alternative time",
+      "Show willingness to accommodate the group's preference"
+    ]
+  },
+  {
+    "id": "email-library",
+    "title": "Kütüphane cezası itirazı",
+    "scenario": "You returned a library book on time, but the library system shows it as overdue and has charged you a fine. Write an email to the library services office.",
+    "bullets": [
+      "Explain the situation clearly",
+      "Mention any evidence you have (for example, a return confirmation)",
+      "Politely request that the fine be removed"
+    ]
+  },
+  {
+    "id": "email-career",
+    "title": "Kariyer merkezinden randevu talebi",
+    "scenario": "You want to schedule a meeting with your university's career center to discuss internship opportunities in your field. Write an email requesting an appointment.",
+    "bullets": [
+      "Explain what kind of help you are looking for",
+      "Mention your general availability",
+      "Ask what you should prepare before the meeting"
+    ]
+  }
+]

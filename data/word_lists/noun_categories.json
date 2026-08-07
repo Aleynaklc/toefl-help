@@ -1,0 +1,47 @@
+[
+  {
+    "id": "egitim",
+    "label": "Eğitim",
+    "raw": "education - eğitim\ncurriculum - müfredat\nlecture - ders, konferans\nassignment - ödev\nresearch - araştırma\nthesis - tez\ndegree - derece, diploma\nscholarship - burs\ntuition - öğrenim ücreti\nfaculty - fakülte, öğretim üyeleri\nenrollment - kayıt\nsemester - dönem, sömestr\nacademy - akademi\nliteracy - okuryazarlık\nknowledge - bilgi\nskill - beceri\ndiscipline - disiplin, alan\ninstitution - kurum\ninstructor - eğitmen\nprofessor - profesör\nclassroom - sınıf\ntextbook - ders kitabı\nexam - sınav\ngrade - not\ndiploma - diploma\ncertificate - sertifika\nseminar - seminer\nworkshop - çalıştay, atölye\nsyllabus - ders programı\nquestionnaire - anket, soru formu\nmethodology - yöntembilim, metodoloji"
+  },
+  {
+    "id": "is-ekonomi",
+    "label": "İş ve Ekonomi",
+    "raw": "economy - ekonomi\nmarket - pazar, piyasa\nindustry - sanayi, endüstri\ncorporation - şirket, kurum\nenterprise - girişim, teşebbüs\nrevenue - gelir\nprofit - kar\nloss - zarar\ninvestment - yatırım\nbudget - bütçe\nexpense - gider, harcama\nasset - varlık\nliability - yükümlülük, borç\ndebt - borç\ncapital - sermaye\ninflation - enflasyon\nrecession - durgunluk, resesyon\ndemand - talep\nsupply - arz\nconsumer - tüketici\ncustomer - müşteri\ntransaction - işlem\ncontract - sözleşme\nnegotiation - müzakere\nmerger - şirket birleşmesi\nacquisition - satın alma\nstrategy - strateji\ncompetition - rekabet\nmonopoly - tekel\nsubsidy - sübvansiyon, destek\ntariff - gümrük tarifesi\ntrade - ticaret\nexport - ihracat\nimport - ithalat\nshareholder - hissedar\nstakeholder - paydaş"
+  },
+  {
+    "id": "bilim-doga",
+    "label": "Bilim ve Doğa",
+    "raw": "hypothesis - hipotez, varsayım\ntheory - teori\nexperiment - deney\nobservation - gözlem\nevidence - kanıt\ndata - veri\nanalysis - analiz\nconclusion - sonuç\nvariable - değişken\nsample - örnek, numune\nspecies - tür (canlı)\norganism - organizma\necosystem - ekosistem\nhabitat - yaşam alanı\nevolution - evrim\ngene - gen\nmolecule - molekül\natom - atom\nparticle - parçacık\nenergy - enerji\ngravity - yer çekimi\nradiation - radyasyon\nclimate - iklim\natmosphere - atmosfer\ntemperature - sıcaklık\npressure - basınç\nmineral - mineral\nfossil - fosil\nextinction - yok olma, tükeniş\nmutation - mutasyon\ncell - hücre\nbacteria - bakteri\nvirus - virüs\nnutrient - besin öğesi\nphotosynthesis - fotosentez"
+  },
+  {
+    "id": "toplum-yonetim",
+    "label": "Toplum ve Yönetim",
+    "raw": "government - hükümet\npolicy - politika\nlegislation - yasama, mevzuat\nregulation - düzenleme, yönetmelik\ncitizen - vatandaş\ndemocracy - demokrasi\nelection - seçim\nconstitution - anayasa\nauthority - yetki, otorite\nbureaucracy - bürokrasi\ndiplomacy - diplomasi\ntreaty - anlaşma, antlaşma\nsanction - yaptırım\njustice - adalet\ncourt - mahkeme\nverdict - hüküm, karar\njury - jüri\nlawsuit - dava\ncrime - suç\npunishment - ceza\nprison - hapishane\nrights - haklar\nfreedom - özgürlük\nequality - eşitlik\ninequality - eşitsizlik\npoverty - yoksulluk\nwelfare - refah, sosyal yardım\ncensus - nüfus sayımı\npopulation - nüfus\nmigration - göç"
+  },
+  {
+    "id": "saglik-gunluk",
+    "label": "Sağlık ve Günlük Yaşam",
+    "raw": "health - sağlık\ndisease - hastalık\nillness - hastalık, rahatsızlık\nsymptom - belirti\ndiagnosis - teşhis\ntreatment - tedavi\nmedication - ilaç, tedavi\ntherapy - terapi\nsurgery - ameliyat\npatient - hasta\nphysician - doktor, hekim\nnutrition - beslenme\ndiet - diyet, beslenme düzeni\nexercise - egzersiz\nfatigue - yorgunluk\nimmunity - bağışıklık\ninfection - enfeksiyon\nvaccine - aşı\nepidemic - salgın\nhygiene - hijyen\nwellness - iyi olma hali, esenlik\ndisability - engellilik\nrecovery - iyileşme\nroutine - rutin\nhousehold - ev halkı, hane\nchore - ev işi\nappointment - randevu\nerrand - ayak işi\ngrocery - market alışverişi"
+  },
+  {
+    "id": "teknoloji",
+    "label": "Teknoloji",
+    "raw": "technology - teknoloji\ndevice - cihaz\nsoftware - yazılım\nhardware - donanım\nalgorithm - algoritma\ndatabase - veritabanı\nnetwork - ağ\nserver - sunucu\napplication - uygulama\ninterface - arayüz\ninnovation - yenilik, inovasyon\nautomation - otomasyon\nrobotics - robotik\nartificial intelligence - yapay zeka\nencryption - şifreleme\nbandwidth - bant genişliği\nstorage - depolama\nplatform - platform\nmalfunction - arıza\nglitch - küçük hata, arıza\nprototype - prototip\nsimulation - simülasyon\ncomponent - bileşen, parça\ncircuit - devre\nsensor - sensör, algılayıcı\nfirmware - yerleşik yazılım\nchip - çip\nprotocol - protokol"
+  },
+  {
+    "id": "cevre",
+    "label": "Çevre",
+    "raw": "environment - çevre\npollution - kirlilik\nemission - emisyon, salım\nsustainability - sürdürülebilirlik\nconservation - koruma (doğa)\ndeforestation - ormansızlaşma\nbiodiversity - biyoçeşitlilik\nrenewable energy - yenilenebilir enerji\nresource - kaynak\nwaste - atık\nrecycling - geri dönüşüm\ndrought - kuraklık\nflood - sel\nwildlife - yaban hayatı\ngreenhouse effect - sera etkisi\ncontamination - kirlenme\noverpopulation - aşırı nüfus artışı\ncarbon footprint - karbon ayak izi\nglacier - buzul\ncoral reef - mercan resifi\noil spill - petrol sızıntısı\nozone layer - ozon tabakası\nlandfill - çöp sahası\nerosion - erozyon\nsediment - tortu, çökelti"
+  },
+  {
+    "id": "sanat-kultur",
+    "label": "Sanat ve Kültür",
+    "raw": "culture - kültür\ntradition - gelenek\nheritage - miras (kültürel)\ncustom - adet, örf\nritual - ritüel, ayin\nceremony - tören\nliterature - edebiyat\nnovel - roman\npoetry - şiir\nnarrative - anlatı, öykü\ncharacter - karakter\nplot - olay örgüsü\ntheme - tema\ngenre - tür (edebi/sanatsal)\nsymbolism - sembolizm\nmetaphor - metafor, mecaz\narchitecture - mimari\nsculpture - heykel\npainting - resim, tablo\nexhibition - sergi\nmuseum - müze\nfestival - festival\nfolklore - folklor, halk kültürü\nartifact - eser, obje (tarihi)\nmasterpiece - başyapıt"
+  },
+  {
+    "id": "duygular-psikoloji",
+    "label": "Duygular ve Psikoloji",
+    "raw": "emotion - duygu\nanxiety - kaygı, anksiyete\ndepression - depresyon\nmotivation - motivasyon\nperception - algı\nbehavior - davranış\npersonality - kişilik\nattitude - tutum, davranış biçimi\nmemory - hafıza, bellek\nawareness - farkındalık\nconsciousness - bilinç\nsubconscious - bilinçaltı\ntrauma - travma\nresilience - dayanıklılık, direnç\nempathy - empati\nself-esteem - özgüven, öz saygı\nfrustration - hayal kırıklığı, engellenme\ngrief - keder, yas\ncuriosity - merak\nconfidence - özgüven\ninsecurity - güvensizlik\ntemperament - mizaç, huy\ninstinct - içgüdü\ncognition - biliş, kavrama\nbias - yanlılık, önyargı"
+  }
+]

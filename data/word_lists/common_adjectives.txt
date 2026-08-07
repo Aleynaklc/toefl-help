@@ -1,0 +1,1076 @@
+good - iyi
+bad - kötü
+big - büyük
+small - küçük
+large - büyük, geniş
+little - küçük, az
+high - yüksek
+low - alçak, düşük
+long - uzun
+short - kısa
+old - yaşlı, eski
+new - yeni
+young - genç
+different - farklı
+same - aynı
+few - az sayıda
+many - çok sayıda
+other - diğer
+right - doğru, sağ
+wrong - yanlış
+important - önemli
+significant - önemli, belirgin
+necessary - gerekli
+possible - mümkün
+impossible - imkânsız
+likely - muhtemel
+unlikely - olası olmayan
+certain - kesin, belirli
+sure - emin
+clear - açık, net
+obvious - açık, belli
+apparent - görünen, açık
+evident - belirgin, açık
+particular - belirli, özel
+specific - belirli, spesifik
+general - genel
+common - yaygın, ortak
+rare - nadir
+unique - eşsiz, benzersiz
+typical - tipik
+normal - normal
+unusual - alışılmadık
+strange - tuhaf, garip
+weird - tuhaf, acayip
+familiar - tanıdık
+unfamiliar - tanıdık olmayan
+similar - benzer
+identical - aynı, özdeş
+consistent - tutarlı
+inconsistent - tutarsız
+stable - kararlı, dengeli
+unstable - kararsız
+reliable - güvenilir
+unreliable - güvenilmez
+accurate - doğru, kesin
+inaccurate - yanlış, hatalı
+precise - kesin, hassas
+vague - belirsiz, muğlak
+ambiguous - belirsiz, iki anlamlı
+complex - karmaşık
+simple - basit
+complicated - karmaşık, girift
+straightforward - basit, anlaşılır
+difficult - zor
+easy - kolay
+hard - zor, sert
+tough - zor, sert
+challenging - zorlayıcı, güç
+demanding - zorlu, talepkar
+convenient - uygun, elverişli
+inconvenient - uygunsuz, elverişsiz
+suitable - uygun
+appropriate - uygun, yerinde
+inappropriate - uygunsuz
+adequate - yeterli
+inadequate - yetersiz
+sufficient - yeterli
+insufficient - yetersiz
+excessive - aşırı, fazla
+extreme - aşırı, uç
+moderate - ölçülü, orta düzeyde
+minimal - minimum, en az
+optimal - en uygun, optimal
+efficient - verimli, etkili
+inefficient - verimsiz
+effective - etkili
+ineffective - etkisiz
+productive - üretken
+valuable - değerli
+worthless - değersiz
+useful - faydalı, kullanışlı
+useless - işe yaramaz
+beneficial - yararlı, faydalı
+harmful - zararlı
+dangerous - tehlikeli
+safe - güvenli
+risky - riskli
+secure - güvenli, sağlam
+vulnerable - zarar görebilir, kırılgan
+fragile - kırılgan, hassas
+durable - dayanıklı
+sturdy - sağlam, dayanıklı
+flexible - esnek
+rigid - sert, katı
+solid - sağlam, katı
+dense - yoğun
+sparse - seyrek
+thick - kalın
+thin - ince
+heavy - ağır
+light - hafif, açık (renk)
+strong - güçlü
+weak - zayıf
+powerful - güçlü, etkili
+vigorous - güçlü, dinamik
+active - aktif
+passive - pasif
+dynamic - dinamik
+static - durağan
+constant - sabit, sürekli
+fixed - sabit
+temporary - geçici
+permanent - kalıcı, sürekli
+brief - kısa süreli
+lengthy - uzun (süre)
+frequent - sık
+infrequent - seyrek
+occasional - ara sıra olan
+regular - düzenli
+irregular - düzensiz
+gradual - kademeli, aşamalı
+sudden - ani
+immediate - anında, hemen
+prompt - hızlı, çabuk
+delayed - geciken, ertelenmiş
+early - erken
+late - geç
+recent - son zamanlardaki
+current - şimdiki, güncel
+previous - önceki
+subsequent - sonraki
+initial - ilk, başlangıç
+final - son, nihai
+ultimate - nihai, en son
+eventual - nihai, sonunda gerçekleşen
+ongoing - süregelen, devam eden
+pending - askıda, bekleyen
+outstanding - üstün, ödenmemiş
+remarkable - dikkat çekici, olağanüstü
+extraordinary - olağanüstü
+ordinary - sıradan
+mediocre - vasat, orta düzey
+exceptional - istisnai, olağanüstü
+superior - üstün
+inferior - aşağı, düşük kalite
+equivalent - eşdeğer
+comparable - karşılaştırılabilir
+proportional - orantılı
+relevant - ilgili, alakalı
+irrelevant - ilgisiz, alakasız
+crucial - çok önemli, kritik
+critical - kritik, eleştirel
+vital - hayati, temel
+essential - gerekli, temel
+fundamental - temel, esas
+basic - temel, basit
+advanced - ileri, gelişmiş
+sophisticated - gelişmiş, karmaşık
+elaborate - ayrıntılı, detaylı
+detailed - detaylı, ayrıntılı
+comprehensive - kapsamlı
+thorough - kapsamlı, dikkatli
+extensive - kapsamlı, geniş
+limited - sınırlı
+restricted - kısıtlı
+exclusive - özel, münhasır
+inclusive - kapsayıcı
+diverse - çeşitli, farklı
+uniform - tekdüze, aynı
+homogeneous - homojen, tekdüze
+heterogeneous - heterojen, çeşitli
+abstract - soyut
+concrete - somut
+theoretical - teorik
+practical - pratik, uygulamalı
+realistic - gerçekçi
+unrealistic - gerçekçi olmayan
+optimistic - iyimser
+pessimistic - kötümser
+confident - kendine güvenen
+anxious - kaygılı
+nervous - gergin, sinirli
+calm - sakin
+relaxed - rahat, gevşemiş
+tense - gergin
+comfortable - rahat, konforlu
+uncomfortable - rahatsız
+satisfied - tatmin olmuş
+dissatisfied - tatminsiz
+content - hoşnut, tatmin olmuş
+frustrated - hayal kırıklığına uğramış
+disappointed - hayal kırıklığına uğramış
+delighted - çok mutlu, sevinçli
+thrilled - çok heyecanlı
+excited - hevesli, heyecanlı
+bored - sıkılmış
+curious - meraklı
+enthusiastic - hevesli, coşkulu
+passionate - tutkulu
+indifferent - kayıtsız, ilgisiz
+reluctant - isteksiz, gönülsüz
+eager - istekli, hevesli
+willing - istekli, gönüllü
+determined - kararlı, azimli
+persistent - azimli, direngen
+stubborn - inatçı
+generous - cömert
+selfish - bencil
+humble - alçakgönüllü
+arrogant - kibirli
+honest - dürüst
+dishonest - dürüst olmayan
+loyal - sadık
+faithful - sadık, vefalı
+trustworthy - güvenilir
+suspicious - şüpheci, kuşkulu
+cautious - dikkatli, tedbirli
+careless - dikkatsiz
+careful - dikkatli
+attentive - dikkatli, ilgili
+negligent - ihmalkar
+diligent - çalışkan, gayretli
+lazy - tembel
+ambitious - hırslı, azimli
+modest - alçakgönüllü, mütevazı
+polite - kibar
+rude - kaba
+aggressive - agresif, saldırgan
+sociable - sosyal, girişken
+shy - çekingen
+outgoing - dışa dönük, sosyal
+introverted - içe dönük
+extroverted - dışa dönük
+`.trim();
+
+const COMMON_ADVERBS_RAW = `
+quickly - hızlı bir şekilde
+slowly - yavaşça
+carefully - dikkatlice
+carelessly - dikkatsizce
+easily - kolayca
+hardly - zorlukla, hemen hemen hiç
+extremely - aşırı derecede
+completely - tamamen
+partially - kısmen
+entirely - tamamen
+totally - tamamen
+absolutely - kesinlikle, tamamen
+definitely - kesinlikle
+probably - muhtemelen
+possibly - muhtemelen, belki
+certainly - kesinlikle
+surely - kesinlikle, elbette
+undoubtedly - şüphesiz
+apparently - görünüşe göre
+obviously - açıkça, belli ki
+clearly - açıkça
+evidently - besbelli, açıkça
+seemingly - görünüşte
+presumably - tahminen, muhtemelen
+frequently - sık sık
+often - genellikle, sık sık
+rarely - nadiren
+seldom - nadiren
+occasionally - ara sıra
+sometimes - bazen
+always - her zaman
+never - asla
+usually - genellikle
+generally - genel olarak
+typically - tipik olarak
+normally - normalde
+constantly - sürekli
+continuously - sürekli olarak
+repeatedly - tekrar tekrar
+eventually - sonunda
+finally - sonunda, nihayet
+immediately - hemen, anında
+instantly - anında
+gradually - kademeli olarak
+suddenly - aniden
+abruptly - ansızın, aniden
+directly - doğrudan
+indirectly - dolaylı olarak
+particularly - özellikle
+especially - özellikle
+specifically - özellikle, belirli olarak
+mainly - başlıca, esas olarak
+primarily - başlıca, öncelikle
+largely - büyük ölçüde
+mostly - çoğunlukla
+partly - kısmen
+approximately - yaklaşık olarak
+roughly - kabaca, yaklaşık
+exactly - tam olarak, kesinlikle
+precisely - tam olarak, kesin biçimde
+virtually - hemen hemen, sanal olarak
+practically - pratik olarak, hemen hemen
+essentially - esasında, temelde
+basically - temelde, esasen
+ultimately - sonuçta, nihayetinde
+consequently - sonuç olarak
+therefore - bu nedenle
+thus - böylece, bu nedenle
+hence - bu nedenle, dolayısıyla
+accordingly - buna göre, dolayısıyla
+otherwise - aksi takdirde
+nevertheless - bununla birlikte, yine de
+nonetheless - yine de, buna karşın
+however - ancak, yine de
+moreover - ayrıca, üstelik
+furthermore - ayrıca, bunun yanı sıra
+additionally - ek olarak
+similarly - benzer şekilde
+likewise - aynı şekilde
+conversely - tersine, aksine
+instead - onun yerine
+alternatively - alternatif olarak
+meanwhile - bu arada
+simultaneously - eş zamanlı olarak
+increasingly - artan bir şekilde
+significantly - önemli ölçüde
+considerably - önemli derecede
+substantially - önemli ölçüde
+slightly - hafifçe, biraz
+barely - ancak, güçbela
+merely - sadece, yalnızca
+simply - basitçe, sadece
+literally - gerçek anlamda, tam anlamıyla
+figuratively - mecazi olarak
+genuinely - gerçekten, samimiyetle
+honestly - dürüst olarak, açıkçası
+sincerely - içtenlikle, samimiyetle
+truly - gerçekten
+actually - aslında
+supposedly - sözde, iddiaya göre
+allegedly - iddiaya göre, sözde
+reportedly - bildirildiğine göre
+personally - şahsen, kişisel olarak
+individually - tek tek, bireysel olarak
+collectively - toplu olarak, birlikte
+jointly - birlikte, ortaklaşa
+independently - bağımsız olarak
+separately - ayrı ayrı
+willingly - isteyerek, gönüllü olarak
+reluctantly - isteksizce
+deliberately - kasıtlı olarak
+intentionally - kasıtlı olarak
+accidentally - kazara, yanlışlıkla
+unintentionally - istemeden, kasıtsızca
+consistently - tutarlı bir şekilde
+inevitably - kaçınılmaz olarak
+undeniably - inkâr edilemez şekilde
+arguably - tartışmaya açık olarak
+theoretically - teorik olarak
+technically - teknik olarak
+officially - resmi olarak
+formally - resmi bir şekilde
+informally - gayri resmi olarak
+publicly - alenen, kamuoyu önünde
+privately - özel olarak, gizlice
+locally - yerel olarak
+globally - küresel olarak
+internationally - uluslararası düzeyde
+domestically - yurt içinde
+temporarily - geçici olarak
+permanently - kalıcı olarak
+regularly - düzenli olarak
+irregularly - düzensiz olarak
+`.trim();
+
+const NOUN_CATEGORIES = [
+  {
+    id: "egitim",
+    label: "Eğitim",
+    raw: `
+education - eğitim
+curriculum - müfredat
+lecture - ders, konferans
+assignment - ödev
+research - araştırma
+thesis - tez
+degree - derece, diploma
+scholarship - burs
+tuition - öğrenim ücreti
+faculty - fakülte, öğretim üyeleri
+enrollment - kayıt
+semester - dönem, sömestr
+academy - akademi
+literacy - okuryazarlık
+knowledge - bilgi
+skill - beceri
+discipline - disiplin, alan
+institution - kurum
+instructor - eğitmen
+professor - profesör
+classroom - sınıf
+textbook - ders kitabı
+exam - sınav
+grade - not
+diploma - diploma
+certificate - sertifika
+seminar - seminer
+workshop - çalıştay, atölye
+syllabus - ders programı
+questionnaire - anket, soru formu
+methodology - yöntembilim, metodoloji
+`.trim(),
+  },
+  {
+    id: "is-ekonomi",
+    label: "İş ve Ekonomi",
+    raw: `
+economy - ekonomi
+market - pazar, piyasa
+industry - sanayi, endüstri
+corporation - şirket, kurum
+enterprise - girişim, teşebbüs
+revenue - gelir
+profit - kar
+loss - zarar
+investment - yatırım
+budget - bütçe
+expense - gider, harcama
+asset - varlık
+liability - yükümlülük, borç
+debt - borç
+capital - sermaye
+inflation - enflasyon
+recession - durgunluk, resesyon
+demand - talep
+supply - arz
+consumer - tüketici
+customer - müşteri
+transaction - işlem
+contract - sözleşme
+negotiation - müzakere
+merger - şirket birleşmesi
+acquisition - satın alma
+strategy - strateji
+competition - rekabet
+monopoly - tekel
+subsidy - sübvansiyon, destek
+tariff - gümrük tarifesi
+trade - ticaret
+export - ihracat
+import - ithalat
+shareholder - hissedar
+stakeholder - paydaş
+`.trim(),
+  },
+  {
+    id: "bilim-doga",
+    label: "Bilim ve Doğa",
+    raw: `
+hypothesis - hipotez, varsayım
+theory - teori
+experiment - deney
+observation - gözlem
+evidence - kanıt
+data - veri
+analysis - analiz
+conclusion - sonuç
+variable - değişken
+sample - örnek, numune
+species - tür (canlı)
+organism - organizma
+ecosystem - ekosistem
+habitat - yaşam alanı
+evolution - evrim
+gene - gen
+molecule - molekül
+atom - atom
+particle - parçacık
+energy - enerji
+gravity - yer çekimi
+radiation - radyasyon
+climate - iklim
+atmosphere - atmosfer
+temperature - sıcaklık
+pressure - basınç
+mineral - mineral
+fossil - fosil
+extinction - yok olma, tükeniş
+mutation - mutasyon
+cell - hücre
+bacteria - bakteri
+virus - virüs
+nutrient - besin öğesi
+photosynthesis - fotosentez
+`.trim(),
+  },
+  {
+    id: "toplum-yonetim",
+    label: "Toplum ve Yönetim",
+    raw: `
+government - hükümet
+policy - politika
+legislation - yasama, mevzuat
+regulation - düzenleme, yönetmelik
+citizen - vatandaş
+democracy - demokrasi
+election - seçim
+constitution - anayasa
+authority - yetki, otorite
+bureaucracy - bürokrasi
+diplomacy - diplomasi
+treaty - anlaşma, antlaşma
+sanction - yaptırım
+justice - adalet
+court - mahkeme
+verdict - hüküm, karar
+jury - jüri
+lawsuit - dava
+crime - suç
+punishment - ceza
+prison - hapishane
+rights - haklar
+freedom - özgürlük
+equality - eşitlik
+inequality - eşitsizlik
+poverty - yoksulluk
+welfare - refah, sosyal yardım
+census - nüfus sayımı
+population - nüfus
+migration - göç
+`.trim(),
+  },
+  {
+    id: "saglik-gunluk",
+    label: "Sağlık ve Günlük Yaşam",
+    raw: `
+health - sağlık
+disease - hastalık
+illness - hastalık, rahatsızlık
+symptom - belirti
+diagnosis - teşhis
+treatment - tedavi
+medication - ilaç, tedavi
+therapy - terapi
+surgery - ameliyat
+patient - hasta
+physician - doktor, hekim
+nutrition - beslenme
+diet - diyet, beslenme düzeni
+exercise - egzersiz
+fatigue - yorgunluk
+immunity - bağışıklık
+infection - enfeksiyon
+vaccine - aşı
+epidemic - salgın
+hygiene - hijyen
+wellness - iyi olma hali, esenlik
+disability - engellilik
+recovery - iyileşme
+routine - rutin
+household - ev halkı, hane
+chore - ev işi
+appointment - randevu
+errand - ayak işi
+grocery - market alışverişi
+`.trim(),
+  },
+  {
+    id: "teknoloji",
+    label: "Teknoloji",
+    raw: `
+technology - teknoloji
+device - cihaz
+software - yazılım
+hardware - donanım
+algorithm - algoritma
+database - veritabanı
+network - ağ
+server - sunucu
+application - uygulama
+interface - arayüz
+innovation - yenilik, inovasyon
+automation - otomasyon
+robotics - robotik
+artificial intelligence - yapay zeka
+encryption - şifreleme
+bandwidth - bant genişliği
+storage - depolama
+platform - platform
+malfunction - arıza
+glitch - küçük hata, arıza
+prototype - prototip
+simulation - simülasyon
+component - bileşen, parça
+circuit - devre
+sensor - sensör, algılayıcı
+firmware - yerleşik yazılım
+chip - çip
+protocol - protokol
+`.trim(),
+  },
+  {
+    id: "cevre",
+    label: "Çevre",
+    raw: `
+environment - çevre
+pollution - kirlilik
+emission - emisyon, salım
+sustainability - sürdürülebilirlik
+conservation - koruma (doğa)
+deforestation - ormansızlaşma
+biodiversity - biyoçeşitlilik
+renewable energy - yenilenebilir enerji
+resource - kaynak
+waste - atık
+recycling - geri dönüşüm
+drought - kuraklık
+flood - sel
+wildlife - yaban hayatı
+greenhouse effect - sera etkisi
+contamination - kirlenme
+overpopulation - aşırı nüfus artışı
+carbon footprint - karbon ayak izi
+glacier - buzul
+coral reef - mercan resifi
+oil spill - petrol sızıntısı
+ozone layer - ozon tabakası
+landfill - çöp sahası
+erosion - erozyon
+sediment - tortu, çökelti
+`.trim(),
+  },
+  {
+    id: "sanat-kultur",
+    label: "Sanat ve Kültür",
+    raw: `
+culture - kültür
+tradition - gelenek
+heritage - miras (kültürel)
+custom - adet, örf
+ritual - ritüel, ayin
+ceremony - tören
+literature - edebiyat
+novel - roman
+poetry - şiir
+narrative - anlatı, öykü
+character - karakter
+plot - olay örgüsü
+theme - tema
+genre - tür (edebi/sanatsal)
+symbolism - sembolizm
+metaphor - metafor, mecaz
+architecture - mimari
+sculpture - heykel
+painting - resim, tablo
+exhibition - sergi
+museum - müze
+festival - festival
+folklore - folklor, halk kültürü
+artifact - eser, obje (tarihi)
+masterpiece - başyapıt
+`.trim(),
+  },
+  {
+    id: "duygular-psikoloji",
+    label: "Duygular ve Psikoloji",
+    raw: `
+emotion - duygu
+anxiety - kaygı, anksiyete
+depression - depresyon
+motivation - motivasyon
+perception - algı
+behavior - davranış
+personality - kişilik
+attitude - tutum, davranış biçimi
+memory - hafıza, bellek
+awareness - farkındalık
+consciousness - bilinç
+subconscious - bilinçaltı
+trauma - travma
+resilience - dayanıklılık, direnç
+empathy - empati
+self-esteem - özgüven, öz saygı
+frustration - hayal kırıklığı, engellenme
+grief - keder, yas
+curiosity - merak
+confidence - özgüven
+insecurity - güvensizlik
+temperament - mizaç, huy
+instinct - içgüdü
+cognition - biliş, kavrama
+bias - yanlılık, önyargı
+`.trim(),
+  },
+];
+
+function parseWordLines(text, category) {
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  const parsed = [];
+  const seen = new Set();
+  for (const line of lines) {
+    const sep = line.includes(" - ") ? " - " : line.includes(":") ? ":" : line.includes("-") ? "-" : null;
+    if (!sep) continue;
+    const idx = line.indexOf(sep);
+    const w = line.slice(0, idx).trim();
+    const d = line.slice(idx + sep.length).trim();
+    const key = w.toLowerCase();
+    if (w && d && !seen.has(key)) {
+      seen.add(key);
+      parsed.push(makeWord(w, d, "", category));
+    }
+  }
+  return parsed;
+}
+
+function AddWords({ onAdd, existingWords }) {
+  const [mode, setMode] = useState("single"); // single | bulk | verbs | nouns
+  const [word, setWord] = useState("");
+  const [definition, setDefinition] = useState("");
+  const [example, setExample] = useState("");
+  const [bulkText, setBulkText] = useState("");
+  const [category, setCategory] = useState("Genel");
+  const [customCategory, setCustomCategory] = useState("");
+  const [error, setError] = useState("");
+
+  const existingCategories = useMemo(
+    () => Array.from(new Set(existingWords.map((w) => w.category).filter(Boolean))),
+    [existingWords]
+  );
+  const resolvedCategory = category === "__custom__" ? customCategory.trim() || "Genel" : category;
+
+  const submitSingle = () => {
+    if (!word.trim() || !definition.trim()) {
+      setError("Kelime ve anlam alanı zorunlu.");
+      return;
+    }
+    onAdd([makeWord(word, definition, example, resolvedCategory)]);
+  };
+
+  const submitBulk = () => {
+    const parsed = parseWordLines(bulkText, resolvedCategory);
+    if (parsed.length === 0) {
+      setError("Satırları 'kelime - anlam' formatında yapıştır.");
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  const seedCommonVerbs = () => {
+    const existingKeys = new Set(existingWords.map((w) => w.word.toLowerCase()));
+    const parsed = parseWordLines(COMMON_VERBS_RAW, "Fiil").filter((w) => !existingKeys.has(w.word.toLowerCase()));
+    if (parsed.length === 0) {
+      setError("Bu 500 fiil listesindeki tüm kelimeler zaten kart kutunda.");
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  const seedToeflVerbs = () => {
+    const existingKeys = new Set(existingWords.map((w) => w.word.toLowerCase()));
+    const parsed = parseWordLines(COMMON_TOEFL_VERBS_RAW, "Fiil").filter((w) => !existingKeys.has(w.word.toLowerCase()));
+    if (parsed.length === 0) {
+      setError("Bu akademik fiil listesindeki tüm kelimeler zaten kart kutunda.");
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  const seedCommonAdjectives = () => {
+    const existingKeys = new Set(existingWords.map((w) => w.word.toLowerCase()));
+    const parsed = parseWordLines(COMMON_ADJECTIVES_RAW, "Sıfat").filter((w) => !existingKeys.has(w.word.toLowerCase()));
+    if (parsed.length === 0) {
+      setError("Bu sıfat listesindeki tüm kelimeler zaten kart kutunda.");
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  const seedCommonAdverbs = () => {
+    const existingKeys = new Set(existingWords.map((w) => w.word.toLowerCase()));
+    const parsed = parseWordLines(COMMON_ADVERBS_RAW, "Zarf").filter((w) => !existingKeys.has(w.word.toLowerCase()));
+    if (parsed.length === 0) {
+      setError("Bu zarf listesindeki tüm kelimeler zaten kart kutunda.");
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  const seedNounCategory = (cat) => {
+    const existingKeys = new Set(existingWords.map((w) => w.word.toLowerCase()));
+    const parsed = parseWordLines(cat.raw, cat.label).filter((w) => !existingKeys.has(w.word.toLowerCase()));
+    if (parsed.length === 0) {
+      setError(`"${cat.label}" kategorisindeki kelimeler zaten kart kutunda.`);
+      return;
+    }
+    onAdd(parsed);
+  };
+
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 6, marginBottom: 20, flexWrap: "wrap" }}>
+        {[
+          { id: "single", label: "Tek kelime" },
+          { id: "bulk", label: "Toplu ekle" },
+          { id: "verbs", label: "500 fiil" },
+          { id: "toeflverbs", label: "TOEFL akademik fiiller" },
+          { id: "adjectives", label: "Sıfatlar" },
+          { id: "adverbs", label: "Zarflar" },
+          { id: "nouns", label: "İsim kategorileri" },
+        ].map((m) => (
+          <button
+            key={m.id}
+            onClick={() => {
+              setMode(m.id);
+              setError("");
+            }}
+            style={{
+              flex: "1 1 auto",
+              padding: "9px 8px",
+              borderRadius: 6,
+              border: `1px solid ${mode === m.id ? COLORS.ink : COLORS.paperLine}`,
+              background: mode === m.id ? COLORS.ink : "transparent",
+              color: mode === m.id ? COLORS.paper : COLORS.ink,
+              fontSize: 12.5,
+              fontWeight: 600,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+
+      {mode === "verbs" ? (
+        <div style={{ textAlign: "center", padding: "20px 10px" }}>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 18, marginBottom: 8 }}>
+            En yaygın 500 İngilizce fiil
+          </div>
+          <p style={{ color: COLORS.inkSoft, fontSize: 13.5, marginBottom: 18, lineHeight: 1.5 }}>
+            Günlük ve akademik İngilizcede en sık kullanılan fiiller, Türkçe anlamlarıyla birlikte
+            hazır ve <strong>"Fiil"</strong> kategorisiyle eklenir. Kutuda zaten olan kelimeler tekrar eklenmez.
+          </p>
+          {error && <div style={{ ...errorStyle, marginBottom: 12 }}>{error}</div>}
+          <button onClick={seedCommonVerbs} style={{ ...primaryBtn, width: "100%" }}>
+            500 fiili kart kutusuna ekle
+          </button>
+        </div>
+      ) : mode === "toeflverbs" ? (
+        <div style={{ textAlign: "center", padding: "20px 10px" }}>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 18, marginBottom: 8 }}>
+            TOEFL'da en çok sorulan akademik fiiller
+          </div>
+          <p style={{ color: COLORS.inkSoft, fontSize: 13.5, marginBottom: 18, lineHeight: 1.5 }}>
+            Coxhead'in Academic Word List (AWL) kaynağındaki en sık geçen fiillerden, mevcut 500
+            fiil listende <strong>olmayanlar</strong>. TOEFL Reading ve Listening bölümlerinde en
+            sık karşına çıkan akademik fiiller bunlar. <strong>"Fiil"</strong> kategorisiyle eklenir.
+          </p>
+          {error && <div style={{ ...errorStyle, marginBottom: 12 }}>{error}</div>}
+          <button onClick={seedToeflVerbs} style={{ ...primaryBtn, width: "100%" }}>
+            Akademik fiilleri kart kutusuna ekle
+          </button>
+        </div>
+      ) : mode === "adjectives" ? (
+        <div style={{ textAlign: "center", padding: "20px 10px" }}>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 18, marginBottom: 8 }}>
+            En yaygın İngilizce sıfatlar
+          </div>
+          <p style={{ color: COLORS.inkSoft, fontSize: 13.5, marginBottom: 18, lineHeight: 1.5 }}>
+            Betimleme ve karşılaştırmalarda en sık kullanılan sıfatlar, Türkçe anlamlarıyla birlikte
+            hazır ve <strong>"Sıfat"</strong> kategorisiyle eklenir. Kutuda zaten olan kelimeler tekrar eklenmez.
+          </p>
+          {error && <div style={{ ...errorStyle, marginBottom: 12 }}>{error}</div>}
+          <button onClick={seedCommonAdjectives} style={{ ...primaryBtn, width: "100%" }}>
+            Sıfatları kart kutusuna ekle
+          </button>
+        </div>
+      ) : mode === "adverbs" ? (
+        <div style={{ textAlign: "center", padding: "20px 10px" }}>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 18, marginBottom: 8 }}>
+            En yaygın İngilizce zarflar
+          </div>
+          <p style={{ color: COLORS.inkSoft, fontSize: 13.5, marginBottom: 18, lineHeight: 1.5 }}>
+            Özellikle TOEFL metinlerinde sık geçen bağlaç zarfları ve derece zarfları, Türkçe
+            anlamlarıyla birlikte hazır ve <strong>"Zarf"</strong> kategorisiyle eklenir. Kutuda zaten olan
+            kelimeler tekrar eklenmez.
+          </p>
+          {error && <div style={{ ...errorStyle, marginBottom: 12 }}>{error}</div>}
+          <button onClick={seedCommonAdverbs} style={{ ...primaryBtn, width: "100%" }}>
+            Zarfları kart kutusuna ekle
+          </button>
+        </div>
+      ) : mode === "nouns" ? (
+        <div>
+          <p style={{ color: COLORS.inkSoft, fontSize: 13.5, marginBottom: 16, lineHeight: 1.5, textAlign: "center" }}>
+            Konuya göre gruplanmış TOEFL isim listeleri. Her kategori kendi etiketiyle eklenir,
+            böylece quiz sırasında karışmazlar.
+          </p>
+          {error && <div style={{ ...errorStyle, marginBottom: 12, textAlign: "center" }}>{error}</div>}
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {NOUN_CATEGORIES.map((cat) => {
+              const count = cat.raw.split("\n").filter(Boolean).length;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => seedNounCategory(cat)}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "12px 14px",
+                    borderRadius: 8,
+                    border: `1px solid ${COLORS.paperLine}`,
+                    background: COLORS.card,
+                    fontSize: 14,
+                    fontFamily: "inherit",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    textAlign: "left",
+                  }}
+                >
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CategoryBadge category={cat.label} /> {cat.label}
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 4, color: COLORS.inkSoft, fontWeight: 500, fontSize: 12.5 }}>
+                    ~{count} kelime <ArrowRight size={13} />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : mode === "single" ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <Field label="Kelime">
+            <input value={word} onChange={(e) => setWord(e.target.value)} placeholder="örn. ubiquitous" style={inputStyle} />
+          </Field>
+          <Field label="Anlam / açıklama">
+            <input
+              value={definition}
+              onChange={(e) => setDefinition(e.target.value)}
+              placeholder="örn. her yerde bulunan, yaygın"
+              style={inputStyle}
+            />
+          </Field>
+          <Field label="Örnek cümle (opsiyonel)">
+            <input
+              value={example}
+              onChange={(e) => setExample(e.target.value)}
+              placeholder="örn. Smartphones have become ubiquitous."
+              style={inputStyle}
+            />
+          </Field>
+          <CategorySelector
+            category={category}
+            setCategory={setCategory}
+            customCategory={customCategory}
+            setCustomCategory={setCustomCategory}
+            existingCategories={existingCategories}
+          />
+          {error && <div style={errorStyle}>{error}</div>}
+          <button onClick={submitSingle} style={primaryBtn}>
+            Kelimeyi ekle
+          </button>
+        </div>
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <Field label="Her satıra bir kelime — format: kelime - anlam">
+            <textarea
+              value={bulkText}
+              onChange={(e) => setBulkText(e.target.value)}
+              placeholder={"ubiquitous - her yerde bulunan\nmeticulous - titiz, dikkatli\nresilient - dirençli"}
+              rows={8}
+              style={{ ...inputStyle, resize: "vertical", fontFamily: "monospace", fontSize: 13 }}
+            />
+          </Field>
+          <CategorySelector
+            category={category}
+            setCategory={setCategory}
+            customCategory={customCategory}
+            setCustomCategory={setCustomCategory}
+            existingCategories={existingCategories}
+          />
+          {error && <div style={errorStyle}>{error}</div>}
+          <button onClick={submitBulk} style={primaryBtn}>
+            Kelimeleri ekle
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CategorySelector({ category, setCategory, customCategory, setCustomCategory, existingCategories }) {
+  const presetLabels = NOUN_CATEGORIES.map((c) => c.label);
+  const allOptions = Array.from(new Set(["Genel", "Fiil", "Sıfat", "Zarf", ...presetLabels, ...existingCategories]));
+  return (
+    <Field label="Kategori">
+      <div style={{ display: "flex", gap: 8 }}>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          style={{ ...inputStyle, flex: 1 }}
+        >
+          {allOptions.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+          <option value="__custom__">Yeni kategori...</option>
+        </select>
+      </div>
+      {category === "__custom__" && (
+        <input
+          value={customCategory}
+          onChange={(e) => setCustomCategory(e.target.value)}
+          placeholder="örn. Duygular"
+          style={{ ...inputStyle, marginTop: 8 }}
+        />
+      )}
+    </Field>
+  );
+}
+
+function Field({ label, children }) {
+  return (
+    <label style={{ display: "block" }}>
+      <div style={{ fontSize: 12.5, fontWeight: 600, color: COLORS.inkSoft, marginBottom: 5 }}>{label}</div>
+      {children}
+    </label>
+  );
+}
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px 12px",
+  borderRadius: 6,
+  border: `1px solid ${COLORS.paperLine}`,
+  fontSize: 14,
+  fontFamily: "inherit",
+  background: COLORS.card,
+};
+const primaryBtn = {
+  background: COLORS.ink,
+  color: COLORS.paper,
+  border: "none",
+  borderRadius: 6,
+  padding: "11px 0",
+  fontSize: 14,
+  fontWeight: 600,
+  cursor: "pointer",
+};
+const errorStyle = { color: COLORS.coral, fontSize: 12.5, fontWeight: 500 };
+
+function buildRound(words) {
+  const size = Math.min(10, words.length);
+  return pickWeighted(words, size);
+}
+
+function buildOptions(target, allWords) {
+  const others = allWords.filter((w) => w.id !== target.id && w.definition !== target.definition);
+  const shuffled = [...others].sort(() => Math.random() - 0.5).slice(0, 3);
+  const opts = [target, ...shuffled].sort(() => Math.random() - 0.5);
+  return opts;
+}
+
+async function generateSentences(wordList) {
+  const prompt = `For each of the following English words, write ONE natural sentence (12-22 words) suitable for an academic TOEFL reading passage. Use the exact word form given, unchanged (do not alter tense, number, or form). The sentence should make the word's meaning reasonably clear from context, without being an obvious definition. Respond with ONLY a JSON array, no markdown code fences, no explanation, in this exact format: [{"word":"...","sentence":"..."}]
+
+Words: ${wordList.join(", ")}
