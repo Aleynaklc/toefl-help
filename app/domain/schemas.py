@@ -40,6 +40,9 @@ class WordRead(WordBase):
     correct_count: int = 0
     wrong_count: int = 0
     last_reviewed: datetime | None = None
+    ease_factor: float = 2.5
+    next_review_at: datetime | None = None
+    repetition_count: int = 0
 
     model_config = {"from_attributes": True}
 

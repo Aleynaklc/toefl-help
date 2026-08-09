@@ -29,6 +29,7 @@ from app.core.middleware import SessionMiddleware
 from app.db.base import Base
 from app.db.session import engine
 from app.routers import placement, quiz, stats, words, writing
+from app.routers import complete_words, build_sentence
 
 settings = get_settings()
 
@@ -102,6 +103,8 @@ app.include_router(quiz.router)
 app.include_router(stats.router)
 app.include_router(writing.router)
 app.include_router(placement.router)
+app.include_router(complete_words.router)
+app.include_router(build_sentence.router)
 
 
 # ---------------------------------------------------------------------------

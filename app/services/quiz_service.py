@@ -49,7 +49,11 @@ class QuizService:
         if not all_words:
             raise AppError("Bu kategoride henüz kelime yok.", status_code=422)
 
-        pool = all_words
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        due = [w for w in all_words if w.next_review_at is None or w.next_review_at <= now]
+        not_due = [w for w in all_words if w.next_review_at is not None and w.next_review_at > now]
+        pool = due + not_due
         selected = _pick_weighted(pool, min(_ROUND_SIZE, len(pool)))
         can_mc = len(all_words) >= _MIN_OPTIONS
 
@@ -87,16 +91,34 @@ class QuizService:
 
             raise NotFoundError("Kelime bulunamadı")
 
+        from datetime import datetime, timezone, timedelta
+        import math
+
+        now = datetime.now(timezone.utc)
+        word.last_reviewed = now
+
         if answer.correct:
-            word.box = min(5, word.box + 1)
             word.correct_count += 1
+            word.repetition_count += 1
+            # SM-2 interval calculation
+            if word.repetition_count == 1:
+                interval_days = 1
+            elif word.repetition_count == 2:
+                interval_days = 6
+            else:
+                # Use ease_factor for exponential growth
+                prev_interval = max(1, (now - (word.last_reviewed or now)).days)
+                interval_days = round(prev_interval * word.ease_factor)
+            interval_days = max(1, min(interval_days, 365))
+            word.next_review_at = now + timedelta(days=interval_days)
+            word.ease_factor = max(1.3, word.ease_factor + 0.1)
+            word.box = min(5, word.box + 1)
         else:
-            word.box = max(1, word.box - 1)
             word.wrong_count += 1
-
-        from datetime import datetime, timezone
-
-        word.last_reviewed = datetime.now(timezone.utc)
+            word.repetition_count = 0
+            word.next_review_at = now  # Review again today
+            word.ease_factor = max(1.3, word.ease_factor - 0.2)
+            word.box = max(1, word.box - 1)
         await self._repo.update(word)
         return word_to_schema(word)
 

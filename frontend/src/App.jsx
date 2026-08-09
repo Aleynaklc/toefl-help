@@ -1,6 +1,25 @@
 
+import placementDict from './placement_dict.json';
 
-const PLACEMENT_DICT = {
+if (typeof window !== 'undefined' && !window.storage) {
+  window.storage = {
+    get: async (key) => {
+      try {
+        const val = localStorage.getItem(key);
+        return val ? { value: val } : null;
+      } catch (e) { return null; }
+    },
+    set: async (key, val) => {
+      try { localStorage.setItem(key, val); return true; } catch (e) { return false; }
+    },
+    remove: async (key) => {
+      try { localStorage.removeItem(key); return true; } catch (e) { return false; }
+    }
+  };
+}
+
+const PLACEMENT_DICT_UNUSED = {
+  "_placeholder": "placeholder",
   "january": "Ocak",
   "february": "Şubat",
   "march": "Mart",
@@ -1332,43 +1351,49 @@ const PLACEMENT_DICT = {
   "vaccinate": "aşılamak"
 };
 
+function cleanWordKey(str) {
+  return str.toLowerCase().replace(/\s*\([^)]*\)/g, '').replace(/noun\.,/g, '').trim();
+}
+
 function getPlacementOptions(targetWord, allSequence) {
-  const wKey = targetWord.toLowerCase();
-  let correctDef = PLACEMENT_DICT[wKey];
-  
-  if (!correctDef) {
-    // Parantezli kelimeleri temizle örn. "bank (money)" -> "bank"
-    const cleanKey = wKey.replace(/\s*\([^)]*\)/g, '').trim();
-    correctDef = PLACEMENT_DICT[cleanKey] || targetWord;
+  const wKey = cleanWordKey(targetWord);
+  // Always use the JSON dictionary - never fall back to showing the word itself as definition
+  let correctDef = placementDict[wKey] || placementDict[targetWord.toLowerCase()];
+  if (!correctDef || correctDef === targetWord || correctDef === targetWord.toLowerCase()) {
+    correctDef = "(" + wKey + " - tanım bulunamadı)";
   }
-  
+
   const targetObj = { id: targetWord, word: targetWord, definition: correctDef, isCorrect: true };
-  
-  const otherWords = allSequence.filter(w => w.word.toLowerCase() !== wKey);
+
+  // Filter out words whose cleaned keys match target, to avoid same-looking options
+  const otherWords = allSequence.filter(w => cleanWordKey(w.word) !== wKey);
   const shuffledOthers = [...otherWords].sort(() => Math.random() - 0.5);
-  
+
   const wrongOptions = [];
   const usedDefs = new Set([correctDef]);
 
   for (const item of shuffledOthers) {
-    const itemKey = item.word.toLowerCase();
-    let wDef = PLACEMENT_DICT[itemKey];
-    if (!wDef) {
-      const cleanKey = itemKey.replace(/\s*\([^)]*\)/g, '').trim();
-      wDef = PLACEMENT_DICT[cleanKey] || item.word;
+    const itemKey = cleanWordKey(item.word);
+    let wDef = placementDict[itemKey] || placementDict[item.word.toLowerCase()];
+    if (!wDef || wDef === item.word || wDef === item.word.toLowerCase()) {
+      continue; // Skip if we'd show the word itself as definition
     }
-
     if (!usedDefs.has(wDef)) {
       usedDefs.add(wDef);
-      wrongOptions.push({ id: item.word, word: item.word, definition: wDef, isCorrect: false });
+      wrongOptions.push({ id: item.word + '_' + wrongOptions.length, word: item.word, definition: wDef, isCorrect: false });
       if (wrongOptions.length === 3) break;
     }
   }
 
-  // Eğer 3 çeldirici dolmadıysa fallback rastgele tanımlar ekle
-  const fallbackDefs = ["önemli, esaslı", "geliştirmek, ilerletmek", "kabul etmek", "karşılaşmak", "etkilemek", "oluşturmak", "sonuç, netice"];
+  // Meaningful fallbacks if not enough distractors found
+  const fallbackDefs = [
+    "önemli, esaslı", "geliştirmek, ilerletmek", "kabul etmek, onaylamak",
+    "karşılaşmak, yüzleşmek", "etkilemek, değiştirmek", "oluşturmak, kurmak",
+    "sonuç, netice", "bağlantı, ilişki", "özellik, nitelik", "sağlamak, temin etmek",
+    "karar vermek", "analiz etmek", "değerlendirmek", "uygulama, pratiğe dökmek"
+  ];
   let fIdx = 0;
-  while (wrongOptions.length < 3) {
+  while (wrongOptions.length < 3 && fIdx < fallbackDefs.length * 2) {
     const fDef = fallbackDefs[fIdx % fallbackDefs.length];
     if (!usedDefs.has(fDef)) {
       usedDefs.add(fDef);
@@ -1377,14 +1402,14 @@ function getPlacementOptions(targetWord, allSequence) {
     fIdx++;
   }
 
-  const allOpts = [targetObj, ...wrongOptions].sort(() => Math.random() - 0.5);
-  return allOpts;
+  return [targetObj, ...wrongOptions].sort(() => Math.random() - 0.5);
 }
 
 
 import { api } from './api';
 import { useState, useEffect, useMemo, useRef } from "react";
-import { BookOpen, Plus, BarChart2, Check, X, RotateCcw, Search, Trash2, Layers, ArrowRight, Sparkles, PenLine, Mail, MessageSquare, Clock, Send, GraduationCap, Pause } from "lucide-react";
+import { BookOpen, Plus, BarChart2, Check, X, RotateCcw, Search, Trash2, Layers, ArrowRight, Sparkles, PenLine, Mail, MessageSquare, Clock, Send, GraduationCap, Pause, Info, Type, Shuffle, ChevronRight, ChevronDown, AlertCircle, Award, Target, Zap, Brain, TrendingUp, BookMarked, CheckCircle, ChevronLeft } from "lucide-react";
+import grammarData from "./data/toefl_grammar_content.json";
 
 const STORAGE_KEY = "toefl-vocab-words";
 
@@ -1533,6 +1558,10 @@ export default function App() {
             }}
           />
         )}
+        {view === "toefl" && <TOEFLGuide setView={setView} />}
+        {view === "grammar" && <GrammarView />}
+        {view === "complete" && <CompleteWords words={words} />}
+        {view === "build" && <BuildSentence words={words} />}
       </main>
       {toast && (
         <div style={{ ...styles.toast, ...(toast.kind === "error" ? styles.toastError : {}) }}>{toast.msg}</div>
@@ -1602,10 +1631,14 @@ function Header({ view, setView, wordCount }) {
   const tabs = [
     { id: "list", label: "Kelimeler", icon: BookOpen },
     { id: "quiz", label: "Quiz", icon: Layers },
+    { id: "complete", label: "Tamamla", icon: Type },
+    { id: "build", label: "Cümle Kur", icon: Shuffle },
     { id: "writing", label: "Yazma", icon: PenLine },
-    { id: "placement", label: "Seviye Testi", icon: GraduationCap },
+    { id: "placement", label: "Seviye", icon: GraduationCap },
     { id: "stats", label: "İstatistik", icon: BarChart2 },
-  ];
+    { id: "toefl", label: "TOEFL 2026", icon: Info },
+    { id: "grammar", label: "Gramer", icon: BookMarked },
+];
   return (
     <header
       style={{
@@ -5050,6 +5083,47 @@ function PlacementTest({ existingWords, onImportWords }) {
 
   // Active quiz screen
   const currentItem = sequence[currentIndex];
+
+  return (
+    <PlacementQuizQuestion
+      key={`${activeLevel}-${currentIndex}`}
+      currentItem={currentItem}
+      sequence={sequence}
+      activeLevel={activeLevel}
+      currentIndex={currentIndex}
+      totalCount={sequence.length}
+      onAnswer={persistAnswer}
+      onPause={pauseAndExit}
+    />
+  );
+}
+
+// Separate component for quiz question - hooks are ALWAYS called unconditionally at top level
+function PlacementQuizQuestion({ currentItem, sequence, activeLevel, currentIndex, totalCount, onAnswer, onPause }) {
+  const [selectedOpt, setSelectedOpt] = useState(null);
+  const [answeredState, setAnsweredState] = useState(false);
+
+  // Regenerate options whenever the current word changes
+  const currentOptions = useMemo(() => {
+    return getPlacementOptions(currentItem.word, sequence);
+  }, [currentItem.word, activeLevel]);
+
+  const handleSelectOption = (opt) => {
+    if (answeredState) return;
+    setSelectedOpt(opt);
+    setAnsweredState(true);
+
+    setTimeout(() => {
+      onAnswer(opt.isCorrect ? "know" : "unknown");
+      // State reset happens automatically when parent gives us new key prop
+    }, 900);
+  };
+
+  const handleSkip = () => {
+    if (answeredState) return;
+    onAnswer("unknown");
+  };
+
   const bucketStartIndex = sequence.findIndex((it) => it.bucket === currentItem.bucket);
   const bucketCount = sequence.filter((it) => it.bucket === currentItem.bucket).length;
   const bucketPosition = currentIndex - bucketStartIndex + 1;
@@ -5058,23 +5132,24 @@ function PlacementTest({ existingWords, onImportWords }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
         <button
-          onClick={pauseAndExit}
+          onClick={onPause}
           style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: "none", color: COLORS.inkSoft, fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}
         >
           <Pause size={13} /> Ara ver
         </button>
         <span style={{ fontSize: 12.5, color: COLORS.inkSoft, fontWeight: 600 }}>
-          {currentIndex + 1} / {sequence.length}
+          {currentIndex + 1} / {totalCount}
         </span>
       </div>
 
       <div style={{ background: COLORS.paper, borderRadius: 4, height: 5, overflow: "hidden", marginBottom: 20 }}>
         <div
           style={{
-            width: `${((currentIndex + 1) / sequence.length) * 100}%`,
+            width: `${((currentIndex + 1) / totalCount) * 100}%`,
             height: "100%",
             background: COLORS.gold,
             borderRadius: 4,
+            transition: "width 0.3s ease",
           }}
         />
       </div>
@@ -5091,96 +5166,1302 @@ function PlacementTest({ existingWords, onImportWords }) {
           background: COLORS.card,
           border: `1px solid ${COLORS.paperLine}`,
           borderRadius: 10,
-          padding: "40px 24px",
+          padding: "30px 24px",
           textAlign: "center",
-          marginBottom: 22,
+          marginBottom: 18,
         }}
       >
-        <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 32, fontWeight: 700 }}>{currentItem.word}</div>
+        <div style={{ fontSize: 13, color: COLORS.inkSoft, marginBottom: 6 }}>
+          Bu kelimenin Türkçe karşılığı nedir?
+        </div>
+        <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 32, fontWeight: 700 }}>
+          {currentItem.word.replace(/\s*\([^)]*\)/g, '')}
+        </div>
       </div>
 
-      
-      {(() => {
-        const currentOptions = getPlacementOptions(currentItem.word, sequence);
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
+        {currentOptions.map((opt, i) => {
+          let btnBg = COLORS.card;
+          let btnBorder = COLORS.paperLine;
+          let btnColor = COLORS.ink;
 
-        const handleSelectOption = (opt) => {
-          if (answeredState) return;
-          setSelectedOpt(opt);
-          setAnsweredState(true);
-
-          setTimeout(() => {
+          if (answeredState) {
             if (opt.isCorrect) {
-              persistAnswer("know");
-            } else {
-              persistAnswer("unknown");
+              btnBg = COLORS.moss;
+              btnBorder = COLORS.moss;
+              btnColor = "#fff";
+            } else if (selectedOpt && selectedOpt.id === opt.id) {
+              btnBg = COLORS.coral;
+              btnBorder = COLORS.coral;
+              btnColor = "#fff";
             }
-            setSelectedOpt(null);
-            setAnsweredState(false);
-          }, 1000);
-        };
+          }
 
-        const handleSkip = () => {
-          if (answeredState) return;
-          persistAnswer("unknown");
-        };
+          return (
+            <button
+              key={opt.id || i}
+              onClick={() => handleSelectOption(opt)}
+              disabled={answeredState}
+              style={{
+                padding: "16px 14px",
+                borderRadius: 8,
+                border: `1px solid ${btnBorder}`,
+                background: btnBg,
+                color: btnColor,
+                fontSize: 13.5,
+                fontWeight: 600,
+                cursor: answeredState ? "default" : "pointer",
+                textAlign: "center",
+                transition: "all 0.2s ease",
+                minHeight: 60,
+                lineHeight: 1.4,
+              }}
+            >
+              {opt.definition}
+            </button>
+          );
+        })}
+      </div>
 
+      <div style={{ textAlign: "center" }}>
+        <button
+          onClick={handleSkip}
+          disabled={answeredState}
+          style={{ background: "none", border: "none", color: COLORS.inkSoft, fontSize: 13, fontWeight: 600, cursor: "pointer", textDecoration: "underline", opacity: answeredState ? 0.4 : 1 }}
+        >
+          Bilmiyorum / Pas Geç
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TOEFL 2026 BİLGİ SAYFASI
+// ─────────────────────────────────────────────────────────────────────────────
+
+function TOEFLGuide({ setView }) {
+  const [openSection, setOpenSection] = useState(null);
+
+  const sections = [
+    {
+      id: "reading",
+      icon: BookOpen,
+      color: "#2E6B78",
+      bg: "#DCE7EA",
+      title: "Reading",
+      time: "~35 dk",
+      questions: "20 soru",
+      score: "0–30 puan",
+      tasks: [
+        {
+          name: "Complete the Words 🆕",
+          highlight: true,
+          steps: [
+            "Ekranda 70–100 kelimelik kısa bir akademik paragraf görürsün",
+            "Paragraftaki 10 kelimenin son kısmı gizlenmiş: ör. \"phe_______\" → sen \"phenomenon\" yazmalısın",
+            "İlk cümle her zaman tam gösterilir — anlam bağlamını ver",
+            "Her boşluk için doğru harfleri klavyeyle gir; tam yazım zorunlu, kısmi puan yok",
+            "İpucu: bağlamdan kelimeyi çıkarmaya çalış, gramer sınırlarını kullan",
+          ],
+          warning: "Yazım hatası = yanlış cevap. Amerika İngilizcesi imlasına dikkat et (ör. 'analyze' değil 'analyse').",
+        },
+        {
+          name: "Adaptif Okuma Pasajları",
+          highlight: false,
+          steps: [
+            "2 akademik okuma pasajı (~700 kelime her biri); bilim, tarih, sosyoloji, sanat gibi alanlardan",
+            "Her pasaj için 10 soru; toplamda 20 soru",
+            "Format adaptif: 1. pasajdaki performansına göre 2. pasajın zorluğu otomatik ayarlanır",
+            "Soru tipleri: Ana fikir, Kelime bağlamı ('this word most nearly means'), Çıkarım, Retorik amaç",
+            "Pasaj ekranda kalır; sorular ilerledikçe ilgili paragraf vurgulanır",
+          ],
+          warning: null,
+        },
+      ],
+      tips: [
+        "Complete the Words için: kelime ailelerini öğren — phenomenon → phenomenal → phenomenally",
+        "Pasajı baştan sona okuma; önce soruyu oku, sonra ilgili paragrafı bul",
+        "Kelime bağlamı sorularında: önerilen kelimeyi cümleye koy, anlam bozuluyor mu test et",
+        "Tablo/kategori doldurma sorularında tüm pasajı taramak gerekebilir",
+      ],
+      vocab: "Oxford 5000 B2–C1 + Academic Word List (AWL) — akademik isimler ve fiiller öncelikli",
+    },
+    {
+      id: "listening",
+      icon: MessageSquare,
+      color: "#5D4A8C",
+      bg: "#E6E0F0",
+      title: "Listening",
+      time: "~36 dk",
+      questions: "28 soru",
+      score: "0–30 puan",
+      tasks: [
+        {
+          name: "3 Akademik Ders (Lecture)",
+          highlight: false,
+          steps: [
+            "Her ders 4–5 dakika sürer; tek konuşmacı (profesör), akademik bir konuyu anlatır",
+            "Not alabilirsin — ekranda not alanı veya fiziksel kağıt verilir",
+            "Ders biterken 6 soru gelir; ses yalnızca bir kez çalınır",
+            "Soru tipleri: Ana fikir, Önemli detay, Konuşmacının tutumu, Organizasyon, Bağlam çıkarımı",
+            "Dikkat: bazı cevaplar doğrudan söylenmez, konuşmacının tonundan ya da vurgusundan anlaşılır",
+          ],
+          warning: "Derste geçen teknik terimler çok sık soruya girer — duyduğunda hemen not et.",
+        },
+        {
+          name: "2 Kampüs Konuşması (Conversation)",
+          highlight: false,
+          steps: [
+            "Her konuşma 2–3 dakika; 2 kişi konuşur (öğrenci + danışman, kütüphane görevlisi vb.)",
+            "Konuşma biterken 5 soru gelir",
+            "Soru tipleri: Konuşmanın amacı nedir?, Öğrencinin sorunu nedir?, Tarafların tutumu, İma edilen anlam",
+            "İma soruları: cevap bazen hiç doğrudan söylenmez — tondan ve bağlamdan çıkarılır",
+          ],
+          warning: null,
+        },
+      ],
+      tips: [
+        "Not alırken tam cümle yazma — anahtar kelimeler ve kısa oklar yeterli",
+        "Konuşmacının tereddüt ettiği anlar ('well, perhaps...', 'I'm not sure but...') soru olur",
+        "Liste başı ve sonu kritik: ana fikir genellikle giriş ve sonuçta açıklanır",
+        "Sinyal kelimeleri tanı ve not et: 'however', 'therefore', 'in contrast', 'as a result'",
+      ],
+      vocab: "Akademik ders terminolojisi + sinyal kelimeleri (contrast, cause-effect, sequence ifadeleri)",
+    },
+    {
+      id: "writing",
+      icon: PenLine,
+      color: "#4C6B31",
+      bg: "#E4EAD8",
+      title: "Writing",
+      time: "~29 dk",
+      questions: "3 görev",
+      score: "0–30 puan",
+      tasks: [
+        {
+          name: "Build a Sentence 🆕",
+          highlight: true,
+          steps: [
+            "Kısa bir bağlam verilir (2–3 cümle); ardından 8–12 kelime/ifade karışık sırada listelenir",
+            "Aralarında 1–2 'decoy' (tuzak) kelime vardır — bunlar cümleye uymaz",
+            "Tüm token'lara bakarak tek, dilbilgisel açıdan doğru cümle kur",
+            "Decoy kelimeleri KULLANMA — cümle anlamsız olur ve sıfır puan alırsın",
+            "Strateji: önce Özne–Yüklem–Nesne iskeletini bul, sonra diğer kelimeleri yerleştir",
+          ],
+          warning: "All-or-nothing puanlama: mükemmel = tam puan, tek hata = sıfır. Acele etme, önce kafanda kur.",
+        },
+        {
+          name: "Integrated Writing (Entegre Yazma)",
+          highlight: false,
+          steps: [
+            "ADIM 1 — Oku (3 dk): Kısa akademik pasaj okursun, notlar alabilirsin. Pasaj 3 ana noktayı savunur.",
+            "ADIM 2 — Dinle (~2 dk): Aynı konuda bir ders çalınır. Ders çoğunlukla pasajın 3 noktasını eleştirir veya zayıflatır.",
+            "ADIM 3 — Yaz (20 dk): Pasaj tekrar ekrana gelir. 150–225 kelime yazarsın.",
+            "Ne yazarsın: Derste anlatılanlar pasajın hangi noktalarına nasıl itiraz ediyor? — kendi görüşünü KATMA.",
+            "Önerilen yapı: Giriş (1 cümle) → Nokta 1 karşılaştırması → Nokta 2 → Nokta 3 → Kapanış",
+          ],
+          warning: "Kendi görüşünü ekleme — bu görev sadece özetleme ve sentezlemedir. 'I think...' ile başlamak puan kaybettirir.",
+        },
+        {
+          name: "Academic Discussion (Akademik Tartışma)",
+          highlight: false,
+          steps: [
+            "Ekranda bir profesörün sorusu ve 2 sınıf arkadaşının yazılı cevabı gösterilir",
+            "10 dakikan var; minimum 100 kelime yazmalısın",
+            "Ne yazarsın: Arkadaşların görüşüne katılıp katılmadığını belirt → kendi argümanını sun → somut bir örnek ver",
+            "Akademik ton zorunlu: 'good/bad' yerine 'beneficial/detrimental', 'shows' yerine 'demonstrates' kullan",
+            "Yüksek puan için: bir arkadaşa doğrudan atıf yap ('While [isim] argues X, I believe...')",
+          ],
+          warning: null,
+        },
+      ],
+      tips: [
+        "Integrated: ders sadece bir kez çalınır — not almaya odaklan, pasaj zaten sonra açılır",
+        "Academic Discussion: sınıf arkadaşlarından birine doğrudan yanıt ver, yüksek puan getirir",
+        "Build a Sentence: token'lara önce hızlıca gözat, decoy'ları tespit et, sonra cümleyi kur",
+        "'important', 'good', 'bad' gibi genel kelimeler puanı düşürür — spesifik tercihler ölçülüyor",
+      ],
+      vocab: "Akademik bağlaçlar (furthermore, consequently, in contrast, notably) + nüanslı fiiller (argue, contend, refute, assert, demonstrate)",
+    },
+    {
+      id: "speaking",
+      icon: Send,
+      color: "#93445A",
+      bg: "#F0DEE0",
+      title: "Speaking",
+      time: "~16 dk",
+      questions: "2 görev 🆕",
+      score: "0–30 puan",
+      tasks: [
+        {
+          name: "Listen and Repeat — Görev 1 🆕",
+          highlight: true,
+          steps: [
+            "Ekranda bir görsel (harita, tabela, grafik) gösterilir — bağlam verir, ama asıl görev ses",
+            "7 kısa cümle sırayla sesli okunur; her cümle biraz daha karmaşık hale gelir",
+            "Her cümleyi dinledikten hemen sonra AYNEN tekrar edersin — 8 ile 12 saniye kayıt süresi verilir",
+            "Hazırlık süresi yoktur; duyduğun anda konuşmaya başlarsın",
+            "Kendi görüşünü söylemene gerek yok — sadece duyduğunu doğru, anlaşılır biçimde tekrar et",
+          ],
+          warning: "Eski 'Independent Speaking' veya 'Campus Situation' görevleri 2026'da tamamen KALDIRILDI. Artık yok.",
+        },
+        {
+          name: "Take an Interview — Görev 2 🆕",
+          highlight: true,
+          steps: [
+            "Sanal bir mülakat: bir soru ekranda belirir, hemen 45 saniye içinde cevap verirsin",
+            "Toplamda 4 soru sorulur; konular kampüs yaşamı veya genel akademik deneyimler",
+            "Örnek sorular: 'What study method works best for you and why?', 'Describe a challenge you've overcome in learning.'",
+            "Hazırlık süresi yoktur — soruyu okuyunca hemen konuşmaya başla",
+            "Cevapların akıcılığı, gramer doğruluğu, kelime seçimi ve tutarlılığı puanlanır",
+          ],
+          warning: "Eski 'Integrated Speaking' (okuma + dinleme + konuşma) görevi de 2026'da kalktı. Bu görev yerine geçmiyor — bunlar tamamen yeni görev türleri.",
+        },
+      ],
+      tips: [
+        "Listen and Repeat: sadece kelimeleri değil, ritim ve tonu da taklit et",
+        "Interview için: 'CLAIM → REASON → ÖRNEK' yapısını 45 saniyeye sıkıştır",
+        "'um', 'uh', 'like' gibi doldurucuları azalt — kısa duraklama çok daha profesyonel",
+        "Her TOEFL kelimesini sesli telaffuz ederek çalış; sadece okumak yetmez",
+        "Konuşma hızı: çok yavaş da çok hızlı da puan kaybettirir — doğal tempo hedefle",
+      ],
+      vocab: "Akademik konuşma kalıpları + kampüs yaşam terimleri + spontane ifade becerileri",
+    },
+  ];
+
+  const bandData = [
+    { band: "6", cefr: "C2", old: "95–120", meaning: "Ustalık", color: COLORS.moss },
+    { band: "5–5.5", cefr: "C1", old: "72–94", meaning: "İleri", color: "#3A5A8C" },
+    { band: "4–4.5", cefr: "B2", old: "52–71", meaning: "Üst-Orta", color: "#8C7423" },
+    { band: "3–3.5", cefr: "B1", old: "35–51", meaning: "Orta", color: COLORS.gold },
+    { band: "2–2.5", cefr: "A2", old: "18–34", meaning: "Temel", color: COLORS.coral },
+    { band: "1–1.5", cefr: "A1", old: "0–17", meaning: "Başlangıç", color: "#999" },
+  ];
+
+  return (
+    <div>
+      {/* Hero */}
+      <div style={{
+        background: "linear-gradient(135deg, #1a1f2e 0%, #2d3561 50%, #1a2a3a 100%)",
+        borderRadius: 16, padding: "32px 24px", marginBottom: 24,
+        position: "relative", overflow: "hidden",
+      }}>
+        <div style={{ position: "absolute", top: -20, right: -20, width: 120, height: 120, borderRadius: "50%", background: "rgba(184,137,43,0.15)" }} />
+        <div style={{ position: "absolute", bottom: -30, left: -10, width: 80, height: 80, borderRadius: "50%", background: "rgba(63,110,77,0.2)" }} />
+        <div style={{ position: "relative" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+            <div style={{ background: "rgba(184,137,43,0.2)", borderRadius: 8, padding: "6px 10px", border: "1px solid rgba(184,137,43,0.4)" }}>
+              <span style={{ color: COLORS.gold, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em" }}>GÜNCEL • 21 OCAK 2026</span>
+            </div>
+            <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 8, padding: "6px 10px" }}>
+              <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 11, fontWeight: 600 }}>ETS Resmi Format</span>
+            </div>
+          </div>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 8, lineHeight: 1.2 }}>TOEFL iBT 2026</div>
+          <div style={{ color: "rgba(255,255,255,0.65)", fontSize: 13.5, lineHeight: 1.6, marginBottom: 20 }}>
+            21 Ocak 2026'dan itibaren adaptif format, 3 yeni görev türü ve CEFR uyumlu 1–6 bant puanı ile tamamen yenilendi. Speaking bölümü kökten değişti.
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+            {[
+              { label: "Süre", value: "~1.5 saat", icon: Clock },
+              { label: "Puan", value: "1–6 Bant", icon: Award },
+              { label: "Format", value: "Adaptif", icon: TrendingUp },
+            ].map(({ label, value, icon: Icon }) => (
+              <div key={label} style={{ background: "rgba(255,255,255,0.08)", borderRadius: 10, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.12)" }}>
+                <Icon size={14} color={COLORS.gold} style={{ marginBottom: 6 }} />
+                <div style={{ color: "#fff", fontSize: 15, fontWeight: 700 }}>{value}</div>
+                <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Yeni Görev Türleri Banner */}
+      <div style={{ background: "linear-gradient(135deg, #fff8e8 0%, #fef3cd 100%)", border: `1px solid ${COLORS.goldSoft}`, borderLeft: `4px solid ${COLORS.gold}`, borderRadius: 12, padding: "16px 18px", marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+          <Zap size={16} color={COLORS.gold} />
+          <span style={{ fontSize: 13, fontWeight: 700, color: COLORS.gold }}>2026 Yenilikleri — 3 Yeni Görev Türü</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          {[
+            { view: "complete", icon: Type, title: "Complete the Words", desc: "Reading: Kelime son kısmını tamamla", color: "#2E6B78", bg: "#DCE7EA" },
+            { view: "build", icon: Shuffle, title: "Build a Sentence", desc: "Writing: Doğru cümleyi kur", color: "#4C6B31", bg: "#E4EAD8" },
+            { view: null, icon: Send, title: "Listen & Repeat", desc: "Speaking: Duyduğun cümleyi tekrar et (7 cümle)", color: "#93445A", bg: "#F0DEE0" },
+            { view: null, icon: MessageSquare, title: "Take an Interview", desc: "Speaking: 4 soruya 45 sn cevap ver", color: "#5D4A8C", bg: "#E6E0F0" },
+          ].map(({ view, icon: Icon, title, desc, color, bg }) => (
+            <div key={title} style={{ background: "#fff", borderRadius: 8, padding: "12px 14px", border: `1px solid ${COLORS.goldSoft}` }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 5 }}>
+                <div style={{ background: bg, borderRadius: 5, padding: 4 }}><Icon size={12} color={color} /></div>
+                <span style={{ fontSize: 12, fontWeight: 700, color: COLORS.ink }}>{title}</span>
+              </div>
+              <div style={{ fontSize: 11.5, color: COLORS.inkSoft, lineHeight: 1.4, marginBottom: view ? 8 : 0 }}>{desc}</div>
+              {view && <button onClick={() => setView(view)} style={{ background: color, color: "#fff", border: "none", borderRadius: 5, padding: "4px 9px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Pratik Yap →</button>}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sınav sırası */}
+      <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, padding: "14px 16px", marginBottom: 20 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Sınav Sırası (2026)</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 0, overflowX: "auto" }}>
+          {[
+            { label: "Reading", color: "#2E6B78", bg: "#DCE7EA", time: "35 dk" },
+            { label: "Listening", color: "#5D4A8C", bg: "#E6E0F0", time: "36 dk" },
+            { label: "Writing", color: "#4C6B31", bg: "#E4EAD8", time: "29 dk" },
+            { label: "Speaking", color: "#93445A", bg: "#F0DEE0", time: "16 dk" },
+          ].map((s, i) => (
+            <div key={s.label} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+              <div style={{ background: s.bg, border: `1px solid ${s.color}30`, borderRadius: 8, padding: "8px 12px", textAlign: "center" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: s.color }}>{s.label}</div>
+                <div style={{ fontSize: 10.5, color: s.color, opacity: 0.7 }}>{s.time}</div>
+              </div>
+              {i < 3 && <ChevronRight size={14} color={COLORS.inkSoft} style={{ margin: "0 4px", flexShrink: 0 }} />}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bölüm Detayları */}
+      <div style={{ marginBottom: 8, fontSize: 13, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase" }}>Bölüm Detayları — Tıkla ve Aç</div>
+      {sections.map((s) => {
+        const Icon = s.icon;
+        const isOpen = openSection === s.id;
         return (
-          <>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
-              {currentOptions.map((opt, i) => {
-                let btnBg = COLORS.card;
-                let btnBorder = COLORS.paperLine;
-                let btnColor = COLORS.ink;
-
-                if (answeredState) {
-                  if (opt.isCorrect) {
-                    btnBg = COLORS.moss;
-                    btnBorder = COLORS.moss;
-                    btnColor = "#fff";
-                  } else if (selectedOpt && selectedOpt.id === opt.id) {
-                    btnBg = COLORS.coral;
-                    btnBorder = COLORS.coral;
-                    btnColor = "#fff";
-                  }
-                }
-
-                return (
-                  <button
-                    key={opt.id || i}
-                    onClick={() => handleSelectOption(opt)}
-                    disabled={answeredState}
-                    style={{
-                      padding: "16px 14px",
-                      borderRadius: 8,
-                      border: `1px solid ${btnBorder}`,
-                      background: btnBg,
-                      color: btnColor,
-                      fontSize: 13.5,
-                      fontWeight: 600,
-                      cursor: answeredState ? "default" : "pointer",
-                      textAlign: "center",
-                      transition: "all 0.15s ease",
-                    }}
-                  >
-                    {opt.definition}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-              <button
-                onClick={handleSkip}
-                disabled={answeredState}
-                style={{ background: "none", border: "none", color: COLORS.inkSoft, fontSize: 13, fontWeight: 600, cursor: "pointer", textDecoration: "underline" }}
-              >
-                Emin değilim / Bilmiyorum (Pas Geç)
-              </button>
-            </div>
-          </>
+          <div key={s.id} style={{ background: COLORS.card, borderRadius: 12, border: `1px solid ${COLORS.paperLine}`, marginBottom: 10, overflow: "hidden" }}>
+            <button
+              onClick={() => setOpenSection(isOpen ? null : s.id)}
+              style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "14px 16px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}
+            >
+              <div style={{ background: s.bg, borderRadius: 8, padding: 8, flexShrink: 0 }}><Icon size={16} color={s.color} /></div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.ink }}>{s.title}</div>
+                <div style={{ fontSize: 11.5, color: COLORS.inkSoft, marginTop: 2 }}>{s.time} · {s.questions} · {s.score}</div>
+              </div>
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <span style={{ background: s.bg, color: s.color, fontSize: 11, fontWeight: 700, padding: "3px 8px", borderRadius: 20, whiteSpace: "nowrap" }}>{s.score}</span>
+                {isOpen ? <ChevronDown size={15} color={COLORS.inkSoft} /> : <ChevronRight size={15} color={COLORS.inkSoft} />}
+              </div>
+            </button>
+            {isOpen && (
+              <div style={{ padding: "0 16px 16px", borderTop: `1px solid ${COLORS.paperLine}` }}>
+                <div style={{ marginTop: 14, marginBottom: 14 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Görev Türleri & Nasıl Yapılır?</div>
+                  {s.tasks.map((task) => (
+                    <div key={task.name} style={{ background: task.highlight ? s.bg : COLORS.paper, borderRadius: 10, padding: "14px", marginBottom: 10, border: task.highlight ? `1px solid ${s.color}40` : `1px solid ${COLORS.paperLine}` }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: task.highlight ? s.color : COLORS.ink, marginBottom: 10 }}>{task.name}</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                        {task.steps.map((step, si) => (
+                          <div key={si} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                            <div style={{ width: 20, height: 20, borderRadius: "50%", flexShrink: 0, background: task.highlight ? s.color : COLORS.inkSoft, color: "#fff", fontSize: 10, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>{si + 1}</div>
+                            <div style={{ fontSize: 12.5, color: COLORS.ink, lineHeight: 1.55 }}>{step}</div>
+                          </div>
+                        ))}
+                      </div>
+                      {task.warning && (
+                        <div style={{ marginTop: 10, padding: "8px 10px", borderRadius: 7, background: "rgba(181,69,59,0.06)", border: `1px solid ${COLORS.coralSoft}`, display: "flex", gap: 7, alignItems: "flex-start" }}>
+                          <AlertCircle size={13} color={COLORS.coral} style={{ flexShrink: 0, marginTop: 1 }} />
+                          <span style={{ fontSize: 12, color: COLORS.coral, fontWeight: 600, lineHeight: 1.5 }}>{task.warning}</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 8 }}>
+                    <Target size={11} style={{ verticalAlign: "middle", marginRight: 4 }} />Sınava Hazırlanma İpuçları
+                  </div>
+                  {s.tips.map((tip, i) => (
+                    <div key={i} style={{ display: "flex", gap: 8, marginBottom: 7 }}>
+                      <div style={{ width: 5, height: 5, borderRadius: "50%", background: s.color, flexShrink: 0, marginTop: 7 }} />
+                      <div style={{ fontSize: 12.5, color: COLORS.ink, lineHeight: 1.55 }}>{tip}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: s.bg, borderRadius: 8, padding: "9px 12px", display: "flex", alignItems: "flex-start", gap: 8 }}>
+                  <BookOpen size={12} color={s.color} style={{ marginTop: 2, flexShrink: 0 }} />
+                  <span style={{ fontSize: 12, color: s.color, fontWeight: 600, lineHeight: 1.5 }}>{s.vocab}</span>
+                </div>
+              </div>
+            )}
+          </div>
         );
-      })()}
+      })}
 
+      {/* CEFR Bant Tablosu */}
+      <div style={{ marginTop: 24, marginBottom: 8, fontSize: 13, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+        <Award size={13} style={{ verticalAlign: "middle", marginRight: 6 }} />Puan Bant Sistemi (2026)
+      </div>
+      <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, overflow: "hidden", marginBottom: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "auto auto auto 1fr", gap: 0 }}>
+          {["Bant", "CEFR", "0–120", "Seviye"].map((h) => (
+            <div key={h} style={{ padding: "10px 14px", background: COLORS.paper, fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.04em", textTransform: "uppercase", borderBottom: `1px solid ${COLORS.paperLine}` }}>{h}</div>
+          ))}
+          {bandData.flatMap((row) => [
+            <div key={`band-${row.band}`} style={{ padding: "11px 14px", borderBottom: `1px solid ${COLORS.paperLine}`, display: "flex", alignItems: "center" }}>
+              <span style={{ fontSize: 14, fontWeight: 800, color: row.color }}>{row.band}</span>
+            </div>,
+            <div key={`cefr-${row.band}`} style={{ padding: "11px 14px", borderBottom: `1px solid ${COLORS.paperLine}`, fontSize: 13, fontWeight: 700, color: COLORS.inkSoft, display: "flex", alignItems: "center" }}>{row.cefr}</div>,
+            <div key={`old-${row.band}`} style={{ padding: "11px 14px", borderBottom: `1px solid ${COLORS.paperLine}`, fontSize: 12.5, color: COLORS.inkSoft, display: "flex", alignItems: "center" }}>{row.old}</div>,
+            <div key={`meaning-${row.band}`} style={{ padding: "11px 14px", borderBottom: `1px solid ${COLORS.paperLine}`, display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: row.color, flexShrink: 0 }} />
+              <span style={{ fontSize: 12.5, fontWeight: 600, color: COLORS.ink }}>{row.meaning}</span>
+            </div>,
+          ])}
+        </div>
+        <div style={{ padding: "10px 14px", fontSize: 11.5, color: COLORS.inkSoft, background: COLORS.paper, borderTop: `1px solid ${COLORS.paperLine}` }}>
+          ℹ️ Geçiş dönemi (Ocak 2026–Ocak 2028): Skor raporlarında hem 1–6 Bant hem de 0–120 skala birlikte gösterilir.
+        </div>
+      </div>
+
+      {/* Strateji */}
+      <div style={{ background: "linear-gradient(135deg, #f0f7f2 0%, #e8f4ec 100%)", border: `1px solid ${COLORS.mossSoft}`, borderLeft: `4px solid ${COLORS.moss}`, borderRadius: 12, padding: "16px 18px", marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+          <Brain size={16} color={COLORS.moss} />
+          <span style={{ fontSize: 13, fontWeight: 700, color: COLORS.moss }}>Kelime Çalışma Stratejisi (2026 Odaklı)</span>
+        </div>
+        {[
+          { num: "1", text: "Kelime ailelerini öğren: analyze → analysis → analytical → analytically (4 kelime, tek çaba)" },
+          { num: "2", text: "Yazım zorunlu: Complete the Words tam eşleşme istiyor — günde 5 kelimeyi sesli yazarak pratik yap" },
+          { num: "3", text: "Bağlam içinde öğren: her yeni kelimeyi bir örnek cümleyle birlikte kaydet, izole ezberleme yetmez" },
+          { num: "4", text: "Öncelik sırası: Oxford 3000 → Oxford 5000 → Academic Word List (570 kelime ailesi)" },
+          { num: "5", text: "SM-2 Quiz: her gün çalış — algoritma 'bugün tekrar edilmesi gerekenleri' önce getiriyor" },
+        ].map(({ num, text }) => (
+          <div key={num} style={{ display: "flex", gap: 10, marginBottom: 9, alignItems: "flex-start" }}>
+            <div style={{ width: 20, height: 20, borderRadius: "50%", background: COLORS.moss, color: "#fff", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>{num}</div>
+            <div style={{ fontSize: 12.5, color: COLORS.ink, lineHeight: 1.55 }}>{text}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Hızlı Erişim */}
+      <div style={{ marginBottom: 8, fontSize: 13, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase" }}>Pratik Yap</div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        {[
+          { view: "complete", icon: Type, label: "Complete the Words", sub: "Yazım + bağlam (Reading)", color: COLORS.moss, bg: COLORS.mossSoft },
+          { view: "build", icon: Shuffle, label: "Build a Sentence", sub: "Cümle kurma (Writing)", color: "#3A5A8C", bg: "#DCE7EA" },
+          { view: "quiz", icon: Layers, label: "Kelime Quiz", sub: "SM-2 Spaced Repetition", color: COLORS.gold, bg: COLORS.goldSoft },
+          { view: "placement", icon: GraduationCap, label: "Seviye Testi", sub: "CEFR A1→C1 tespiti", color: COLORS.coral, bg: COLORS.coralSoft },
+        ].map(({ view, icon: Icon, label, sub, color, bg }) => (
+          <button key={view} onClick={() => setView(view)} style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 10, padding: "14px", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ background: bg, borderRadius: 6, padding: 7, width: "fit-content" }}><Icon size={15} color={color} /></div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: COLORS.ink }}>{label}</div>
+            <div style={{ fontSize: 11.5, color: COLORS.inkSoft }}>{sub}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+function maskWord(word) {
+  if (word.length <= 3) return word[0] + "_".repeat(word.length - 1);
+  const revealCount = Math.max(1, Math.floor(word.length / 3));
+  return word.slice(0, revealCount) + "_".repeat(word.length - revealCount);
+}
+
+function CompleteWords({ words }) {
+  const [phase, setPhase] = useState("intro"); // intro | quiz | result
+  const [questions, setQuestions] = useState([]);
+  const [current, setCurrent] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [inputVal, setInputVal] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [score, setScore] = useState(0);
+  const inputRef = useRef(null);
+
+  function startQuiz() {
+    if (words.length < 5) return;
+    const pool = [...words].sort(() => Math.random() - 0.5).slice(0, 10);
+    const qs = pool.map((w) => ({
+      word: w.word,
+      masked: maskWord(w.word),
+      hint: w.definition,
+    }));
+    setQuestions(qs);
+    setCurrent(0);
+    setAnswers({});
+    setScore(0);
+    setInputVal("");
+    setChecked(false);
+    setIsCorrect(null);
+    setPhase("quiz");
+  }
+
+  useEffect(() => {
+    if (phase === "quiz" && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [current, phase]);
+
+  function handleCheck() {
+    if (!inputVal.trim()) return;
+    const q = questions[current];
+    const correct = inputVal.trim().toLowerCase() === q.word.toLowerCase();
+    setIsCorrect(correct);
+    setChecked(true);
+    setAnswers((prev) => ({ ...prev, [current]: { val: inputVal, correct } }));
+    if (correct) setScore((s) => s + 1);
+  }
+
+  function handleNext() {
+    const next = current + 1;
+    if (next >= questions.length) {
+      setPhase("result");
+    } else {
+      setCurrent(next);
+      setInputVal("");
+      setChecked(false);
+      setIsCorrect(null);
+    }
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      if (!checked) handleCheck();
+      else handleNext();
+    }
+  }
+
+  if (phase === "intro") {
+    return (
+      <div>
+        <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 24, fontWeight: 700, marginBottom: 6 }}>Complete the Words</div>
+        <div style={{ fontSize: 13.5, color: COLORS.inkSoft, marginBottom: 24, lineHeight: 1.6 }}>
+          2026 TOEFL Reading'in ilk görevi. Kelimenin ilk kısmı gösterilir, eksik harfleri doğru yazmalısın. <strong>Tam yazım zorunlu.</strong>
+        </div>
+        {/* Örnek */}
+        <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, padding: "20px", marginBottom: 20 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>Örnek Soru</div>
+          <div style={{ fontSize: 13, color: COLORS.inkSoft, marginBottom: 6 }}>İpucu (Türkçe karşılık):</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: COLORS.ink, marginBottom: 12 }}>Ocak ayı</div>
+          <div style={{ fontSize: 13, color: COLORS.inkSoft, marginBottom: 6 }}>Kelime:</div>
+          <div style={{ fontFamily: "monospace", fontSize: 22, fontWeight: 700, letterSpacing: 4, color: COLORS.ink, marginBottom: 12 }}>
+            jan<span style={{ color: COLORS.coral }}>_______</span>
+          </div>
+          <div style={{ fontSize: 13, color: COLORS.moss, fontWeight: 600 }}>✓ Doğru cevap: january</div>
+        </div>
+        <div style={{ background: COLORS.paper, borderRadius: 10, padding: "14px 16px", marginBottom: 20, border: `1px solid ${COLORS.paperLine}` }}>
+          <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+            <AlertCircle size={14} color={COLORS.gold} style={{ flexShrink: 0, marginTop: 1 }} />
+            <div style={{ fontSize: 13, color: COLORS.ink, lineHeight: 1.5 }}>
+              <strong>Dikkat:</strong> Büyük/küçük harf fark etmez, ama yazım tam doğru olmalı. {words.length} kelimenden rastgele 10 soru seçilir.
+            </div>
+          </div>
+        </div>
+        {words.length < 5 ? (
+          <div style={{ textAlign: "center", color: COLORS.inkSoft, fontSize: 13.5, padding: 20 }}>
+            Bu mod için en az 5 kelime gerekli. Şu an {words.length} kelimen var.
+          </div>
+        ) : (
+          <button onClick={startQuiz} style={{
+            width: "100%", background: COLORS.ink, color: COLORS.paper, border: "none",
+            borderRadius: 10, padding: "15px", fontSize: 14, fontWeight: 700, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+          }}>
+            <Type size={16} /> Başla ({Math.min(10, words.length)} Soru)
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  if (phase === "result") {
+    const pct = Math.round((score / questions.length) * 100);
+    const band = pct >= 90 ? { label: "Mükemmel!", color: COLORS.moss } : pct >= 70 ? { label: "İyi!", color: COLORS.gold } : pct >= 50 ? { label: "Gelişiyor", color: "#8C7423" } : { label: "Daha Çok Çalış", color: COLORS.coral };
+    return (
+      <div>
+        <div style={{ textAlign: "center", padding: "30px 0 24px" }}>
+          <div style={{ fontSize: 56, fontWeight: 800, color: band.color, fontFamily: "'Source Serif 4', serif" }}>{score}/{questions.length}</div>
+          <div style={{ fontSize: 18, fontWeight: 700, color: band.color, marginBottom: 6 }}>{band.label}</div>
+          <div style={{ fontSize: 13.5, color: COLORS.inkSoft }}>%{pct} başarı</div>
+        </div>
+        <div style={{ background: COLORS.paper, borderRadius: 4, height: 8, overflow: "hidden", marginBottom: 24 }}>
+          <div style={{ width: `${pct}%`, height: "100%", background: band.color, borderRadius: 4, transition: "width 0.8s ease" }} />
+        </div>
+        {/* Cevap özeti */}
+        <div style={{ marginBottom: 20 }}>
+          {questions.map((q, i) => {
+            const ans = answers[i];
+            return (
+              <div key={i} style={{
+                display: "flex", gap: 10, alignItems: "center",
+                padding: "10px 12px", borderRadius: 8,
+                background: ans?.correct ? COLORS.mossSoft : COLORS.coralSoft,
+                marginBottom: 6, border: `1px solid ${ans?.correct ? COLORS.moss : COLORS.coral}20`,
+              }}>
+                {ans?.correct ? <Check size={14} color={COLORS.moss} /> : <X size={14} color={COLORS.coral} />}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: COLORS.ink }}>{q.word}</span>
+                  {!ans?.correct && <span style={{ fontSize: 12, color: COLORS.inkSoft, marginLeft: 8 }}>senin cevabın: "{ans?.val || "boş"}"</span>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <button onClick={startQuiz} style={{
+          width: "100%", background: COLORS.ink, color: COLORS.paper, border: "none",
+          borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700, cursor: "pointer",
+        }}>
+          <RotateCcw size={15} style={{ verticalAlign: "middle", marginRight: 6 }} />Tekrar Dene
+        </button>
+      </div>
+    );
+  }
+
+  // Quiz phase
+  const q = questions[current];
+  const progress = ((current) / questions.length) * 100;
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <div style={{ fontSize: 12.5, fontWeight: 700, color: COLORS.inkSoft }}>Complete the Words</div>
+        <div style={{ fontSize: 12.5, fontWeight: 600, color: COLORS.inkSoft }}>{current + 1} / {questions.length}</div>
+      </div>
+      <div style={{ background: COLORS.paper, borderRadius: 4, height: 5, overflow: "hidden", marginBottom: 22 }}>
+        <div style={{ width: `${progress}%`, height: "100%", background: COLORS.gold, borderRadius: 4, transition: "width 0.3s ease" }} />
+      </div>
+
+      <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, padding: "24px", marginBottom: 18, textAlign: "center" }}>
+        <div style={{ fontSize: 12, color: COLORS.inkSoft, marginBottom: 8 }}>Türkçe karşılık (ipucu):</div>
+        <div style={{ fontSize: 16, fontWeight: 600, color: COLORS.ink, marginBottom: 20, fontStyle: "italic" }}>{q.hint}</div>
+        <div style={{ fontSize: 12, color: COLORS.inkSoft, marginBottom: 8 }}>İngilizce kelime:</div>
+        <div style={{
+          fontFamily: "monospace",
+          fontSize: 28,
+          fontWeight: 700,
+          letterSpacing: 6,
+          color: checked ? (isCorrect ? COLORS.moss : COLORS.coral) : COLORS.ink,
+          marginBottom: 4,
+          transition: "color 0.2s",
+        }}>
+          {q.masked}
+        </div>
+        {checked && !isCorrect && (
+          <div style={{ fontSize: 14, color: COLORS.moss, fontWeight: 700, marginTop: 8 }}>✓ Doğru: {q.word}</div>
+        )}
+      </div>
+
+      <input
+        ref={inputRef}
+        value={inputVal}
+        onChange={(e) => setInputVal(e.target.value)}
+        onKeyDown={handleKeyDown}
+        disabled={checked}
+        placeholder="Tam kelimeyi yaz..."
+        style={{
+          width: "100%",
+          padding: "14px 16px",
+          borderRadius: 10,
+          border: `1.5px solid ${checked ? (isCorrect ? COLORS.moss : COLORS.coral) : COLORS.paperLine}`,
+          fontSize: 15,
+          fontFamily: "'Inter', sans-serif",
+          background: checked ? (isCorrect ? COLORS.mossSoft : COLORS.coralSoft) : COLORS.card,
+          color: COLORS.ink,
+          outline: "none",
+          marginBottom: 12,
+          transition: "all 0.2s",
+          boxSizing: "border-box",
+          textTransform: "lowercase",
+        }}
+      />
+
+      {!checked ? (
+        <button onClick={handleCheck} disabled={!inputVal.trim()} style={{
+          width: "100%", background: inputVal.trim() ? COLORS.ink : COLORS.paperLine,
+          color: inputVal.trim() ? COLORS.paper : COLORS.inkSoft,
+          border: "none", borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700,
+          cursor: inputVal.trim() ? "pointer" : "default", transition: "all 0.2s",
+        }}>
+          Kontrol Et (Enter)
+        </button>
+      ) : (
+        <button onClick={handleNext} style={{
+          width: "100%", background: isCorrect ? COLORS.moss : COLORS.coral,
+          color: "#fff", border: "none", borderRadius: 10, padding: "14px",
+          fontSize: 14, fontWeight: 700, cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        }}>
+          {isCorrect ? <Check size={16} /> : <X size={16} />}
+          {current + 1 < questions.length ? "Sonraki" : "Sonuçları Gör"}
+        </button>
+      )}
+
+      <div style={{ textAlign: "center", marginTop: 12 }}>
+        <span style={{ fontSize: 13, color: COLORS.inkSoft, fontWeight: 600 }}>
+          Puan: {score} / {current + (checked ? 1 : 0)}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BUILD A SENTENCE MODU
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SENTENCE_TEMPLATES = [
+  { template: "The {word} is considered an important concept in academic research.", decoys: ["however", "therefore"] },
+  { template: "Scholars have long debated the role of {word} in modern society.", decoys: ["moreover", "subsequently"] },
+  { template: "A thorough understanding of {word} is essential for academic success.", decoys: ["alternatively", "specifically"] },
+  { template: "Many researchers argue that {word} significantly affects human behavior.", decoys: ["consequently", "primarily"] },
+  { template: "The study of {word} requires careful analysis and critical thinking.", decoys: ["essentially", "particularly"] },
+  { template: "Recent studies suggest that {word} plays a key role in development.", decoys: ["furthermore", "nonetheless"] },
+  { template: "Students who master {word} tend to perform better on academic tasks.", decoys: ["meanwhile", "conversely"] },
+  { template: "The concept of {word} has evolved significantly over the past century.", decoys: ["nevertheless", "accordingly"] },
+];
+
+function generateBuildQuestion(wordObj) {
+  const tpl = SENTENCE_TEMPLATES[Math.floor(Math.random() * SENTENCE_TEMPLATES.length)];
+  const sentence = tpl.template.replace("{word}", wordObj.word);
+  const sentenceTokens = sentence.replace(/\./g, " .").split(" ").filter(Boolean);
+  const numDecoys = Math.floor(Math.random() * 2) + 1;
+  const decoys = tpl.decoys.slice(0, numDecoys);
+  const allTokens = [...sentenceTokens, ...decoys].sort(() => Math.random() - 0.5);
+  return {
+    sentence,
+    sentenceTokens,
+    tokens: allTokens,
+    decoys,
+    word: wordObj.word,
+    hint: wordObj.definition,
+  };
+}
+
+function BuildSentence({ words }) {
+  const [phase, setPhase] = useState("intro"); // intro | quiz | result
+  const [questions, setQuestions] = useState([]);
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState([]); // tokens user has placed in order
+  const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [results, setResults] = useState([]);
+
+  function startQuiz() {
+    if (words.length < 3) return;
+    const pool = [...words].sort(() => Math.random() - 0.5).slice(0, 5);
+    setQuestions(pool.map(generateBuildQuestion));
+    setCurrent(0);
+    setSelected([]);
+    setChecked(false);
+    setIsCorrect(null);
+    setResults([]);
+    setPhase("quiz");
+  }
+
+  function handleTokenClick(token, fromBank) {
+    if (checked) return;
+    if (fromBank) {
+      // Add to selected (remove from bank)
+      setSelected((prev) => [...prev, token]);
+    } else {
+      // Remove from selected
+      setSelected((prev) => {
+        const idx = prev.indexOf(token);
+        if (idx === -1) return prev;
+        return [...prev.slice(0, idx), ...prev.slice(idx + 1)];
+      });
+    }
+  }
+
+  function handleCheck() {
+    const q = questions[current];
+    const userSentence = selected.join(" ").replace(" .", ".").trim();
+    const correct = q.sentence.toLowerCase().replace(/\s+/g, " ").trim();
+    const user = userSentence.toLowerCase().replace(/\s+/g, " ").trim();
+    const isOk = correct === user;
+    setIsCorrect(isOk);
+    setChecked(true);
+    setResults((prev) => [...prev, { correct: isOk, q }]);
+  }
+
+  function handleNext() {
+    const next = current + 1;
+    if (next >= questions.length) {
+      setPhase("result");
+    } else {
+      setCurrent(next);
+      setSelected([]);
+      setChecked(false);
+      setIsCorrect(null);
+    }
+  }
+
+  if (phase === "intro") {
+    return (
+      <div>
+        <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 24, fontWeight: 700, marginBottom: 6 }}>Build a Sentence</div>
+        <div style={{ fontSize: 13.5, color: COLORS.inkSoft, marginBottom: 24, lineHeight: 1.6 }}>
+          2026 TOEFL Writing'in yeni görevi. Verilen kelimelerden <strong>tek doğru cümleyi</strong> kur. Dikkat: aralarında <strong>aldatıcı (decoy)</strong> kelimeler de var!
+        </div>
+        <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, padding: "20px", marginBottom: 20 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>Nasıl Çalışır?</div>
+          {[
+            { icon: "1", text: "Kelime bankasından kelimelere tıklayarak cümle oluştur" },
+            { icon: "2", text: "Yanlış sıraya koyduğun kelimeye tekrar tıkla → banka'ya geri döner" },
+            { icon: "3", text: "Kırmızı renkli kelimeler decoy — bunları KULLANMA" },
+            { icon: "4", text: "All-or-nothing: tam doğru olmalı, yarım puan yok" },
+          ].map(({ icon, text }) => (
+            <div key={icon} style={{ display: "flex", gap: 10, marginBottom: 8, alignItems: "flex-start" }}>
+              <div style={{ width: 22, height: 22, borderRadius: "50%", background: COLORS.ink, color: "#fff", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icon}</div>
+              <div style={{ fontSize: 13, color: COLORS.ink, lineHeight: 1.5, paddingTop: 2 }}>{text}</div>
+            </div>
+          ))}
+        </div>
+        {words.length < 3 ? (
+          <div style={{ textAlign: "center", color: COLORS.inkSoft, fontSize: 13.5, padding: 20 }}>
+            Bu mod için en az 3 kelime gerekli. Şu an {words.length} kelimen var.
+          </div>
+        ) : (
+          <button onClick={startQuiz} style={{
+            width: "100%", background: COLORS.ink, color: COLORS.paper, border: "none",
+            borderRadius: 10, padding: "15px", fontSize: 14, fontWeight: 700, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+          }}>
+            <Shuffle size={16} /> Başla ({Math.min(5, words.length)} Soru)
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  if (phase === "result") {
+    const score = results.filter((r) => r.correct).length;
+    const pct = Math.round((score / questions.length) * 100);
+    return (
+      <div>
+        <div style={{ textAlign: "center", padding: "30px 0 24px" }}>
+          <div style={{ fontSize: 56, fontWeight: 800, color: pct >= 80 ? COLORS.moss : pct >= 60 ? COLORS.gold : COLORS.coral, fontFamily: "'Source Serif 4', serif" }}>{score}/{questions.length}</div>
+          <div style={{ fontSize: 14, color: COLORS.inkSoft, marginTop: 6 }}>%{pct} doğru · All-or-nothing</div>
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          {results.map((r, i) => (
+            <div key={i} style={{ background: r.correct ? COLORS.mossSoft : COLORS.coralSoft, borderRadius: 8, padding: "12px 14px", marginBottom: 8 }}>
+              <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4 }}>
+                {r.correct ? <Check size={14} color={COLORS.moss} /> : <X size={14} color={COLORS.coral} />}
+                <span style={{ fontSize: 12, fontWeight: 700, color: COLORS.inkSoft }}>Hedef kelime: {r.q.word}</span>
+              </div>
+              <div style={{ fontSize: 12.5, color: COLORS.ink, fontStyle: "italic" }}>{r.q.sentence}</div>
+            </div>
+          ))}
+        </div>
+        <button onClick={startQuiz} style={{
+          width: "100%", background: COLORS.ink, color: COLORS.paper, border: "none",
+          borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700, cursor: "pointer",
+        }}>
+          <RotateCcw size={15} style={{ verticalAlign: "middle", marginRight: 6 }} />Tekrar Dene
+        </button>
+      </div>
+    );
+  }
+
+  const q = questions[current];
+  // Bank: tokens that have NOT been placed in selected
+  const placedCounts = {};
+  for (const t of selected) placedCounts[t] = (placedCounts[t] || 0) + 1;
+  const bankCounts = {};
+  for (const t of q.tokens) bankCounts[t] = (bankCounts[t] || 0) + 1;
+  const bankAvailable = [];
+  const tempPlaced = { ...placedCounts };
+  for (const t of q.tokens) {
+    if (tempPlaced[t] > 0) { tempPlaced[t]--; }
+    else bankAvailable.push(t);
+  }
+
+  const userSentence = selected.join(" ").replace(" .", ".").trim();
+  const correctSentence = q.sentence.toLowerCase().replace(/\s+/g, " ").trim();
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <div style={{ fontSize: 12.5, fontWeight: 700, color: COLORS.inkSoft }}>Build a Sentence</div>
+        <div style={{ fontSize: 12.5, fontWeight: 600, color: COLORS.inkSoft }}>{current + 1} / {questions.length}</div>
+      </div>
+      <div style={{ background: COLORS.paper, borderRadius: 4, height: 5, overflow: "hidden", marginBottom: 22 }}>
+        <div style={{ width: `${(current / questions.length) * 100}%`, height: "100%", background: "#3A5A8C", borderRadius: 4, transition: "width 0.3s ease" }} />
+      </div>
+
+      {/* Hedef kelime + ipucu */}
+      <div style={{ background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 12, padding: "18px", marginBottom: 16, textAlign: "center" }}>
+        <div style={{ fontSize: 12, color: COLORS.inkSoft, marginBottom: 4 }}>Bu kelimeyi içeren bir cümle kur:</div>
+        <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 26, fontWeight: 700, color: COLORS.ink, marginBottom: 6 }}>{q.word}</div>
+        <div style={{ fontSize: 13, color: COLORS.inkSoft, fontStyle: "italic" }}>{q.hint}</div>
+      </div>
+
+      {/* Seçilen cümle alanı */}
+      <div style={{
+        minHeight: 60,
+        background: checked ? (isCorrect ? COLORS.mossSoft : COLORS.coralSoft) : COLORS.paper,
+        border: `1.5px ${checked ? "solid" : "dashed"} ${checked ? (isCorrect ? COLORS.moss : COLORS.coral) : COLORS.paperLine}`,
+        borderRadius: 10,
+        padding: "12px 14px",
+        marginBottom: 14,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 6,
+        alignContent: "flex-start",
+        transition: "all 0.2s",
+      }}>
+        {selected.length === 0 && <span style={{ color: COLORS.inkSoft, fontSize: 13, fontStyle: "italic" }}>Kelimelere tıkla…</span>}
+        {selected.map((token, i) => (
+          <button key={i} onClick={() => !checked && handleTokenClick(token, false)} style={{
+            padding: "5px 10px", borderRadius: 6, border: `1px solid ${checked ? "transparent" : COLORS.paperLine}`,
+            background: checked ? "rgba(255,255,255,0.6)" : COLORS.card,
+            fontSize: 13.5, fontWeight: 600, cursor: checked ? "default" : "pointer",
+            color: COLORS.ink,
+          }}>
+            {token}
+          </button>
+        ))}
+        {checked && !isCorrect && (
+          <div style={{ width: "100%", marginTop: 8, fontSize: 12.5, color: COLORS.moss, fontWeight: 600 }}>
+            ✓ Doğru: {q.sentence}
+          </div>
+        )}
+      </div>
+
+      {/* Kelime bankası */}
+      {!checked && (
+        <div style={{
+          background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 10,
+          padding: "12px 14px", marginBottom: 16, display: "flex", flexWrap: "wrap", gap: 6,
+        }}>
+          <div style={{ width: "100%", fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, marginBottom: 6, letterSpacing: "0.04em", textTransform: "uppercase" }}>Kelime Bankası</div>
+          {bankAvailable.map((token, i) => {
+            const isDecoy = q.decoys.includes(token);
+            return (
+              <button key={i} onClick={() => handleTokenClick(token, true)} style={{
+                padding: "6px 11px", borderRadius: 6,
+                border: `1px solid ${isDecoy ? COLORS.coralSoft : COLORS.paperLine}`,
+                background: isDecoy ? COLORS.coralSoft : COLORS.paper,
+                fontSize: 13.5, fontWeight: 600, cursor: "pointer",
+                color: isDecoy ? COLORS.coral : COLORS.ink,
+              }}>
+                {token}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {!checked ? (
+        <button onClick={handleCheck} disabled={selected.length === 0} style={{
+          width: "100%", background: selected.length > 0 ? COLORS.ink : COLORS.paperLine,
+          color: selected.length > 0 ? COLORS.paper : COLORS.inkSoft,
+          border: "none", borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700,
+          cursor: selected.length > 0 ? "pointer" : "default", transition: "all 0.2s",
+        }}>
+          Cümleyi Kontrol Et
+        </button>
+      ) : (
+        <button onClick={handleNext} style={{
+          width: "100%", background: isCorrect ? COLORS.moss : COLORS.coral,
+          color: "#fff", border: "none", borderRadius: 10, padding: "14px",
+          fontSize: 14, fontWeight: 700, cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        }}>
+          {isCorrect ? <Check size={16} /> : <X size={16} />}
+          {current + 1 < questions.length ? "Sonraki Soru" : "Sonuçları Gör"}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GRAMMAR VIEW
+// ─────────────────────────────────────────────────────────────────────────────
+
+const LEVEL_META = {
+  A1: { color: "#4C9A6A", bg: "#E0F0E8", label: "Baslangic" },
+  A2: { color: "#3A7DA8", bg: "#DCE9F2", label: "Temel" },
+  B1: { color: "#7A6B38", bg: "#F0EAD8", label: "Orta Alti" },
+  B2: { color: "#8C5A28", bg: "#F0E4D4", label: "Orta Ustu" },
+  C1: { color: "#6B3A8C", bg: "#EAE0F4", label: "Ileri" },
+  C2: { color: "#8C2A3A", bg: "#F4DDE2", label: "Ustalik" },
+};
+
+function GrammarView() {
+  const [selectedLevel, setSelectedLevel] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
+
+  const levels = grammarData.levels;
+
+  if (selectedTopic) {
+    const t = selectedTopic;
+    const lvlMeta = LEVEL_META[selectedLevel] || LEVEL_META.A1;
+
+    return (
+      <div>
+        <button
+          onClick={() => { setSelectedTopic(null); setQuizAnswers({}); }}
+          style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", color: COLORS.inkSoft, fontSize: 13, fontWeight: 600, marginBottom: 16, padding: 0 }}
+        >
+          <ChevronLeft size={16} />
+          {selectedLevel} konularina geri don
+        </button>
+
+        <div style={{ background: lvlMeta.color + "22", border: "1px solid " + lvlMeta.color + "40", borderRadius: 14, padding: "18px 20px", marginBottom: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <span style={{ background: lvlMeta.color, color: "#fff", fontSize: 11, fontWeight: 800, padding: "3px 9px", borderRadius: 20, letterSpacing: "0.06em" }}>{selectedLevel}</span>
+            <span style={{ fontSize: 11.5, color: COLORS.inkSoft, fontWeight: 600 }}>Gramer Konusu</span>
+          </div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: COLORS.ink, marginBottom: 4 }}>{t.title}</div>
+          <div style={{ fontSize: 14, color: COLORS.inkSoft, fontWeight: 500 }}>{t.title_tr}</div>
+        </div>
+
+        <div style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Konu Anlatimi</div>
+          <p style={{ fontSize: 13.5, color: COLORS.ink, lineHeight: 1.7, marginBottom: 12, margin: "0 0 12px 0" }}>{t.explanation}</p>
+          <div style={{ background: lvlMeta.bg, borderRadius: 8, padding: "10px 14px", borderLeft: "3px solid " + lvlMeta.color }}>
+            <p style={{ fontSize: 13, color: COLORS.ink, lineHeight: 1.65, margin: 0 }}>{t.explanation_tr}</p>
+          </div>
+        </div>
+
+        {t.structure_patterns && t.structure_patterns.length > 0 && (
+          <div style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Yapi Kaliplari</div>
+            {t.structure_patterns.map((p, i) => (
+              <div key={i} style={{ background: "#1e1e2e", borderRadius: 8, padding: "10px 14px", marginBottom: 6, fontFamily: "monospace", fontSize: 13, color: "#a9d9f0" }}>
+                {p}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {t.signal_words && t.signal_words.length > 0 && (
+          <div style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Sinyal Kelimeleri</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
+              {t.signal_words.map((w, i) => (
+                <span key={i} style={{ background: lvlMeta.bg, color: lvlMeta.color, fontSize: 12, fontWeight: 700, padding: "4px 10px", borderRadius: 20, border: "1px solid " + lvlMeta.color + "40" }}>{w}</span>
+              ))}
+            </div>
+            {t.signal_words_note_tr && (
+              <p style={{ fontSize: 12, color: COLORS.inkSoft, lineHeight: 1.55, margin: 0 }}>{t.signal_words_note_tr}</p>
+            )}
+          </div>
+        )}
+
+        {t.examples && t.examples.length > 0 && (
+          <div style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Ornekler</div>
+            {t.examples.map((ex, i) => (
+              <div key={i} style={{ borderLeft: "3px solid " + lvlMeta.color, paddingLeft: 14, marginBottom: 10 }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: COLORS.ink, marginBottom: 3 }}>{ex.sentence}</div>
+                <div style={{ fontSize: 12.5, color: COLORS.inkSoft }}>{ex.translation}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {t.exceptions && t.exceptions.length > 0 && (
+          <div style={{ background: "#fff8f0", border: "1px solid " + COLORS.goldSoft, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.gold, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Istisnalar</div>
+            {t.exceptions.map((ex, i) => (
+              <div key={i} style={{ background: "#fff", borderRadius: 8, padding: "10px 12px", marginBottom: 8, border: "1px solid " + COLORS.goldSoft }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: COLORS.ink, marginBottom: 4 }}>{ex.rule}</div>
+                <div style={{ fontFamily: "monospace", fontSize: 12.5, color: "#3A5A8C", background: "#f0f4f9", borderRadius: 5, padding: "4px 8px", marginBottom: 4 }}>{ex.example}</div>
+                {ex.explanation_tr && <div style={{ fontSize: 12, color: COLORS.inkSoft }}>{ex.explanation_tr}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {t.common_mistakes && t.common_mistakes.length > 0 && (
+          <div style={{ background: "#fff5f5", border: "1px solid " + COLORS.coralSoft, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.coral, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 10 }}>Sik Yapilan Hatalar</div>
+            {t.common_mistakes.map((m, i) => (
+              <div key={i} style={{ background: "#fff", borderRadius: 8, padding: "12px", marginBottom: 10, border: "1px solid " + COLORS.coralSoft }}>
+                <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.coral, marginBottom: 3 }}>Yanlis</div>
+                    <div style={{ fontFamily: "monospace", fontSize: 13, color: COLORS.coral, background: "#fff0f0", borderRadius: 5, padding: "4px 8px" }}>{m.wrong}</div>
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.moss, marginBottom: 3 }}>Dogru</div>
+                    <div style={{ fontFamily: "monospace", fontSize: 13, color: COLORS.moss, background: "#f0f7f2", borderRadius: 5, padding: "4px 8px" }}>{m.correct}</div>
+                  </div>
+                </div>
+                {m.explanation_tr && <div style={{ fontSize: 12, color: COLORS.inkSoft, lineHeight: 1.55 }}>{m.explanation_tr}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {t.toefl_tip && (
+          <div style={{ background: "linear-gradient(135deg, #1a1f2e 0%, #2d3561 100%)", borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.gold, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 8 }}>TOEFL Ipucu</div>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.85)", lineHeight: 1.65, margin: 0 }}>{t.toefl_tip}</p>
+          </div>
+        )}
+
+        {t.toefl_style_questions && t.toefl_style_questions.length > 0 && (
+          <div style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px 18px", marginBottom: 14 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>Pratik Sorular</div>
+            {t.toefl_style_questions.map((q, qi) => {
+              const answered = quizAnswers[qi];
+              return (
+                <div key={qi} style={{ background: COLORS.paper, borderRadius: 10, padding: "14px", marginBottom: 12, border: "1px solid " + COLORS.paperLine }}>
+                  <div style={{ fontSize: 13.5, fontWeight: 600, color: COLORS.ink, marginBottom: 12, lineHeight: 1.5 }}>
+                    <span style={{ color: COLORS.inkSoft, fontWeight: 400 }}>Soru {qi + 1}: </span>{q.question}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                    {q.options.map((opt, oi) => {
+                      const isCorrect = opt === q.answer;
+                      const isSelected = answered === opt;
+                      let bg = COLORS.card, borderColor = COLORS.paperLine, color = COLORS.ink;
+                      if (answered) {
+                        if (isCorrect) { bg = "#f0f7f2"; borderColor = COLORS.moss; color = COLORS.moss; }
+                        else if (isSelected) { bg = "#fff5f5"; borderColor = COLORS.coral; color = COLORS.coral; }
+                      }
+                      return (
+                        <button
+                          key={oi}
+                          disabled={!!answered}
+                          onClick={() => setQuizAnswers(prev => ({ ...prev, [qi]: opt }))}
+                          style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 8, border: "1px solid " + borderColor, background: bg, cursor: answered ? "default" : "pointer", textAlign: "left", transition: "all 0.15s" }}
+                        >
+                          <span style={{ width: 22, height: 22, borderRadius: "50%", border: "2px solid " + borderColor, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color, flexShrink: 0 }}>
+                            {answered ? (isCorrect ? "V" : (isSelected ? "X" : String.fromCharCode(65 + oi))) : String.fromCharCode(65 + oi)}
+                          </span>
+                          <span style={{ fontSize: 13, color, fontWeight: (isCorrect && answered) ? 700 : 400 }}>{opt}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {answered && (
+                    <div style={{ marginTop: 10, padding: "8px 10px", borderRadius: 7, background: answered === q.answer ? "#f0f7f2" : "#fff5f5", border: "1px solid " + (answered === q.answer ? COLORS.moss : COLORS.coral) + "50", fontSize: 12.5, color: COLORS.ink, lineHeight: 1.55 }}>
+                      <strong style={{ color: answered === q.answer ? COLORS.moss : COLORS.coral }}>
+                        {answered === q.answer ? "Dogru! " : ("Yanlis — Dogru: " + q.answer + ". ")}
+                      </strong>
+                      {q.explanation_tr}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (selectedLevel) {
+    const levelData = levels.find(l => l.level === selectedLevel);
+    const lvlMeta = LEVEL_META[selectedLevel];
+    return (
+      <div>
+        <button
+          onClick={() => setSelectedLevel(null)}
+          style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", color: COLORS.inkSoft, fontSize: 13, fontWeight: 600, marginBottom: 16, padding: 0 }}
+        >
+          <ChevronLeft size={16} />
+          Tum seviyelere geri don
+        </button>
+        <div style={{ background: "linear-gradient(135deg, " + lvlMeta.color + " 0%, " + lvlMeta.color + "cc 100%)", borderRadius: 14, padding: "18px 20px", marginBottom: 18 }}>
+          <div style={{ fontSize: 28, fontWeight: 800, color: "#fff", marginBottom: 4 }}>{selectedLevel}</div>
+          <div style={{ fontSize: 14, color: "rgba(255,255,255,0.8)", fontWeight: 500 }}>{lvlMeta.label} · {levelData.topic_count} konu</div>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {levelData.topics.map((topic, i) => (
+            <button
+              key={topic.id}
+              onClick={() => setSelectedTopic(topic)}
+              style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "14px 16px", cursor: "pointer", textAlign: "left", display: "flex", alignItems: "center", gap: 12 }}
+            >
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: lvlMeta.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <span style={{ fontSize: 13, fontWeight: 800, color: lvlMeta.color }}>{i + 1}</span>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 13.5, fontWeight: 700, color: COLORS.ink, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{topic.title}</div>
+                <div style={{ fontSize: 12, color: COLORS.inkSoft, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{topic.title_tr}</div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+                {topic.toefl_style_questions && <span style={{ fontSize: 11, background: lvlMeta.bg, color: lvlMeta.color, fontWeight: 600, padding: "3px 7px", borderRadius: 10 }}>{topic.toefl_style_questions.length} soru</span>}
+                <ChevronRight size={14} color={COLORS.inkSoft} />
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div style={{ background: "linear-gradient(135deg, #1a1f2e 0%, #2d3561 50%, #1a2a3a 100%)", borderRadius: 16, padding: "24px 20px", marginBottom: 20, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: -15, right: -15, width: 100, height: 100, borderRadius: "50%", background: "rgba(108,92,231,0.2)" }} />
+        <div style={{ position: "relative" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+            <div style={{ background: "rgba(184,137,43,0.2)", borderRadius: 8, padding: "5px 10px", border: "1px solid rgba(184,137,43,0.4)" }}>
+              <span style={{ color: COLORS.gold, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em" }}>A1 den C2 ye · 44 Konu</span>
+            </div>
+          </div>
+          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 24, fontWeight: 700, color: "#fff", marginBottom: 6 }}>Dil Bilgisi Rehberi</div>
+          <div style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, lineHeight: 1.6 }}>
+            TOEFL odakli Turkce anlatimlar, yapi kaliplari, sik yapilan hatalar ve pratik sorularla kapsamli gramer rehberi.
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 20 }}>
+        {[
+          { label: "Toplam Konu", value: "44", icon: BookMarked },
+          { label: "Pratik Soru", value: "88", icon: CheckCircle },
+          { label: "Seviye", value: "A1-C2", icon: TrendingUp },
+        ].map(function(item) {
+          var Icon = item.icon;
+          return (
+            <div key={item.label} style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 10, padding: "12px 14px", textAlign: "center" }}>
+              <Icon size={16} color={COLORS.moss} style={{ marginBottom: 6 }} />
+              <div style={{ fontSize: 18, fontWeight: 800, color: COLORS.ink }}>{item.value}</div>
+              <div style={{ fontSize: 11, color: COLORS.inkSoft, marginTop: 2 }}>{item.label}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ marginBottom: 8, fontSize: 13, fontWeight: 700, color: COLORS.inkSoft, letterSpacing: "0.06em", textTransform: "uppercase" }}>Seviye Sec</div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        {levels.map(function(lvl) {
+          var meta = LEVEL_META[lvl.level] || LEVEL_META.A1;
+          return (
+            <button
+              key={lvl.level}
+              onClick={() => setSelectedLevel(lvl.level)}
+              style={{ background: COLORS.card, border: "1px solid " + COLORS.paperLine, borderRadius: 12, padding: "16px", cursor: "pointer", textAlign: "left", display: "flex", flexDirection: "column", gap: 8 }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <div style={{ fontSize: 24, fontWeight: 900, color: meta.color }}>{lvl.level}</div>
+                <span style={{ background: meta.bg, color: meta.color, fontSize: 10.5, fontWeight: 700, padding: "3px 8px", borderRadius: 20 }}>{lvl.topic_count} konu</span>
+              </div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: COLORS.inkSoft }}>{meta.label}</div>
+              <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                {(lvl.topics || []).slice(0, 3).map(function(t, i) {
+                  return (
+                    <span key={i} style={{ fontSize: 10.5, color: COLORS.inkSoft, background: COLORS.paper, padding: "2px 6px", borderRadius: 6, border: "1px solid " + COLORS.paperLine }}>
+                      {t.title_tr.split("(")[0].trim()}
+                    </span>
+                  );
+                })}
+                {lvl.topic_count > 3 && (
+                  <span style={{ fontSize: 10.5, color: meta.color, fontWeight: 700, padding: "2px 6px" }}>+{lvl.topic_count - 3} daha</span>
+                )}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+                <ChevronRight size={14} color={meta.color} />
+              </div>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
