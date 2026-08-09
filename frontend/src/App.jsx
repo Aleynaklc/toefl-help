@@ -1536,7 +1536,9 @@ export default function App() {
             existingWords={words}
             onAdd={async (newWords, rawText, category) => {
     try {
-      await api.addBulkWords(rawText, category);
+      const finalRawText = rawText || newWords.map(w => `${w.word} - ${w.definition}`).join('\n');
+      const finalCategory = category || "Genel";
+      await api.addBulkWords(finalRawText, finalCategory);
       await refetchWords();
       showToast(newWords.length > 1 ? `${newWords.length} kelime eklendi` : "Kelime eklendi");
       setView("list");
@@ -3254,7 +3256,8 @@ function AddWords({ onAdd, existingWords }) {
       setError("Kelime ve anlam alanı zorunlu.");
       return;
     }
-    onAdd([makeWord(word, definition, example, resolvedCategory)]);
+    const rawText = `${word} - ${definition}`;
+    onAdd([makeWord(word, definition, example, resolvedCategory)], rawText, resolvedCategory);
   };
 
   const submitBulk = () => {
@@ -3263,7 +3266,7 @@ function AddWords({ onAdd, existingWords }) {
       setError("Satırları 'kelime - anlam' formatında yapıştır.");
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, bulkText, resolvedCategory);
   };
 
   const seedCommonVerbs = () => {
@@ -3273,7 +3276,7 @@ function AddWords({ onAdd, existingWords }) {
       setError("Bu 500 fiil listesindeki tüm kelimeler zaten kart kutunda.");
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, COMMON_VERBS_RAW, "Fiil");
   };
 
   const seedToeflVerbs = () => {
