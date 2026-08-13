@@ -1,142 +1,108 @@
-# TOEFL Vocab
+# TOEFL Help
 
-Modüler TOEFL kelime öğrenme uygulaması — **Leitner box sistemi**, **AI yazma geri bildirimi** ve **CEFR seviye testi**.
+TOEFL iBT'nin **21 Ocak 2026 sonrası güncel formatına** göre hazırlanmış çalışma uygulaması.
 
-## Mimari
+Uygulama kelime ezberinden ibaret değildir. Kullanıcıyı şu akışla yüksek puana hazırlar:
 
-```
-app/
-├── main.py              # FastAPI giriş noktası
-├── config.py            # Pydantic Settings (.env'den yüklenir)
-├── core/
-│   ├── exceptions.py    # AppError hiyerarşisi
-│   ├── ids.py           # ID üretici
-│   └── middleware.py    # Cookie tabanlı anonim session
-├── db/
-│   ├── base.py          # SQLAlchemy DeclarativeBase
-│   ├── models.py        # ORM modelleri (User, Word, PlacementProgress, WritingEntry)
-│   └── session.py       # Async engine + session factory
-├── domain/
-│   ├── enums.py         # QuizMode, WritingTaskType, PlacementAnswerStatus
-│   └── schemas.py       # Pydantic giriş/çıkış şemaları
-├── repositories/        # Veri erişim katmanı
-├── services/            # İş mantığı katmanı
-│   ├── word_service.py       # Kelime parse + ekleme
-│   ├── quiz_service.py       # Leitner + çoktan seçmeli
-│   ├── writing_service.py    # Anthropic AI entegrasyonu
-│   ├── placement_service.py  # CEFR seviye testi
-│   └── stats_service.py      # Performans istatistikleri
-└── routers/             # HTTP endpoint'leri
-    ├── words.py     → /api/words
-    ├── quiz.py      → /api/quiz
-    ├── stats.py     → /api/stats
-    ├── writing.py   → /api/writing
-    └── placement.py → /api/placement
-```
+1. **Seviye tespiti**: A1–C2 kelime açıklarını bul.
+2. **Kelime kartları**: Bilmediğin kelimeleri Leitner tekrar sistemine aktar.
+3. **Sınav görevleri**: Reading, Listening, Writing ve Speaking drilleri yap.
+4. **Takip**: Zayıf kelimeleri, kutu seviyelerini ve çalışma önceliklerini izle.
 
-## Kurulum
+## Mevcut Hedef Profili
+
+- Sınav aralığı: **Aralık 2026 ilk haftaları**
+- Minimum hedef: **4.5+ band**
+- Çalışma planı: `TOEFL 2026 > Plan`
+- Item bank verisi: `frontend/src/data/toefl2026_item_bank.json`
+
+Entegrasyon yol haritası: `docs/ENTEGRASYON_PLANI.md`
+
+## Hızlı Başlangıç
 
 ```bash
-# 1. Bağımlılıkları yükle
+# Backend
 pip install uv
 uv sync
-
-# 2. Ortam değişkenlerini ayarla
 cp .env.example .env
-# .env dosyasını düzenle (özellikle ANTHROPIC_API_KEY)
-
-# 3. Sunucuyu başlat (DB otomatik oluşturulur)
 uv run uvicorn app.main:app --reload
+
+# Frontend
+cd frontend
+npm ci
+npm run dev
 ```
 
-Swagger UI: **http://localhost:8000/docs**
+- Uygulama: `http://localhost:5173`
+- API dokümantasyonu: `http://localhost:8000/docs`
 
-## API Endpoint'leri
+## Kullanıcı Akışı
 
-### Kelimeler `/api/words`
-| Metod | Yol | Açıklama |
-|-------|-----|----------|
-| GET | `/api/words` | Kelimeleri listele (`?category=` filtresi) |
-| POST | `/api/words` | Tekil kelime ekle |
-| POST | `/api/words/bulk` | Toplu metin parse + ekle |
-| DELETE | `/api/words/{id}` | Kelime sil |
+| İhtiyaç | Ekran | Ne yapar? |
+|--------|------|-----------|
+| Nereden başlayacağımı bilmiyorum | `Ana Sayfa` | Günlük çalışma sırasını ve hızlı aksiyonları gösterir |
+| Seviyemi bilmiyorum | `Seviye` | CEFR kelime seviyeni ölçer, bilmediklerini karta aktarır |
+| Kelime öğrenmek istiyorum | `Kelimeler`, `Quiz` | Kart ekler, Leitner/SM-2 tekrar yapar |
+| Reading 2026 görevi çalışacağım | `Tamamla`, `TOEFL 2026 > Reading` | Complete the Words ve kısa okuma drillleri |
+| Writing 2026 görevi çalışacağım | `Cümle Kur`, `Yazma`, `TOEFL 2026 > Writing Bank` | Build a Sentence doğru cevapları, Email ve Academic Discussion model cevapları |
+| Speaking/Listening çalışacağım | `TOEFL 2026` | Listen/Repeat, Interview ve Listening drillleri |
+| Gelişimimi görmek istiyorum | `İstatistik` | Toplam kelime, doğruluk, kutu dağılımı, zor kelimeler |
 
-### Quiz `/api/quiz`
-| Metod | Yol | Açıklama |
-|-------|-----|----------|
-| POST | `/api/quiz/round` | Leitner ağırlıklı quiz turu başlat |
-| POST | `/api/quiz/answer` | Cevap kaydet (box güncellenir) |
+Detaylı kullanım rehberi: `docs/KULLANIM_REHBERI.md`
 
-### İstatistik `/api/stats`
-| Metod | Yol | Açıklama |
-|-------|-----|----------|
-| GET | `/api/stats` | Performans özeti |
+## 2026 TOEFL Kapsamı ve Uygulama Havuzu
 
-### Yazma `/api/writing`
-| Metod | Yol | Açıklama |
-|-------|-----|----------|
-| GET | `/api/writing/prompts` | Rastgele prompt (`?task_type=email\|discussion`) |
-| GET | `/api/writing/prompts/all` | Tüm prompt'lar |
-| POST | `/api/writing/submit` | Yazı gönder + AI geri bildirimi al |
-| GET | `/api/writing/history` | Geçmiş yazılar |
+Uygulamadaki TOEFL 2026 bölümü ETS'in güncel görev adlarını baz alır:
 
-### Seviye Testi `/api/placement`
-| Metod | Yol | Açıklama |
-|-------|-----|----------|
-| GET | `/api/placement/levels` | Mevcut CEFR seviyeleri |
-| GET | `/api/placement/words/{level}` | Seviye kelimeleri |
-| GET | `/api/placement/progress` | Kullanıcı ilerlemesi |
-| POST | `/api/placement/answer` | Kelime cevabı kaydet |
-| POST | `/api/placement/import/{level}` | Bilinmeyenleri karta aktar |
-| DELETE | `/api/placement/progress/{level}` | Seviye ilerlemesini sıfırla |
+| Bölüm | Resmi toplam | Görevler | Uygulama havuzu |
+|------|--------------|----------|----------------|
+| Reading | 50 item / 30 dk | Complete the Words, Read in Daily Life, Read an Academic Passage | 5 kelime tamamlama seti, 4 günlük metin, 4 akademik pasaj |
+| Listening | 47 item / 29 dk | Listen and Choose a Response, Conversation, Announcement, Academic Talk | 1 kısa tepki, 2 conversation, 1 announcement, 1 academic talk |
+| Writing | 12 item / 23 dk | Build a Sentence, Write an Email, Write for an Academic Discussion | 6 cümle kurma, 5 email senaryosu, 5 discussion senaryosu |
+| Speaking | 11 item / 8 dk | Listen and Repeat, Take an Interview | 7 tekrar cümlesi, 5 interview sorusu |
+| Scoring | 1–6 bant | CEFR hizalı | Skor planlayıcı hedef tahmini |
 
-## Toplu Kelime Ekleme Formatı
+Not: ETS Reading, Listening ve Writing için alt görev başına sabit item dağılımı yayımlamaz; resmi bilgi bölüm toplamıdır. Uygulama havuzu sayıları projedeki çalışma materyali sayısını gösterir.
 
-```
-POST /api/words/bulk
-{
-  "text": "abandon - terk etmek\nacquire - edinmek\nbenefit: fayda sağlamak",
-  "category": "Akademik"
-}
-```
+Resmi referanslar:
 
-Desteklenen ayırıcılar: ` - `, ` — `, `:`, `,` (ilk virgül)
+- ETS test yapısı: `https://www.ets.org/toefl/test-takers/ibt/about/content.html`
+- ETS Reading bölümü: `https://www.ets.org/toefl/test-takers/ibt/about/content/reading.html`
+- ETS Writing bölümü: `https://www.ets.org/toefl/test-takers/ibt/about/content/writing.html`
+- ETS skor açıklaması: `https://www.ets.org/toefl/test-takers/ibt/scores/understand-scores.html`
 
-## Geliştirme
+## Geliştirme Komutları
 
 ```bash
-# Testleri çalıştır
-uv run pytest tests/ -v
+# Backend testleri
+uv run --extra dev pytest tests/ -v
 
-# Demo verileri ekle
-uv run python scripts/seed_data.py
-
-# Kod formatlama
-uv run ruff check . --fix
-uv run ruff format .
+# Frontend doğrulama
+cd frontend
+npm run build
+npm run lint
 ```
 
 ## Ortam Değişkenleri
 
 | Değişken | Varsayılan | Açıklama |
-|----------|-----------|----------|
-| `DATABASE_URL` | `sqlite+aiosqlite:///./toefl_vocab.db` | DB bağlantısı |
-| `ANTHROPIC_API_KEY` | _(boş)_ | AI yazma geri bildirimi için gerekli |
-| `ANTHROPIC_MODEL` | `claude-sonnet-4-20250514` | Claude model versiyonu |
-| `SECRET_KEY` | `dev-secret-change-me` | Production'da değiştir |
-| `APP_ENV` | `development` | `production` veya `development` |
-| `DEBUG` | `true` | SQL sorgularını logla |
+|----------|------------|----------|
+| `DATABASE_URL` | `sqlite+aiosqlite:///./toefl_vocab.db` | Veritabanı bağlantısı |
+| `ANTHROPIC_API_KEY` | boş | AI yazma geri bildirimi için gerekir |
+| `ANTHROPIC_MODEL` | `claude-sonnet-4-20250514` | AI değerlendirme modeli |
+| `SECRET_KEY` | `dev-secret-change-me` | Production için değiştirilmeli |
+| `APP_ENV` | `development` | `development` veya `production` |
 
-## Production
+## Proje Yapısı
 
-```bash
-# PostgreSQL için .env
-DATABASE_URL=postgresql+asyncpg://user:pass@db:5432/toefl_vocab
-
-# Migration (production'a geçişte)
-uv run alembic revision --autogenerate -m "initial"
-uv run alembic upgrade head
-
-# Sunucuyu başlat
-uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+```text
+app/                 FastAPI backend
+app/routers/         API endpointleri
+app/services/        İş mantığı
+app/db/              SQLAlchemy modelleri ve session
+data/                TOEFL kelime, placement ve writing verileri
+frontend/src/        React arayüz
+frontend/src/components/
+docs/                Kullanıcı ve proje belgeleri
+tests/               Backend testleri
 ```

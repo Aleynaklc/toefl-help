@@ -1,16 +1,37 @@
-# React + Vite
+# TOEFL Help Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite arayüzü. Kullanıcı akışı `Ana Sayfa` üzerinden başlar ve tüm çalışma modlarına buradan yönlenir.
 
-Currently, two official plugins are available:
+## Çalıştırma
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm ci
+npm run dev
+```
 
-## React Compiler
+Backend ayrı terminalde `http://localhost:8000` üzerinde çalışmalıdır.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Doğrulama
 
-## Expanding the Oxlint configuration
+```bash
+npm run build
+npm run lint
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+`npm run lint` şu anda eski dosyalardan kalan uyarılar verebilir; yeni eklenen `HomeDashboard` ve `ToeflPrep2026` bileşenleri build'i bozmaz.
+
+## Ana Bileşenler
+
+- `src/App.jsx`: ana uygulama, navigasyon ve eski modüller
+- `src/components/HomeDashboard.jsx`: kullanıcı dostu başlangıç ekranı
+- `src/components/ToeflPrep2026.jsx`: 2026 format rehberi, drilller, planlayıcı
+- `src/api.js`: FastAPI çağrıları
+- `src/data/toefl2026_item_bank.json`: 2026 görev tiplerine göre item bank
+- `src/data/toefl_grammar_content.json`: gramer rehberi verisi
+
+## UX İlkeleri
+
+- Kullanıcı boş ekranda bırakılmaz; her boş durumda bir sonraki aksiyon gösterilir.
+- Seviye testi, kelime eklemeden önce önerilir.
+- Sınav formatı bilgisi tek başına belge gibi değil, drill ve çalışma planıyla birlikte verilir.
+- Skor planlayıcı resmi skor dönüştürücü değildir; çalışma önceliği belirlemek içindir.

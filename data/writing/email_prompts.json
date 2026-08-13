@@ -1,62 +1,82 @@
 [
   {
-    "id": "email-housing",
-    "title": "Yurt gürültüsü şikayeti",
-    "scenario": "You live in a university dormitory. For the past two weeks, construction noise near your building has made it very difficult to study or sleep. Write an email to the Housing Office.",
+    "id": "wr-email-001",
+    "title": "Akademik Danışman Randevusu Talebi (Bölüm Değişikliği)",
+    "scenario": "You need to change your major, but the online system requires your academic advisor's formal sign-off. Write an email to your academic advisor requesting an appointment.",
     "bullets": [
-      "Explain the problem clearly",
-      "Explain how it has been affecting you",
-      "Propose a specific solution you would like"
+      "Explain clearly why you want to meet",
+      "Mention the formal deadline for major change submissions",
+      "Propose two specific appointment time options"
     ]
   },
   {
-    "id": "email-extension",
-    "title": "Ödev süresi uzatma talebi",
-    "scenario": "You are unable to submit a major course assignment by the deadline due to a family emergency. Write an email to your professor.",
+    "id": "wr-email-002",
+    "title": "Ödev Teslim Süresi Uzatma Talebi (Sağlık Mazereti)",
+    "scenario": "You cannot submit your research paper on time because you were sick with influenza for several days. Write an email to your professor requesting a short extension.",
     "bullets": [
-      "Explain briefly why you need more time",
-      "Propose a specific new deadline",
-      "Reassure the professor about the quality of your work"
+      "Briefly explain the medical reason without oversharing",
+      "Propose a realistic, specific new submission date",
+      "Reassure the professor about your current draft progress"
     ]
   },
   {
-    "id": "email-registration",
-    "title": "Kayıt sorunu",
-    "scenario": "You tried to register for a required course online, but the system shows it is full, even though you were told there would be space reserved for your major. Write an email to the registrar's office.",
+    "id": "wr-email-003",
+    "title": "Kampüs Etkinliği Gönüllülük ve Yetkinlik Bildirimi",
+    "scenario": "You volunteered to assist at the university's International Student Orientation. The event coordinator sent a request for your availability and relevant skills. Write an email to the coordinator.",
     "bullets": [
-      "Describe the problem clearly",
-      "Mention what you were told, and by whom",
-      "Request specific action from the office"
+      "Confirm your commitment to volunteer at the orientation",
+      "State your exact available time slots across the weekend",
+      "Highlight one specific skill or past campus experience that will help the team"
     ]
   },
   {
-    "id": "email-group",
-    "title": "Grup projesi zamanlama çakışması",
-    "scenario": "You are part of a group project team. One of your regular meeting times no longer works for you because of a new schedule conflict. Write an email to your teammates.",
+    "id": "wr-email-004",
+    "title": "Grup Projesi Toplantı Saati Çakışması ve Çözüm Önerisi",
+    "scenario": "Your project team has scheduled a group meeting during a time when you must attend a mandatory chemistry laboratory makeup session. Write an email to your group members.",
     "bullets": [
-      "Explain the conflict",
-      "Propose at least one alternative time",
-      "Show willingness to accommodate the group's preference"
+      "Explain the unavoidable schedule conflict clearly",
+      "Propose a practical alternative meeting time and collaborative online workflow",
+      "Set a deadline for team members to respond"
     ]
   },
   {
-    "id": "email-library",
-    "title": "Kütüphane cezası itirazı",
-    "scenario": "You returned a library book on time, but the library system shows it as overdue and has charged you a fine. Write an email to the library services office.",
+    "id": "wr-email-005",
+    "title": "Yurt Çalışma Odası Yazıcı Arızası Bildirimi",
+    "scenario": "The shared printer in your residence hall study lounge has been out of order for three days during midterm exam week. Write an email to the Residence Life Office.",
     "bullets": [
-      "Explain the situation clearly",
-      "Mention any evidence you have (for example, a return confirmation)",
-      "Politely request that the fine be removed"
+      "Describe the malfunction and how long it has persisted",
+      "Explain why this issue is particularly critical for residents right now",
+      "Request immediate repair or an alternative printing arrangement"
     ]
   },
   {
-    "id": "email-career",
-    "title": "Kariyer merkezinden randevu talebi",
-    "scenario": "You want to schedule a meeting with your university's career center to discuss internship opportunities in your field. Write an email requesting an appointment.",
+    "id": "wr-email-006",
+    "title": "Zorunlu Ders Kayıt Kontenjanı Sorunu (Öğrenci İşleri)",
+    "scenario": "You attempted to register for a required senior seminar (ECON 401), but the course reached maximum capacity within minutes. You need this course to graduate on schedule. Write an email to the Economics Department Registrar.",
     "bullets": [
-      "Explain what kind of help you are looking for",
-      "Mention your general availability",
-      "Ask what you should prepare before the meeting"
+      "Identify the course code and explain the capacity constraint",
+      "Explain why completing this course this term is essential for your graduation timeline",
+      "Inquire about a capacity override permit or opening a second section"
+    ]
+  },
+  {
+    "id": "wr-email-007",
+    "title": "Kaçırılan Randevu Özrü ve Yeni Görüşme Talebi",
+    "scenario": "You missed a scheduled research consultation with your professor due to an unexpected public transit delay. Write an email to apologize and reschedule.",
+    "bullets": [
+      "Offer a sincere and immediate apology for missing the appointment",
+      "Briefly explain the unavoidable delay without lengthy excuses",
+      "Propose new options for meeting or offer to send your questions electronically"
+    ]
+  },
+  {
+    "id": "wr-email-008",
+    "title": "Laboratuvar Araştırma Asistanlığı Başvurusu",
+    "scenario": "A biology professor announced an opening for an undergraduate research assistant in their microbiology lab. Write an email expressing your interest and qualifications.",
+    "bullets": [
+      "State your interest in the specific laboratory research project",
+      "Summarize your relevant coursework and lab techniques learned",
+      "Inquire about interview opportunities or submitting your CV and transcript"
     ]
   }
 ]

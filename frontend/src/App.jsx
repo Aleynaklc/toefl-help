@@ -1410,6 +1410,8 @@ import { api } from './api';
 import { useState, useEffect, useMemo, useRef } from "react";
 import { BookOpen, Plus, BarChart2, Check, X, RotateCcw, Search, Trash2, Layers, ArrowRight, Sparkles, PenLine, Mail, MessageSquare, Clock, Send, GraduationCap, Pause, Info, Type, Shuffle, ChevronRight, ChevronDown, AlertCircle, Award, Target, Zap, Brain, TrendingUp, BookMarked, CheckCircle, ChevronLeft } from "lucide-react";
 import grammarData from "./data/toefl_grammar_content.json";
+import HomeDashboard from "./components/HomeDashboard.jsx";
+import ToeflPrep2026 from "./components/ToeflPrep2026.jsx";
 
 const STORAGE_KEY = "toefl-vocab-words";
 
@@ -1472,20 +1474,40 @@ function pickWeighted(pool, n) {
 export default function App() {
   const [words, setWords] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [view, setView] = useState("list"); // list | add | quiz | stats
+  const [view, setView] = useState("home");
   const [toast, setToast] = useState(null);
   const toastTimer = useRef(null);
 
   useEffect(() => {
     (async () => {
+      let initialWords = [];
       try {
-        const res = await window.storage.get(STORAGE_KEY, false);
-        if (res && res.value) {
-          const parsedWords = JSON.parse(res.value).map((w) => ({ ...w, category: w.category || "Genel" }));
-          setWords(parsedWords);
+        const cached = await window.storage.get(STORAGE_KEY);
+        if (cached && cached.value) {
+          const parsedWords = JSON.parse(cached.value);
+          if (Array.isArray(parsedWords) && parsedWords.length > 0) {
+            initialWords = parsedWords.map((w) => ({ ...w, category: w.category || "Genel" }));
+            setWords(initialWords);
+          }
         }
       } catch (e) {
-        // key does not exist yet — that's fine
+        console.warn("Storage get warning:", e);
+      }
+
+      try {
+        const apiWords = await api.getWords();
+        if (Array.isArray(apiWords)) {
+          if (apiWords.length > 0) {
+            setWords(apiWords);
+            await window.storage.set(STORAGE_KEY, JSON.stringify(apiWords));
+          } else if (initialWords.length > 0) {
+            // Sync local storage words to backend if backend DB is empty
+            const bulkText = initialWords.map((w) => `${w.word} - ${w.definition}`).join("\n");
+            api.addBulkWords(bulkText, "Genel").catch(() => {});
+          }
+        }
+      } catch (err) {
+        console.warn("Backend sync notice:", err);
       } finally {
         setLoaded(true);
       }
@@ -1494,13 +1516,25 @@ export default function App() {
 
   const persist = async (next) => {
     setWords(next);
-    // API backend'i ile tek tek senkronize olmak için detaylı UI refactoring gerekir.
-    // Şimdilik UI state'i güncelleniyor.
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(next));
+    } catch (e) {
+      console.warn("Persist storage error:", e);
+    }
   };
 
   const refetchWords = async () => {
-    const data = await api.getWords();
-    setWords(data);
+    try {
+      const data = await api.getWords();
+      if (Array.isArray(data)) {
+        setWords(data);
+        await window.storage.set(STORAGE_KEY, JSON.stringify(data));
+        return data;
+      }
+    } catch (e) {
+      console.warn("refetchWords failed:", e);
+    }
+    return words;
   };
   
   const showToast = (msg, kind = "ok") => {
@@ -1525,27 +1559,61 @@ export default function App() {
       <FontLoader />
       <Header view={view} setView={setView} wordCount={words.length} />
       <main style={styles.main}>
+        {view === "home" && <HomeDashboard words={words} setView={setView} />}
         {view === "list" && (
-          <WordList words={words} onDelete={async (id) => {
-    await api.deleteWord(id);
-    refetchWords();
-  }} setView={setView} />
+          <WordList
+            words={words}
+            onDelete={async (id) => {
+              const updated = words.filter((w) => w.id !== id);
+              setWords(updated);
+              await window.storage.set(STORAGE_KEY, JSON.stringify(updated));
+              try {
+                await api.deleteWord(id);
+              } catch (e) {
+                console.warn("Delete API warning:", e);
+              }
+              showToast("Kelime silindi");
+            }}
+            setView={setView}
+          />
         )}
         {view === "add" && (
           <AddWords
             existingWords={words}
             onAdd={async (newWords, rawText, category) => {
-    try {
-      const finalRawText = rawText || newWords.map(w => `${w.word} - ${w.definition}`).join('\n');
-      const finalCategory = category || "Genel";
-      await api.addBulkWords(finalRawText, finalCategory);
-      await refetchWords();
-      showToast(newWords.length > 1 ? `${newWords.length} kelime eklendi` : "Kelime eklendi");
-      setView("list");
-    } catch(e) {
-      showToast("Ekleme hatası", "error");
-    }
-  }}
+              if (!newWords || newWords.length === 0) {
+                showToast("Eklenecek kelime bulunamadı", "error");
+                return;
+              }
+
+              const existingKeys = new Set(words.map((w) => w.word.toLowerCase()));
+              const filteredNew = newWords.filter((w) => !existingKeys.has(w.word.toLowerCase()));
+              
+              if (filteredNew.length === 0) {
+                showToast("Bu kelimeler zaten kart kutunda mevcut");
+                setView("list");
+                return;
+              }
+
+              const merged = [...words, ...filteredNew];
+              setWords(merged);
+              await window.storage.set(STORAGE_KEY, JSON.stringify(merged));
+
+              const finalCategory = category || filteredNew[0]?.category || "Genel";
+              const finalRawText = rawText || filteredNew.map((w) => `${w.word} - ${w.definition}`).join("\n");
+
+              try {
+                const res = await api.addBulkWords(finalRawText, finalCategory);
+                if (res && res.added !== undefined) {
+                  await refetchWords();
+                }
+              } catch (apiErr) {
+                console.warn("Backend add warning (preserved locally):", apiErr);
+              }
+
+              showToast(filteredNew.length > 1 ? `${filteredNew.length} kelime eklendi` : "Kelime eklendi");
+              setView("list");
+            }}
           />
         )}
         {view === "quiz" && <Quiz words={words} onUpdate={persist} />}
@@ -1554,13 +1622,28 @@ export default function App() {
         {view === "placement" && (
           <PlacementTest
             existingWords={words}
-            onImportWords={(newWords) => {
-              persist([...words, ...newWords]);
-              showToast(`${newWords.length} kelime kart kutusuna eklendi`);
+            onImportWords={async (newWords) => {
+              const existingKeys = new Set(words.map((w) => w.word.toLowerCase()));
+              const filteredNew = newWords.filter((w) => !existingKeys.has(w.word.toLowerCase()));
+              if (filteredNew.length === 0) {
+                showToast("Bu kelimeler zaten kart kutunda mevcut");
+                return;
+              }
+              const merged = [...words, ...filteredNew];
+              setWords(merged);
+              await window.storage.set(STORAGE_KEY, JSON.stringify(merged));
+
+              const rawText = filteredNew.map((w) => `${w.word} - ${w.definition}`).join("\n");
+              try {
+                await api.addBulkWords(rawText, filteredNew[0]?.category || "Seviye Testi");
+              } catch (e) {
+                console.warn("Placement sync warning:", e);
+              }
+              showToast(`${filteredNew.length} kelime kart kutusuna eklendi`);
             }}
           />
         )}
-        {view === "toefl" && <TOEFLGuide setView={setView} />}
+        {view === "toefl" && <ToeflPrep2026 setView={setView} />}
         {view === "grammar" && <GrammarView />}
         {view === "complete" && <CompleteWords words={words} />}
         {view === "build" && <BuildSentence words={words} />}
@@ -1631,6 +1714,8 @@ const styles = {
 
 function Header({ view, setView, wordCount }) {
   const tabs = [
+    { id: "home", label: "Ana Sayfa", icon: Target },
+    { id: "toefl", label: "TOEFL 2026", icon: Info },
     { id: "list", label: "Kelimeler", icon: BookOpen },
     { id: "quiz", label: "Quiz", icon: Layers },
     { id: "complete", label: "Tamamla", icon: Type },
@@ -1638,7 +1723,6 @@ function Header({ view, setView, wordCount }) {
     { id: "writing", label: "Yazma", icon: PenLine },
     { id: "placement", label: "Seviye", icon: GraduationCap },
     { id: "stats", label: "İstatistik", icon: BarChart2 },
-    { id: "toefl", label: "TOEFL 2026", icon: Info },
     { id: "grammar", label: "Gramer", icon: BookMarked },
 ];
   return (
@@ -1662,10 +1746,10 @@ function Header({ view, setView, wordCount }) {
                 letterSpacing: "-0.01em",
               }}
             >
-              Kelime Fişi
+              TOEFL Help
             </div>
             <div style={{ fontSize: 12.5, color: COLORS.inkSoft, marginTop: 2 }}>
-              TOEFL kelime kartların · {wordCount} kelime
+              2026 formatına göre çalışma merkezi · {wordCount} kelime
             </div>
           </div>
           <button
@@ -1783,23 +1867,52 @@ function WordList({ words, onDelete, setView }) {
           Kart kutun boş
         </div>
         <p style={{ color: COLORS.inkSoft, fontSize: 14, marginBottom: 20, lineHeight: 1.5 }}>
-          Çalışmaya başlamak için ilk kelimelerini ekle. Tek tek de girebilirsin,
-          liste halinde yapıştırıp toplu da ekleyebilirsin.
+          Rastgele kelime eklemek yerine önce seviyeni ölçebilir, sonra bilmediğin kelimeleri kartlara aktarabilirsin.
         </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, maxWidth: 420, margin: "0 auto 12px" }}>
+          <button
+            onClick={() => setView("placement")}
+            style={{
+              background: COLORS.ink,
+              color: COLORS.paper,
+              border: "none",
+              borderRadius: 8,
+              padding: "12px 14px",
+              fontSize: 13.5,
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Seviye testiyle başla
+          </button>
+          <button
+            onClick={() => setView("add")}
+            style={{
+              background: COLORS.card,
+              color: COLORS.ink,
+              border: `1px solid ${COLORS.paperLine}`,
+              borderRadius: 8,
+              padding: "12px 14px",
+              fontSize: 13.5,
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Manuel kelime ekle
+          </button>
+        </div>
         <button
-          onClick={() => setView("add")}
+          onClick={() => setView("home")}
           style={{
-            background: COLORS.ink,
-            color: COLORS.paper,
+            background: "transparent",
             border: "none",
-            borderRadius: 6,
-            padding: "10px 18px",
-            fontSize: 13.5,
-            fontWeight: 600,
+            color: COLORS.gold,
+            fontSize: 13,
+            fontWeight: 700,
             cursor: "pointer",
           }}
         >
-          Kelime ekle
+          Çalışma akışını göster
         </button>
       </div>
     );
@@ -3216,16 +3329,52 @@ bias - yanlılık, önyargı
   },
 ];
 
-function parseWordLines(text, category) {
+function parseWordLines(text, category = "Genel") {
+  if (!text) return [];
   const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
   const parsed = [];
   const seen = new Set();
   for (const line of lines) {
-    const sep = line.includes(" - ") ? " - " : line.includes(":") ? ":" : line.includes("-") ? "-" : null;
-    if (!sep) continue;
-    const idx = line.indexOf(sep);
-    const w = line.slice(0, idx).trim();
-    const d = line.slice(idx + sep.length).trim();
+    if (line.startsWith("#") || line.startsWith("//")) continue;
+    let w = "", d = "";
+    if (line.includes(" - ")) {
+      const idx = line.indexOf(" - ");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 3).trim();
+    } else if (line.includes(" — ")) {
+      const idx = line.indexOf(" — ");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 3).trim();
+    } else if (line.includes(" – ")) {
+      const idx = line.indexOf(" – ");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 3).trim();
+    } else if (line.includes(":")) {
+      const idx = line.indexOf(":");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    } else if (line.includes("=")) {
+      const idx = line.indexOf("=");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    } else if (line.includes("\t")) {
+      const idx = line.indexOf("\t");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    } else if (line.includes("-")) {
+      const idx = line.indexOf("-");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    } else if (line.includes(",")) {
+      const idx = line.indexOf(",");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    } else if (line.includes(";")) {
+      const idx = line.indexOf(";");
+      w = line.slice(0, idx).trim();
+      d = line.slice(idx + 1).trim();
+    }
+
     const key = w.toLowerCase();
     if (w && d && !seen.has(key)) {
       seen.add(key);
@@ -3256,14 +3405,14 @@ function AddWords({ onAdd, existingWords }) {
       setError("Kelime ve anlam alanı zorunlu.");
       return;
     }
-    const rawText = `${word} - ${definition}`;
+    const rawText = `${word.trim()} - ${definition.trim()}`;
     onAdd([makeWord(word, definition, example, resolvedCategory)], rawText, resolvedCategory);
   };
 
   const submitBulk = () => {
     const parsed = parseWordLines(bulkText, resolvedCategory);
     if (parsed.length === 0) {
-      setError("Satırları 'kelime - anlam' formatında yapıştır.");
+      setError("Satırları 'kelime - anlam' veya 'kelime: anlam' formatında yapıştır.");
       return;
     }
     onAdd(parsed, bulkText, resolvedCategory);
@@ -3286,7 +3435,7 @@ function AddWords({ onAdd, existingWords }) {
       setError("Bu akademik fiil listesindeki tüm kelimeler zaten kart kutunda.");
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, COMMON_TOEFL_VERBS_RAW, "Fiil");
   };
 
   const seedCommonAdjectives = () => {
@@ -3296,7 +3445,7 @@ function AddWords({ onAdd, existingWords }) {
       setError("Bu sıfat listesindeki tüm kelimeler zaten kart kutunda.");
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, COMMON_ADJECTIVES_RAW, "Sıfat");
   };
 
   const seedCommonAdverbs = () => {
@@ -3306,7 +3455,7 @@ function AddWords({ onAdd, existingWords }) {
       setError("Bu zarf listesindeki tüm kelimeler zaten kart kutunda.");
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, COMMON_ADVERBS_RAW, "Zarf");
   };
 
   const seedNounCategory = (cat) => {
@@ -3316,7 +3465,7 @@ function AddWords({ onAdd, existingWords }) {
       setError(`"${cat.label}" kategorisindeki kelimeler zaten kart kutunda.`);
       return;
     }
-    onAdd(parsed);
+    onAdd(parsed, cat.raw, cat.label);
   };
 
   return (
@@ -4140,153 +4289,190 @@ function StatCard({ label, value, accent }) {
 
 const EMAIL_PROMPTS = [
   {
-    id: "email-housing",
-    title: "Yurt gürültüsü şikayeti",
-    scenario:
-      "You live in a university dormitory. For the past two weeks, construction noise near your building has made it very difficult to study or sleep. Write an email to the Housing Office.",
+    id: "wr-email-001",
+    title: "Akademik Danışman Randevusu Talebi (Bölüm Değişikliği)",
+    scenario: "You need to change your major, but the online system requires your academic advisor's formal sign-off. Write an email to your academic advisor requesting an appointment.",
     bullets: [
-      "Explain the problem clearly",
-      "Explain how it has been affecting you",
-      "Propose a specific solution you would like",
+      "Explain clearly why you want to meet",
+      "Mention the formal deadline for major change submissions",
+      "Propose two specific appointment time options",
     ],
   },
   {
-    id: "email-extension",
-    title: "Ödev süresi uzatma talebi",
-    scenario:
-      "You are unable to submit a major course assignment by the deadline due to a family emergency. Write an email to your professor.",
+    id: "wr-email-002",
+    title: "Ödev Teslim Süresi Uzatma Talebi (Sağlık Mazereti)",
+    scenario: "You cannot submit your research paper on time because you were sick with influenza for several days. Write an email to your professor requesting a short extension.",
     bullets: [
-      "Explain briefly why you need more time",
-      "Propose a specific new deadline",
-      "Reassure the professor about the quality of your work",
+      "Briefly explain the medical reason without oversharing",
+      "Propose a realistic, specific new submission date",
+      "Reassure the professor about your current draft progress",
     ],
   },
   {
-    id: "email-registration",
-    title: "Kayıt sorunu",
-    scenario:
-      "You tried to register for a required course online, but the system shows it is full, even though you were told there would be space reserved for your major. Write an email to the registrar's office.",
+    id: "wr-email-003",
+    title: "Kampüs Etkinliği Gönüllülük ve Yetkinlik Bildirimi",
+    scenario: "You volunteered to assist at the university's International Student Orientation. The event coordinator sent a request for your availability and relevant skills. Write an email to the coordinator.",
     bullets: [
-      "Describe the problem clearly",
-      "Mention what you were told, and by whom",
-      "Request specific action from the office",
+      "Confirm your commitment to volunteer at the orientation",
+      "State your exact available time slots across the weekend",
+      "Highlight one specific skill or past campus experience that will help the team",
     ],
   },
   {
-    id: "email-group",
-    title: "Grup projesi zamanlama çakışması",
-    scenario:
-      "You are part of a group project team. One of your regular meeting times no longer works for you because of a new schedule conflict. Write an email to your teammates.",
+    id: "wr-email-004",
+    title: "Grup Projesi Toplantı Saati Çakışması ve Çözüm Önerisi",
+    scenario: "Your project team has scheduled a group meeting during a time when you must attend a mandatory chemistry laboratory makeup session. Write an email to your group members.",
     bullets: [
-      "Explain the conflict",
-      "Propose at least one alternative time",
-      "Show willingness to accommodate the group's preference",
+      "Explain the unavoidable schedule conflict clearly",
+      "Propose a practical alternative meeting time and collaborative online workflow",
+      "Set a deadline for team members to respond",
     ],
   },
   {
-    id: "email-library",
-    title: "Kütüphane cezası itirazı",
-    scenario:
-      "You returned a library book on time, but the library system shows it as overdue and has charged you a fine. Write an email to the library services office.",
+    id: "wr-email-005",
+    title: "Yurt Çalışma Odası Yazıcı Arızası Bildirimi",
+    scenario: "The shared printer in your residence hall study lounge has been out of order for three days during midterm exam week. Write an email to the Residence Life Office.",
     bullets: [
-      "Explain the situation clearly",
-      "Mention any evidence you have (for example, a return confirmation)",
-      "Politely request that the fine be removed",
+      "Describe the malfunction and how long it has persisted",
+      "Explain why this issue is particularly critical for residents right now",
+      "Request immediate repair or an alternative printing arrangement",
     ],
   },
   {
-    id: "email-career",
-    title: "Kariyer merkezinden randevu talebi",
-    scenario:
-      "You want to schedule a meeting with your university's career center to discuss internship opportunities in your field. Write an email requesting an appointment.",
+    id: "wr-email-006",
+    title: "Zorunlu Ders Kayıt Kontenjanı Sorunu (Öğrenci İşleri)",
+    scenario: "You attempted to register for a required senior seminar (ECON 401), but the course reached maximum capacity within minutes. You need this course to graduate on schedule. Write an email to the Economics Department Registrar.",
     bullets: [
-      "Explain what kind of help you are looking for",
-      "Mention your general availability",
-      "Ask what you should prepare before the meeting",
+      "Identify the course code and explain the capacity constraint",
+      "Explain why completing this course this term is essential for your graduation timeline",
+      "Inquire about a capacity override permit or opening a second section",
+    ],
+  },
+  {
+    id: "wr-email-007",
+    title: "Kaçırılan Randevu Özrü ve Yeni Görüşme Talebi",
+    scenario: "You missed a scheduled research consultation with your professor due to an unexpected public transit delay. Write an email to apologize and reschedule.",
+    bullets: [
+      "Offer a sincere and immediate apology for missing the appointment",
+      "Briefly explain the unavoidable delay without lengthy excuses",
+      "Propose new options for meeting or offer to send your questions electronically",
+    ],
+  },
+  {
+    id: "wr-email-008",
+    title: "Laboratuvar Araştırma Asistanlığı Başvurusu",
+    scenario: "A biology professor announced an opening for an undergraduate research assistant in their microbiology lab. Write an email expressing your interest and qualifications.",
+    bullets: [
+      "State your interest in the specific laboratory research project",
+      "Summarize your relevant coursework and lab techniques learned",
+      "Inquire about interview opportunities or submitting your CV and transcript",
     ],
   },
 ];
 
 const DISCUSSION_PROMPTS = [
   {
-    id: "disc-socialmedia",
-    title: "Sosyal medya düzenlemesi",
-    question:
-      "In our next class, we will discuss whether government regulation of social media companies does more good than harm. Please share your view with supporting reasons before our discussion.",
+    id: "wr-discussion-001",
+    title: "Ders Kayıtlarının Erişime Açılması (Agree & Extend)",
+    question: "Should universities record all lectures and make them permanently available to enrolled students after class? Explain your view with specific reasons.",
     studentA: {
-      name: "Elena",
-      text: "I believe stronger regulation is necessary. Without it, companies prioritize profit over user wellbeing, especially regarding misinformation and the mental health effects on teenagers.",
+      name: "Mina",
+      text: "Yes. Recordings allow students to review complex explanations at their own pace and support those who miss lectures due to illness, family emergencies, or commute issues.",
     },
     studentB: {
-      name: "Marcus",
-      text: "I disagree. Government regulation often moves too slowly to keep up with technology, and it risks limiting free expression. Self-regulation by companies, combined with media literacy education, would be more effective.",
+      name: "Jonah",
+      text: "I disagree. If recordings are readily accessible online, in-person lecture attendance will decline, resulting in lifeless classrooms and fewer spontaneous discussions.",
     },
   },
   {
-    id: "disc-service",
-    title: "Zorunlu topluluk hizmeti",
-    question: "Should universities require all students to complete community service hours before graduating? Share your opinion.",
+    id: "wr-discussion-002",
+    title: "Zorunlu Üniversite Stajları (Disagree & Defend)",
+    question: "Should universities require every undergraduate student to complete an internship before graduation? Explain your opinion with supporting evidence.",
     studentA: {
-      name: "Priya",
-      text: "Yes, mandatory service connects students to their communities and builds practical skills that classroom learning cannot provide.",
+      name: "Rafael",
+      text: "Yes. Internships provide practical workplace experience, develop essential soft skills, and give graduates a clear competitive edge in the modern job market.",
     },
     studentB: {
-      name: "Tomas",
-      text: "I think it should remain optional. Forcing service can make students resentful rather than genuinely engaged, and it takes time away from academic work many students already struggle to manage.",
+      name: "Nora",
+      text: "I believe internships should remain optional because mandatory requirements unfairly burden students who rely on paid jobs or who cannot afford unpaid positions.",
     },
   },
   {
-    id: "disc-language",
-    title: "Dil öğrenme yöntemi",
-    question:
-      "Is it more effective to learn a foreign language by living in a country where it is spoken, or by studying it systematically in a classroom? What is your view?",
+    id: "wr-discussion-003",
+    title: "Kampüs Bütçesi: Sessiz Çalışma vs. Sosyal Alan (Resource Allocation)",
+    question: "If a university receives a substantial surplus grant, should it prioritize expanding quiet individual study spaces or modern recreational lounges? State and defend your choice.",
     studentA: {
-      name: "Ana",
-      text: "Immersion is far more effective. Being surrounded by the language forces practical use and builds intuition that textbooks cannot replicate.",
-    },
-    studentB: {
-      name: "Kwame",
-      text: "I would argue a classroom foundation is essential first. Without understanding grammar and structure, immersion can lead to fluent but inaccurate speech that is hard to correct later.",
-    },
-  },
-  {
-    id: "disc-remote",
-    title: "Uzaktan çalışma",
-    question: "Should companies allow employees to work from home permanently, or is some in-person presence necessary? Share your view.",
-    studentA: {
-      name: "Sofia",
-      text: "Permanent remote work should be the standard option. It improves work-life balance and productivity for many employees, and companies save on office costs.",
-    },
-    studentB: {
-      name: "Daniel",
-      text: "I think regular in-person time matters for collaboration and mentorship, especially for newer employees who benefit from informal learning that is hard to replicate online.",
-    },
-  },
-  {
-    id: "disc-genetic",
-    title: "Genetik mühendislik",
-    question:
-      "Should genetic engineering be used to prevent inherited diseases in future generations, even though it also raises ethical questions? What do you think?",
-    studentA: {
-      name: "Fatima",
-      text: "I support using it to prevent serious inherited diseases. Preventing suffering should outweigh hypothetical ethical concerns when the goal is purely medical.",
-    },
-    studentB: {
-      name: "Lucas",
-      text: "I am cautious. Once we start editing genes for disease prevention, it becomes difficult to draw a clear line before it is used for non-medical enhancement instead.",
-    },
-  },
-  {
-    id: "disc-competition",
-    title: "Rekabet mi işbirliği mi",
-    question: "Which is more important for a society's progress: competition or cooperation? Please explain your reasoning.",
-    studentA: {
-      name: "Yuki",
-      text: "Competition drives innovation. Without it, there is little incentive to improve products, ideas, or services.",
+      name: "Leah",
+      text: "The administration should expand quiet study rooms because deep concentration is the primary foundation for academic success, especially during exam periods.",
     },
     studentB: {
       name: "Omar",
-      text: "Cooperation matters more in the long run. Many of humanity's biggest achievements, from scientific research to public health, required people working together rather than competing.",
+      text: "Recreational and social lounges should be prioritized because student mental health and community bonding are just as essential for overall university retention.",
+    },
+  },
+  {
+    id: "wr-discussion-004",
+    title: "Ödevlerde Yapay Zeka Araçlarının Kullanımı (Tech & Ethics)",
+    question: "Should university students be permitted to use generative AI tools when preparing coursework, provided they formally declare how the technology was utilized? Explain your stance.",
+    studentA: {
+      name: "Hana",
+      text: "Yes. Generative AI is an indispensable workplace technology. Universities should teach students how to prompt, verify, and cite AI tools responsibly rather than banning them.",
+    },
+    studentB: {
+      name: "Mateo",
+      text: "I disagree. Allowing AI tools makes it impossible for professors to evaluate students' authentic analytical and writing abilities, which compromises educational integrity.",
+    },
+  },
+  {
+    id: "wr-discussion-005",
+    title: "Kalıcı Uzaktan Çalışma vs. Hibrit Ofis (Workplace Policy)",
+    question: "Should corporate employers adopt permanent remote work policies, or should they mandate in-person office attendance for part of the work week? Share your reasoning.",
+    studentA: {
+      name: "Sofia",
+      text: "Full remote work should be standard. It eliminates grueling commutes, provides superior work-life balance, and allows organizations to recruit top talent globally.",
+    },
+    studentB: {
+      name: "Daniel",
+      text: "Mandatory in-person time is indispensable. Face-to-face contact fosters spontaneous innovation, strengthens organizational culture, and provides crucial mentorship for juniors.",
+    },
+  },
+  {
+    id: "wr-discussion-006",
+    title: "Tek Kullanımlık Plastiklerin Yasaklanması (Environmental Policy)",
+    question: "Should municipal governments enact strict bans on all single-use plastics, or should they rely on voluntary consumer recycling initiatives? Discuss your position.",
+    studentA: {
+      name: "Carlos",
+      text: "Strict bans are essential. Decades of voluntary recycling programs have failed to stem ocean plastic pollution, and only regulatory prohibition drives real change.",
+    },
+    studentB: {
+      name: "Grace",
+      text: "Outright bans disproportionately harm small businesses by suddenly inflating packaging costs, which gets passed on to low-income consumers during inflation.",
+    },
+  },
+  {
+    id: "wr-discussion-007",
+    title: "Geleneksel Sınavlar vs. Sürekli Proje Değerlendirmesi (Assessment Policy)",
+    question: "Should university courses base student grades primarily on comprehensive final examinations or on multi-stage cumulative group and individual projects? Explain your view.",
+    studentA: {
+      name: "Tanya",
+      text: "Grades should be based on projects. Real careers require sustained research, iterative revision, and collaboration, not the memorization of facts under timed exam pressure.",
+    },
+    studentB: {
+      name: "Liam",
+      text: "Standardized final exams remain necessary because they guarantee individual accountability and prevent free-riding problems that often plague group project assessments.",
+    },
+  },
+  {
+    id: "wr-discussion-008",
+    title: "Şehir Merkezlerinin Araç Trafiğine Kapatılması (Urban Policy)",
+    question: "Should metropolitan city centers be permanently closed to private motorized vehicles to create dedicated pedestrian and cycling zones? Defend your position.",
+    studentA: {
+      name: "Zoe",
+      text: "Yes. Pedestrianized urban centers drastically reduce greenhouse gas emissions, enhance pedestrian safety, and revitalize local storefronts through increased foot traffic.",
+    },
+    studentB: {
+      name: "Felix",
+      text: "Banning vehicles restricts mobility for the elderly and disabled, disrupts commercial freight deliveries, and pushes severe traffic congestion into surrounding residential suburbs.",
     },
   },
 ];
@@ -5243,7 +5429,7 @@ function PlacementQuizQuestion({ currentItem, sequence, activeLevel, currentInde
 // TOEFL 2026 BİLGİ SAYFASI
 // ─────────────────────────────────────────────────────────────────────────────
 
-function TOEFLGuide({ setView }) {
+function TOEFLGuideLegacy({ setView }) {
   const [openSection, setOpenSection] = useState(null);
 
   const sections = [

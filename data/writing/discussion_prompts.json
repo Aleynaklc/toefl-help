@@ -1,80 +1,106 @@
 [
   {
-    "id": "disc-socialmedia",
-    "title": "Sosyal medya düzenlemesi",
-    "question": "In our next class, we will discuss whether government regulation of social media companies does more good than harm. Please share your view with supporting reasons before our discussion.",
+    "id": "wr-discussion-001",
+    "title": "Ders Kayıtlarının Erişime Açılması (Agree & Extend)",
+    "question": "Should universities record all lectures and make them permanently available to enrolled students after class? Explain your view with specific reasons.",
     "student_a": {
-      "name": "Elena",
-      "text": "I believe stronger regulation is necessary. Without it, companies prioritize profit over user wellbeing, especially regarding misinformation and the mental health effects on teenagers."
+      "name": "Mina",
+      "text": "Yes. Recordings allow students to review complex explanations at their own pace and support those who miss lectures due to illness, family emergencies, or commute issues."
     },
     "student_b": {
-      "name": "Marcus",
-      "text": "I disagree. Government regulation often moves too slowly to keep up with technology, and it risks limiting free expression. Self-regulation by companies, combined with media literacy education, would be more effective."
+      "name": "Jonah",
+      "text": "I disagree. If recordings are readily accessible online, in-person lecture attendance will decline, resulting in lifeless classrooms and fewer spontaneous discussions."
     }
   },
   {
-    "id": "disc-service",
-    "title": "Zorunlu topluluk hizmeti",
-    "question": "Should universities require all students to complete community service hours before graduating? Share your opinion.",
+    "id": "wr-discussion-002",
+    "title": "Zorunlu Üniversite Stajları (Disagree & Defend)",
+    "question": "Should universities require every undergraduate student to complete an internship before graduation? Explain your opinion with supporting evidence.",
     "student_a": {
-      "name": "Priya",
-      "text": "Yes, mandatory service connects students to their communities and builds practical skills that classroom learning cannot provide."
+      "name": "Rafael",
+      "text": "Yes. Internships provide practical workplace experience, develop essential soft skills, and give graduates a clear competitive edge in the modern job market."
     },
     "student_b": {
-      "name": "Tomas",
-      "text": "I think it should remain optional. Forcing service can make students resentful rather than genuinely engaged, and it takes time away from academic work many students already struggle to manage."
+      "name": "Nora",
+      "text": "I believe internships should remain optional because mandatory requirements unfairly burden students who rely on paid jobs or who cannot afford unpaid positions."
     }
   },
   {
-    "id": "disc-language",
-    "title": "Dil öğrenme yöntemi",
-    "question": "Is it more effective to learn a foreign language by living in a country where it is spoken, or by studying it systematically in a classroom? What is your view?",
+    "id": "wr-discussion-003",
+    "title": "Kampüs Bütçesi: Sessiz Çalışma vs. Sosyal Alan (Resource Allocation)",
+    "question": "If a university receives a substantial surplus grant, should it prioritize expanding quiet individual study spaces or modern recreational lounges? State and defend your choice.",
     "student_a": {
-      "name": "Ana",
-      "text": "Immersion is far more effective. Being surrounded by the language forces practical use and builds intuition that textbooks cannot replicate."
-    },
-    "student_b": {
-      "name": "Kwame",
-      "text": "I would argue a classroom foundation is essential first. Without understanding grammar and structure, immersion can lead to fluent but inaccurate speech that is hard to correct later."
-    }
-  },
-  {
-    "id": "disc-remote",
-    "title": "Uzaktan çalışma",
-    "question": "Should companies allow employees to work from home permanently, or is some in-person presence necessary? Share your view.",
-    "student_a": {
-      "name": "Sofia",
-      "text": "Permanent remote work should be the standard option. It improves work-life balance and productivity for many employees, and companies save on office costs."
-    },
-    "student_b": {
-      "name": "Daniel",
-      "text": "I think regular in-person time matters for collaboration and mentorship, especially for newer employees who benefit from informal learning that is hard to replicate online."
-    }
-  },
-  {
-    "id": "disc-genetic",
-    "title": "Genetik mühendislik",
-    "question": "Should genetic engineering be used to prevent inherited diseases in future generations, even though it also raises ethical questions? What do you think?",
-    "student_a": {
-      "name": "Fatima",
-      "text": "I support using it to prevent serious inherited diseases. Preventing suffering should outweigh hypothetical ethical concerns when the goal is purely medical."
-    },
-    "student_b": {
-      "name": "Lucas",
-      "text": "I am cautious. Once we start editing genes for disease prevention, it becomes difficult to draw a clear line before it is used for non-medical enhancement instead."
-    }
-  },
-  {
-    "id": "disc-competition",
-    "title": "Rekabet mi işbirliği mi",
-    "question": "Which is more important for a society's progress: competition or cooperation? Please explain your reasoning.",
-    "student_a": {
-      "name": "Yuki",
-      "text": "Competition drives innovation. Without it, there is little incentive to improve products, ideas, or services."
+      "name": "Leah",
+      "text": "The administration should expand quiet study rooms because deep concentration is the primary foundation for academic success, especially during exam periods."
     },
     "student_b": {
       "name": "Omar",
-      "text": "Cooperation matters more in the long run. Many of humanity's biggest achievements, from scientific research to public health, required people working together rather than competing."
+      "text": "Recreational and social lounges should be prioritized because student mental health and community bonding are just as essential for overall university retention."
+    }
+  },
+  {
+    "id": "wr-discussion-004",
+    "title": "Ödevlerde Yapay Zeka Araçlarının Kullanımı (Tech & Ethics)",
+    "question": "Should university students be permitted to use generative AI tools when preparing coursework, provided they formally declare how the technology was utilized? Explain your stance.",
+    "student_a": {
+      "name": "Hana",
+      "text": "Yes. Generative AI is an indispensable workplace technology. Universities should teach students how to prompt, verify, and cite AI tools responsibly rather than banning them."
+    },
+    "student_b": {
+      "name": "Mateo",
+      "text": "I disagree. Allowing AI tools makes it impossible for professors to evaluate students' authentic analytical and writing abilities, which compromises educational integrity."
+    }
+  },
+  {
+    "id": "wr-discussion-005",
+    "title": "Kalıcı Uzaktan Çalışma vs. Hibrit Ofis (Workplace Policy)",
+    "question": "Should corporate employers adopt permanent remote work policies, or should they mandate in-person office attendance for part of the work week? Share your reasoning.",
+    "student_a": {
+      "name": "Sofia",
+      "text": "Full remote work should be standard. It eliminates grueling commutes, provides superior work-life balance, and allows organizations to recruit top talent globally."
+    },
+    "student_b": {
+      "name": "Daniel",
+      "text": "Mandatory in-person time is indispensable. Face-to-face contact fosters spontaneous innovation, strengthens organizational culture, and provides crucial mentorship for juniors."
+    }
+  },
+  {
+    "id": "wr-discussion-006",
+    "title": "Tek Kullanımlık Plastiklerin Yasaklanması (Environmental Policy)",
+    "question": "Should municipal governments enact strict bans on all single-use plastics, or should they rely on voluntary consumer recycling initiatives? Discuss your position.",
+    "student_a": {
+      "name": "Carlos",
+      "text": "Strict bans are essential. Decades of voluntary recycling programs have failed to stem ocean plastic pollution, and only regulatory prohibition drives real change."
+    },
+    "student_b": {
+      "name": "Grace",
+      "text": "Outright bans disproportionately harm small businesses by suddenly inflating packaging costs, which gets passed on to low-income consumers during inflation."
+    }
+  },
+  {
+    "id": "wr-discussion-007",
+    "title": "Geleneksel Sınavlar vs. Sürekli Proje Değerlendirmesi (Assessment Policy)",
+    "question": "Should university courses base student grades primarily on comprehensive final examinations or on multi-stage cumulative group and individual projects? Explain your view.",
+    "student_a": {
+      "name": "Tanya",
+      "text": "Grades should be based on projects. Real careers require sustained research, iterative revision, and collaboration, not the memorization of facts under timed exam pressure."
+    },
+    "student_b": {
+      "name": "Liam",
+      "text": "Standardized final exams remain necessary because they guarantee individual accountability and prevent free-riding problems that often plague group project assessments."
+    }
+  },
+  {
+    "id": "wr-discussion-008",
+    "title": "Şehir Merkezlerinin Araç Trafiğine Kapatılması (Urban Policy)",
+    "question": "Should metropolitan city centers be permanently closed to private motorized vehicles to create dedicated pedestrian and cycling zones? Defend your position.",
+    "student_a": {
+      "name": "Zoe",
+      "text": "Yes. Pedestrianized urban centers drastically reduce greenhouse gas emissions, enhance pedestrian safety, and revitalize local storefronts through increased foot traffic."
+    },
+    "student_b": {
+      "name": "Felix",
+      "text": "Banning vehicles restricts mobility for the elderly and disabled, disrupts commercial freight deliveries, and pushes severe traffic congestion into surrounding residential suburbs."
     }
   }
 ]

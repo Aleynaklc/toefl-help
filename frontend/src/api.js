@@ -9,13 +9,29 @@ export const api = {
     return res.json();
   },
 
+  addWord: async (wordData) => {
+    const res = await fetch("/api/words", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(wordData),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || "Kelime eklenemedi");
+    }
+    return res.json();
+  },
+
   addBulkWords: async (text, category = "Genel") => {
     const res = await fetch("/api/words/bulk", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, category }),
     });
-    if (!res.ok) throw new Error("Kelimeler eklenemedi");
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || "Kelimeler eklenemedi");
+    }
     return res.json();
   },
 

@@ -19,6 +19,15 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+*.log
 
 # Virtual environments
 .env
@@ -40,6 +49,7 @@ venv.bak/
 *.swo
 .DS_Store
 
-# SQLite
+# SQLite / Database
 *.sqlite3
 *.db
+toefl.db

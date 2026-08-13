@@ -118,20 +118,35 @@ class WordService:
 # ---------------------------------------------------------------------------
 
 _SEPARATORS = re.compile(
-    r"\s+[-—]\s+|\s*:\s*",   # " - ", " — ", ":"
+    r"\s+[-—–―=│|]\s*|\s*[-—–―=│|]\s+|\s*[:=]\s*|\t+",
 )
 
 
 def _split_line(line: str) -> tuple[str, str] | None:
     """Satırı (kelime, anlam) ikilisine böler."""
+    line = line.strip()
+    if not line:
+        return None
+
     # En güçlü ayırıcılar önce
     m = _SEPARATORS.search(line)
     if m:
-        return line[: m.start()], line[m.end() :]
+        return line[: m.start()].strip(), line[m.end() :].strip()
 
-    # Fallback: ilk virgül
+    # Fallback 1: boşluksuz tek tire veya dash (örn: "word-anlam")
+    if "-" in line:
+        idx = line.index("-")
+        if idx > 0 and idx < len(line) - 1:
+            return line[:idx].strip(), line[idx + 1 :].strip()
+
+    # Fallback 2: ilk virgül
     if "," in line:
         idx = line.index(",")
-        return line[:idx], line[idx + 1 :]
+        return line[:idx].strip(), line[idx + 1 :].strip()
+
+    # Fallback 3: ilk noktalı virgül
+    if ";" in line:
+        idx = line.index(";")
+        return line[:idx].strip(), line[idx + 1 :].strip()
 
     return None
