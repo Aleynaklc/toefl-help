@@ -15,6 +15,7 @@ import {
   Zap,
 } from "lucide-react";
 import itemBank from "../data/toefl2026_item_bank.json";
+import SpeakingTrainer from "./SpeakingTrainer.jsx";
 
 const COLORS = {
   paper: "#FAFAF7",
@@ -672,6 +673,55 @@ function ReadingTrainer() {
         </div>
       )}
 
+      {/* Soru Gezinme Çubuğu */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: COLORS.card, border: `1px solid ${COLORS.paperLine}`, borderRadius: 10, padding: "10px 14px", flexWrap: "wrap", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 13, fontWeight: 800, color: COLORS.ink }}>
+            {activeConfig.label} · Soru {drillIndex + 1} / {activeConfig.items.length}
+          </span>
+          <span style={{ fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 999, background: COLORS.blueSoft, color: COLORS.blue }}>
+            {drill.difficulty}
+          </span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <select
+            value={drillIndex}
+            onChange={(e) => reset(Number(e.target.value))}
+            style={{
+              padding: "5px 8px",
+              borderRadius: 6,
+              border: `1px solid ${COLORS.paperLine}`,
+              background: COLORS.paper,
+              fontSize: 12,
+              fontWeight: 600,
+              color: COLORS.ink,
+              outline: "none",
+              cursor: "pointer",
+            }}
+          >
+            {activeConfig.items.map((item, idx) => (
+              <option key={item.id} value={idx}>
+                {idx + 1}. {item.id.replace(/^rw-complete-|^rd-daily-|^ra-acad-/, "").replace(/-\d+$/, "").replaceAll("-", " ")} ({item.difficulty})
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => reset((drillIndex - 1 + activeConfig.items.length) % activeConfig.items.length)}
+            style={{ border: `1px solid ${COLORS.paperLine}`, background: COLORS.paper, padding: "6px 12px", borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: "pointer" }}
+            title="Önceki Soru"
+          >
+            ← Önceki
+          </button>
+          <button
+            onClick={() => reset((drillIndex + 1) % activeConfig.items.length)}
+            style={{ border: `1px solid ${COLORS.paperLine}`, background: COLORS.paper, padding: "6px 12px", borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: "pointer" }}
+            title="Sonraki Soru"
+          >
+            Sonraki →
+          </button>
+        </div>
+      </div>
+
       <div style={{ ...cardStyle, lineHeight: 1.7, fontSize: 14 }}>
         {drill.text_type && (
           <div style={{ fontSize: 11, fontWeight: 900, color: COLORS.blue, marginBottom: 8, textTransform: "uppercase" }}>
@@ -891,132 +941,7 @@ function ListeningTrainer() {
   );
 }
 
-function SpeakingTrainer() {
-  const [mode, setMode] = useState("repeat");
-  const [repeatIndex, setRepeatIndex] = useState(0);
-  const [interviewQuestion, setInterviewQuestion] = useState(() => pickRandom(INTERVIEW_QUESTIONS));
-  const [answer, setAnswer] = useState("");
-  const [timeLeft, setTimeLeft] = useState(45);
-  const [running, setRunning] = useState(false);
-  const timerRef = useRef(null);
 
-  useEffect(() => {
-    if (!running) return undefined;
-    timerRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          setRunning(false);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timerRef.current);
-  }, [running]);
-
-  function speak(text) {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  }
-
-  function nextRepeat() {
-    setRepeatIndex((repeatIndex + 1) % SPEAKING_REPEAT.length);
-  }
-
-  function nextInterview() {
-    setInterviewQuestion(pickRandom(INTERVIEW_QUESTIONS));
-    setAnswer("");
-    setTimeLeft(45);
-    setRunning(false);
-  }
-
-  const answerWords = wordCount(answer);
-  const structureOk = /\b(because|for example|therefore|so)\b/i.test(answer);
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-      <div style={cardStyle}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-          <Mic size={18} color={COLORS.coral} />
-          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 22, fontWeight: 800 }}>Speaking Trainer</div>
-        </div>
-        <div style={{ fontSize: 13.2, color: COLORS.inkSoft, lineHeight: 1.55 }}>
-          Tarayıcı mikrofon kaydı yerine güvenli metin/timer drilli kullanır. Cevabı sesli söyleyip kısa notunu buraya yaz.
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-        {[
-          { id: "repeat", label: "Listen & Repeat", icon: Headphones },
-          { id: "interview", label: "Interview", icon: MessageSquare },
-        ].map((item) => {
-          const Icon = item.icon;
-          const active = mode === item.id;
-          return (
-            <button key={item.id} onClick={() => setMode(item.id)} style={sectionButtonStyle(active, COLORS.coral, COLORS.coralSoft)}>
-              <Icon size={14} /> {item.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {mode === "repeat" ? (
-        <div style={cardStyle}>
-          <div style={{ fontSize: 12, color: COLORS.inkSoft, fontWeight: 800, marginBottom: 8 }}>
-            Cümle {repeatIndex + 1} / {SPEAKING_REPEAT.length}
-          </div>
-          <div style={{ background: COLORS.paper, border: `1px solid ${COLORS.paperLine}`, borderRadius: 10, padding: 14, fontSize: 15, lineHeight: 1.55, marginBottom: 12 }}>
-            {SPEAKING_REPEAT[repeatIndex]}
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-            <button onClick={() => speak(SPEAKING_REPEAT[repeatIndex])} style={primaryBtn}>Dinle</button>
-            <button onClick={nextRepeat} style={{ ...primaryBtn, background: COLORS.coral }}>Sonraki</button>
-          </div>
-          <div style={{ marginTop: 12, fontSize: 12.8, color: COLORS.inkSoft, lineHeight: 1.5 }}>
-            Kontrol listesi: içerik kelimeleri, küçük bağlaçlar, çoğul/s takıları, vurgu ve doğal tempo.
-          </div>
-        </div>
-      ) : (
-        <div style={cardStyle}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-            <div style={{ fontWeight: 900, fontSize: 13, color: COLORS.coral }}>45 saniye cevap</div>
-            <div style={{ fontWeight: 900, color: timeLeft < 10 ? COLORS.coral : COLORS.ink }}>{formatTime(timeLeft)}</div>
-          </div>
-          <div style={{ background: COLORS.paper, border: `1px solid ${COLORS.paperLine}`, borderRadius: 10, padding: 14, fontSize: 15, lineHeight: 1.55, marginBottom: 12 }}>
-            {interviewQuestion}
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
-            <button onClick={() => setRunning(true)} disabled={running || timeLeft === 0} style={{ ...primaryBtn, opacity: running || timeLeft === 0 ? 0.55 : 1 }}>
-              Başlat
-            </button>
-            <button onClick={nextInterview} style={{ ...primaryBtn, background: COLORS.coral }}>
-              Yeni Soru
-            </button>
-          </div>
-          <textarea
-            value={answer}
-            onChange={(event) => setAnswer(event.target.value)}
-            placeholder="Cevabını sesli söyledikten sonra kısa transkriptini yaz: claim → reason → example."
-            rows={5}
-            style={{ width: "100%", resize: "vertical", border: `1px solid ${COLORS.paperLine}`, borderRadius: 9, padding: 11, fontSize: 13, lineHeight: 1.5, outline: "none", background: COLORS.paper }}
-          />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 10 }}>
-            <div style={{ background: answerWords >= 70 ? COLORS.mossSoft : COLORS.goldSoft, borderRadius: 8, padding: 10, fontSize: 12.5 }}>
-              <strong>{answerWords}</strong> kelime · hedef 70–95
-            </div>
-            <div style={{ background: structureOk ? COLORS.mossSoft : COLORS.coralSoft, borderRadius: 8, padding: 10, fontSize: 12.5 }}>
-              {structureOk ? "Yapı sinyali var" : "Because / example ekle"}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 function WritingTemplates() {
   const [type, setType] = useState("build");
@@ -1547,3 +1472,5 @@ export default function ToeflPrep2026({ setView }) {
     </div>
   );
 }
+
+export { ReadingTrainer };

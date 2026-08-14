@@ -1,8 +1,10 @@
 import {
   BookOpen,
   CheckCircle,
+  Clock,
   GraduationCap,
   Layers,
+  Mic,
   PenLine,
   Shuffle,
   Target,
@@ -113,68 +115,183 @@ export default function HomeDashboard({ words, setView }) {
   const hasWords = words.length > 0;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-      <div style={{ ...cardStyle, background: "linear-gradient(135deg, #1a1f2e 0%, #2d3561 55%, #1a2a3a 100%)", color: "#fff", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -28, right: -28, width: 130, height: 130, borderRadius: "50%", background: "rgba(184,137,43,0.18)" }} />
-        <div style={{ position: "relative" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(184,137,43,0.18)", border: "1px solid rgba(184,137,43,0.42)", borderRadius: 999, padding: "6px 10px", marginBottom: 13 }}>
-            <Zap size={13} color="#F5D489" />
-            <span style={{ color: "#F5D489", fontSize: 11, fontWeight: 900, letterSpacing: "0.05em" }}>TOEFL iBT 2026 çalışma akışı</span>
-          </div>
-          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 30, lineHeight: 1.15, fontWeight: 850, marginBottom: 8 }}>
-            Bugün ne çalışacağını buradan yönet.
-          </div>
-          <div style={{ color: "rgba(255,255,255,0.68)", fontSize: 13.5, lineHeight: 1.6, maxWidth: 520 }}>
-            Önce seviyeni belirle, eksik kelimeleri karta çevir, sonra Reading/Writing/Speaking/Listening görevleriyle sınav formatında tekrar yap.
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 10, marginTop: 18 }}>
-            <button onClick={() => setView(hasWords ? "quiz" : "placement")} style={primaryButton}>
-              {hasWords ? "Bugünkü quizleri çöz" : "Seviye testiyle başla"}
-            </button>
-            <button onClick={() => setView("toefl")} style={{ ...primaryButton, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.18)" }}>
-              2026 format rehberi
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(135px, 1fr))", gap: 10 }}>
-        <StatCard icon={BookOpen} label="Kelime kartı" value={words.length} color={COLORS.blue} bg={COLORS.blueSoft} />
-        <StatCard icon={Target} label="Bugün tekrar" value={due} color={COLORS.gold} bg={COLORS.goldSoft} />
-        <StatCard icon={CheckCircle} label="Ustalaştı" value={mastered} color={COLORS.moss} bg={COLORS.mossSoft} />
-      </div>
-
-      <div style={cardStyle}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-          <TrendingUp size={17} color={COLORS.gold} />
-          <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 21, fontWeight: 850 }}>Önerilen sıra</div>
-        </div>
-        <Step number="1" title="Seviyeni ölç" text="A1–C2 kelime açıklarını gör; bilmediklerini karta aktar." action="Seviye" onClick={() => setView("placement")} />
-        <Step number="2" title="Kelime tabanını kur" text="Eksik akademik kelimeleri ekle ve anlamlarını netleştir." action="Ekle" onClick={() => setView("add")} />
-        <Step number="3" title="Sınav görevleriyle çalış" text="Complete the Words, Build a Sentence, Writing ve Speaking drilleri yap." action="TOEFL 2026" onClick={() => setView("toefl")} />
-        <Step number="4" title="Performansı izle" text="Leitner kutuları ve yanlış kelimelerden bir sonraki günün planını çıkar." action="Stats" onClick={() => setView("stats")} />
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: 10 }}>
-        <ActionCard icon={Type} title="Reading yazım drilli" text="Complete the Words formatında eksik kelime tamamla." button="Tamamla" color={COLORS.blue} bg={COLORS.blueSoft} onClick={() => setView("complete")} />
-        <ActionCard icon={Shuffle} title="Writing cümle drilli" text="Build a Sentence mantığıyla doğru cümle iskeleti kur." button="Cümle Kur" color={COLORS.moss} bg={COLORS.mossSoft} onClick={() => setView("build")} />
-        <ActionCard icon={PenLine} title="Email / Discussion" text="Zamanlayıcıyla yaz, AI geri bildirim al." button="Yazma" color={COLORS.coral} bg={COLORS.coralSoft} onClick={() => setView("writing")} />
-        <ActionCard icon={Layers} title="Leitner tekrar" text="Zayıf kelimeleri daha sık, güçlüleri daha seyrek gör." button="Quiz" color={COLORS.gold} bg={COLORS.goldSoft} onClick={() => setView("quiz")} />
-      </div>
-
-      {!hasWords && (
-        <div style={{ ...cardStyle, background: COLORS.goldSoft, borderColor: "#E4C979" }}>
-          <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-            <GraduationCap size={19} color={COLORS.gold} style={{ flexShrink: 0, marginTop: 1 }} />
-            <div>
-              <div style={{ fontSize: 13.5, fontWeight: 900, marginBottom: 4 }}>Yeni başlıyorsan en mantıklı ilk adım seviye testi.</div>
-              <div style={{ fontSize: 12.8, color: COLORS.inkSoft, lineHeight: 1.5 }}>
-                Rastgele kelime eklemek yerine önce hangi seviyede açık olduğunu gör. Bu, yüksek puan için daha verimli bir çalışma planı çıkarır.
-              </div>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: 24, alignItems: "start" }}>
+      {/* Sol Sütun: Ana Çalışma Akışı ve Sınav Drilleri */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        <div style={{ ...cardStyle, background: "linear-gradient(135deg, #1a1f2e 0%, #2d3561 55%, #1a2a3a 100%)", color: "#fff", position: "relative", overflow: "hidden", padding: "26px 24px" }}>
+          <div style={{ position: "absolute", top: -30, right: -30, width: 160, height: 160, borderRadius: "50%", background: "rgba(184,137,43,0.18)" }} />
+          <div style={{ position: "relative" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(184,137,43,0.18)", border: "1px solid rgba(184,137,43,0.42)", borderRadius: 999, padding: "6px 12px", marginBottom: 14 }}>
+              <Zap size={13} color="#F5D489" />
+              <span style={{ color: "#F5D489", fontSize: 11.5, fontWeight: 900, letterSpacing: "0.05em" }}>TOEFL iBT 2026 ÇALIŞMA MERKEZİ</span>
+            </div>
+            <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 32, lineHeight: 1.2, fontWeight: 800, marginBottom: 10 }}>
+              Bugün ne çalışacağını buradan yönet.
+            </div>
+            <div style={{ color: "rgba(255,255,255,0.72)", fontSize: 14, lineHeight: 1.6, maxWidth: 580 }}>
+              Önce seviyeni belirle, eksik kelimeleri karta çevir; ardından Reading, Writing, Speaking ve Listening görevleriyle 2026 sınav formatında düzenli tekrar yap.
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 22 }}>
+              <button onClick={() => setView("mock")} style={{ ...primaryButton, background: "#F5D489", color: COLORS.ink, padding: "13px 20px", fontSize: 14 }}>
+                <Clock size={16} /> Mini Deneme Sınavı (38 dk)
+              </button>
+              <button onClick={() => setView(hasWords ? "quiz" : "placement")} style={{ ...primaryButton, padding: "13px 18px", fontSize: 13.5 }}>
+                {hasWords ? "Bugünkü Quizleri Çöz" : "Seviye Testiyle Başla"}
+              </button>
+              <button onClick={() => setView("toefl")} style={{ ...primaryButton, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.22)", padding: "13px 16px", fontSize: 13.5 }}>
+                Format Rehberi →
+              </button>
             </div>
           </div>
         </div>
-      )}
+
+        <div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+            <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 20, fontWeight: 800, color: COLORS.ink }}>
+              Sınav Formatına Özel Driller
+            </div>
+            <span style={{ fontSize: 12.5, color: COLORS.inkSoft, fontWeight: 600 }}>2026 Yeni Görevler</span>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
+            <ActionCard
+              icon={Type}
+              title="Reading Yazım Drilli"
+              text="Complete the Words formatında eksik harfleri bağlamdan tamamla."
+              button="Tamamla"
+              color={COLORS.blue}
+              bg={COLORS.blueSoft}
+              onClick={() => setView("complete")}
+            />
+            <ActionCard
+              icon={Shuffle}
+              title="Writing Cümle Drilli"
+              text="Build a Sentence mantığıyla kelimeleri doğru sıraya diz ve çeldiriciyi ele."
+              button="Cümle Kur"
+              color={COLORS.moss}
+              bg={COLORS.mossSoft}
+              onClick={() => setView("build")}
+            />
+            <ActionCard
+              icon={PenLine}
+              title="Email & Discussion Yazma"
+              text="Zamanlayıcı ve kelime hedefiyle yaz, yapay zeka ile anında geri bildirim al."
+              button="Yazma Modu"
+              color={COLORS.coral}
+              bg={COLORS.coralSoft}
+              onClick={() => setView("writing")}
+            />
+            <ActionCard
+              icon={Mic}
+              title="Speaking Sesli Studio"
+              text="Mikrofonla konuş, canlı transkript al ve cümlenin aslıyla kelime kelime doğruluğunu gör."
+              button="Konuşmaya Başla"
+              color="#5D4A8C"
+              bg="#E6E0F0"
+              onClick={() => setView("speaking")}
+            />
+            <ActionCard
+              icon={Layers}
+              title="Leitner Akıllı Tekrar"
+              text="Zayıf kelimeleri daha sık, ustalaştığın kelimeleri daha seyrek görerek pekiştir."
+              button="Quiz Başlat"
+              color={COLORS.gold}
+              bg={COLORS.goldSoft}
+              onClick={() => setView("quiz")}
+            />
+          </div>
+        </div>
+
+        {!hasWords && (
+          <div style={{ ...cardStyle, background: COLORS.goldSoft, borderColor: "#E4C979" }}>
+            <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+              <GraduationCap size={22} color={COLORS.gold} style={{ flexShrink: 0, marginTop: 2 }} />
+              <div>
+                <div style={{ fontSize: 14.5, fontWeight: 900, marginBottom: 4, color: COLORS.ink }}>
+                  Yeni başlıyorsan en mantıklı ilk adım: Seviye Testi
+                </div>
+                <div style={{ fontSize: 13, color: COLORS.inkSoft, lineHeight: 1.5 }}>
+                  Rastgele kelime ezberlemek yerine önce A1–C2 seviyelerinde hangi kelimelerde eksiğin olduğunu tespit et. Bilmediğin kelimeler tek tıkla kart kutuna aktarılır.
+                </div>
+                <button
+                  onClick={() => setView("placement")}
+                  style={{
+                    marginTop: 10,
+                    background: COLORS.ink,
+                    color: COLORS.paper,
+                    border: "none",
+                    borderRadius: 6,
+                    padding: "8px 14px",
+                    fontSize: 12.5,
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  Seviye Testini Aç →
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Sağ Sütun: İstatistikler, Önerilen Sıra ve Günlük İpuçları */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {/* İstatistik Kartları */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+          <StatCard icon={BookOpen} label="Kelime Kartı" value={words.length} color={COLORS.blue} bg={COLORS.blueSoft} />
+          <StatCard icon={Target} label="Bugün Tekrar" value={due} color={COLORS.gold} bg={COLORS.goldSoft} />
+          <StatCard icon={CheckCircle} label="Ustalaştı" value={mastered} color={COLORS.moss} bg={COLORS.mossSoft} />
+        </div>
+
+        {/* Önerilen Sıra */}
+        <div style={cardStyle}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+            <TrendingUp size={18} color={COLORS.gold} />
+            <div style={{ fontFamily: "'Source Serif 4', serif", fontSize: 20, fontWeight: 850 }}>
+              Önerilen Çalışma Sırası
+            </div>
+          </div>
+          <Step
+            number="1"
+            title="Seviyeni Ölç"
+            text="A1–C2 kelime açıklarını gör; bilmediklerini tek tıkla kartlara aktar."
+            action="Seviye"
+            onClick={() => setView("placement")}
+          />
+          <Step
+            number="2"
+            title="Kelime Tabanını Kur"
+            text="Eksik akademik kelimeleri ekle ve bağlam içindeki anlamlarını netleştir."
+            action="Kelimeler"
+            onClick={() => setView("list")}
+          />
+          <Step
+            number="3"
+            title="Sınav Görevleriyle Çalış"
+            text="Complete the Words, Build a Sentence, Writing ve Speaking drilleri yap."
+            action="TOEFL 2026"
+            onClick={() => setView("toefl")}
+          />
+          <Step
+            number="4"
+            title="Performansı İzle"
+            text="Leitner kutuları ve yanlış kelimelerden sonraki günün planını çıkar."
+            action="İstatistik"
+            onClick={() => setView("stats")}
+          />
+        </div>
+
+        {/* 2026 Strateji Kartı */}
+        <div style={{ ...cardStyle, background: "#F5F3EF", borderColor: COLORS.paperLine }}>
+          <div style={{ fontSize: 13, fontWeight: 900, color: COLORS.ink, marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+            <Zap size={14} color={COLORS.gold} /> TOEFL 2026 Puanlama Tüyosu
+          </div>
+          <div style={{ fontSize: 12.5, color: COLORS.inkSoft, lineHeight: 1.5 }}>
+            2026 formatında Reading bölümündeki <strong>Complete the Words</strong> ve Writing bölümündeki <strong>Build a Sentence</strong> görevleri hız ve doğruluk odaklıdır. Günde en az 10 dakika bu drillere zaman ayırın.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

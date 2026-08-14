@@ -56,7 +56,7 @@ Uygulamadaki TOEFL 2026 bölümü ETS'in güncel görev adlarını baz alır:
 
 | Bölüm | Resmi toplam | Görevler | Uygulama havuzu |
 |------|--------------|----------|----------------|
-| Reading | 50 item / 30 dk | Complete the Words, Read in Daily Life, Read an Academic Passage | 5 kelime tamamlama seti, 4 günlük metin, 4 akademik pasaj |
+| Reading | 50 item / 30 dk | Complete the Words, Read in Daily Life, Read an Academic Passage | 30 kelime tamamlama seti, 4 günlük metin, 4 akademik pasaj |
 | Listening | 47 item / 29 dk | Listen and Choose a Response, Conversation, Announcement, Academic Talk | 1 kısa tepki, 2 conversation, 1 announcement, 1 academic talk |
 | Writing | 12 item / 23 dk | Build a Sentence, Write an Email, Write for an Academic Discussion | 6 cümle kurma, 5 email senaryosu, 5 discussion senaryosu |
 | Speaking | 11 item / 8 dk | Listen and Repeat, Take an Interview | 7 tekrar cümlesi, 5 interview sorusu |

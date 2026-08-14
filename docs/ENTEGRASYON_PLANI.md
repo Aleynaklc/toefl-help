@@ -57,7 +57,7 @@ Reading modülü üç resmi görev tipine göre gruplandı:
 
 Yeni Reading item sayıları:
 
-- `complete_words`: 5 set
+- `complete_words`: 30 set (150 eksik harfli kelime tamamlama maddesi + 30 anlama sorusu)
 - `read_in_daily_life`: 4 metin
 - `read_academic_passage`: 4 pasaj
 
@@ -91,7 +91,7 @@ Durum: **Entegre edildi**
 
 | Bölüm | Resmi toplam | Uygulama alt grupları |
 |------|--------------|-----------------------|
-| Reading | 50 item / 30 dk | 5 Complete Words, 4 Daily Life, 4 Academic Passage |
+| Reading | 50 item / 30 dk | 30 Complete Words, 4 Daily Life, 4 Academic Passage |
 | Listening | 47 item / 29 dk | 1 Choose Response, 2 Conversation, 1 Announcement, 1 Academic Talk |
 | Writing | 12 item / 23 dk | 6 Build Sentence, 5 Email, 5 Academic Discussion |
 | Speaking | 11 item / 8 dk | 7 Listen and Repeat, 5 Interview |

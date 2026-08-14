@@ -52,6 +52,7 @@
       {
         "id": "rw-complete-wetlands-001",
         "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
         "passage": "A wetland can absorb excess rainwater and release it slowly into nearby rivers. This natural process reduces flooding in cities and creates habitats for migratory birds. However, many wetlands have been drained for construction, which has made urban areas more vulnerable to severe storms.",
         "blanks": [
           {
@@ -60,17 +61,17 @@
             "hint": "take in liquid or information"
           },
           {
-            "clue": "rel___",
+            "clue": "rel____",
             "answer": "release",
             "hint": "let something go out"
           },
           {
-            "clue": "hab____",
+            "clue": "hab_____",
             "answer": "habitats",
             "hint": "natural homes of animals"
           },
           {
-            "clue": "mig_____",
+            "clue": "mig______",
             "answer": "migratory",
             "hint": "moving seasonally"
           },
@@ -88,17 +89,18 @@
             "To compare different kinds of migratory birds",
             "To argue that construction should always be banned"
           ],
-          "answer": 0
-        },
-        "skill_group": "complete_context_spelling"
+          "answer": 0,
+          "explanation_tr": "Pasaj sulak alanların taşkın önleme ve yaban hayatı için önemini ve kurutulmalarının yarattığı riskleri özetler."
+        }
       },
       {
         "id": "rw-complete-evaluations-002",
         "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
         "passage": "When universities publish course evaluations, students gain useful information about workload and teaching style. Still, evaluations can be misleading if they reflect popularity rather than instructional quality. For that reason, many departments combine student ratings with peer observation and learning outcomes.",
         "blanks": [
           {
-            "clue": "eva_______",
+            "clue": "eval_______",
             "answer": "evaluations",
             "hint": "formal judgments"
           },
@@ -113,7 +115,7 @@
             "hint": "giving a wrong idea"
           },
           {
-            "clue": "ins___________",
+            "clue": "inst_________",
             "answer": "instructional",
             "hint": "related to teaching"
           },
@@ -131,9 +133,9 @@
             "Because students do not understand course workload",
             "Because peer observation is always more popular"
           ],
-          "answer": 0
-        },
-        "skill_group": "complete_context_spelling"
+          "answer": 0,
+          "explanation_tr": "Değerlendirmelerin sadece popülerliği yansıtabileceği için ek gözlem ve sonuçlarla birleştirildiği belirtilmiştir."
+        }
       },
       {
         "id": "rw-complete-solar-003",
@@ -162,7 +164,7 @@
             "hint": "produce"
           },
           {
-            "clue": "cl____",
+            "clue": "clo___",
             "answer": "clouds",
             "hint": "visible masses of water vapor"
           }
@@ -201,7 +203,7 @@
             "hint": "easily affected"
           },
           {
-            "clue": "tem_________",
+            "clue": "temp_______",
             "answer": "temperature",
             "hint": "measure of heat"
           },
@@ -230,7 +232,7 @@
         "passage": "During orientation week, new students attend workshops about academic expectations, campus safety, and library resources. These sessions help students become familiar with university procedures before regular classes begin.",
         "blanks": [
           {
-            "clue": "ori_________",
+            "clue": "orie_______",
             "answer": "orientation",
             "hint": "introduction for new students"
           },
@@ -240,7 +242,7 @@
             "hint": "short practical classes"
           },
           {
-            "clue": "exp__________",
+            "clue": "expe________",
             "answer": "expectations",
             "hint": "things people are required to do"
           },
@@ -265,6 +267,1106 @@
           ],
           "answer": 0,
           "explanation_tr": "Son cümle oturumların öğrencileri prosedürlere alıştırdığını açıklar."
+        }
+      },
+      {
+        "id": "rw-complete-memory-006",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Memory consolidation is the biological process by which temporary impressions are transformed into durable long-term storage. During deep sleep, the brain replays neural patterns acquired throughout the day, strengthening synaptic connections. Consequently, chronic sleep deprivation severely impairs cognitive performance and retention.",
+        "blanks": [
+          {
+            "clue": "cons_________",
+            "answer": "consolidation",
+            "hint": "the process of making memories permanent"
+          },
+          {
+            "clue": "tran_______",
+            "answer": "transformed",
+            "hint": "changed completely in form or function"
+          },
+          {
+            "clue": "dur____",
+            "answer": "durable",
+            "hint": "long-lasting and resilient"
+          },
+          {
+            "clue": "cons________",
+            "answer": "consequently",
+            "hint": "as a result; therefore"
+          },
+          {
+            "clue": "imp____",
+            "answer": "impairs",
+            "hint": "weakens or damages functionality"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "How does deep sleep benefit memory according to the passage?",
+          "options": [
+            "It replays neural activity to reinforce synaptic connections",
+            "It permanently erases temporary impressions from the brain",
+            "It prevents all forms of cognitive retention"
+          ],
+          "answer": 0,
+          "explanation_tr": "Metinde derin uykunun sinirsel kalıpları yeniden oynatarak sinaptik bağlantıları güçlendirdiği belirtilir."
+        }
+      },
+      {
+        "id": "rw-complete-tectonics-007",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "The theory of plate tectonics describes how Earth's outer crust is divided into several rigid slabs called plates. Driven by heat currents within the mantle, these plates move continuously across the planet's surface. When neighboring plates collide or slide past one another, massive geological friction triggers earthquakes and forms mountain chains.",
+        "blanks": [
+          {
+            "clue": "the___",
+            "answer": "theory",
+            "hint": "a well-substantiated scientific explanation"
+          },
+          {
+            "clue": "rig__",
+            "answer": "rigid",
+            "hint": "stiff, firm, and unbending"
+          },
+          {
+            "clue": "man___",
+            "answer": "mantle",
+            "hint": "layer of the Earth between the crust and core"
+          },
+          {
+            "clue": "col____",
+            "answer": "collide",
+            "hint": "crash into each other with force"
+          },
+          {
+            "clue": "tri_____",
+            "answer": "triggers",
+            "hint": "initiates or causes something to happen"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What is the primary focus of the passage?",
+          "options": [
+            "How moving tectonic plates shape geological events",
+            "Why earthquakes only occur near oceanic trenches",
+            "The historical discovery of heat currents in the mantle"
+          ],
+          "answer": 0,
+          "explanation_tr": "Pasaj levha tektoniğinin mekanizmasını ve dağ oluşumu ile depremleri nasıl tetiklediğini açıklar."
+        }
+      },
+      {
+        "id": "rw-complete-echolocation-008",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Bats navigate and hunt in total darkness through a sophisticated biological sonar called echolocation. By emitting ultrasonic pulses that bounce off physical obstacles, bats calculate the distance and velocity of flying prey. This extraordinary sensory adaptation allows them to inhabit diverse ecological niches without competing directly with daytime predators.",
+        "blanks": [
+          {
+            "clue": "nav_____",
+            "answer": "navigate",
+            "hint": "find one's way through an environment"
+          },
+          {
+            "clue": "soph_________",
+            "answer": "sophisticated",
+            "hint": "highly complex and developed"
+          },
+          {
+            "clue": "obs______",
+            "answer": "obstacles",
+            "hint": "objects that block movement"
+          },
+          {
+            "clue": "vel_____",
+            "answer": "velocity",
+            "hint": "speed in a given direction"
+          },
+          {
+            "clue": "ada_______",
+            "answer": "adaptation",
+            "hint": "evolutionary adjustment for survival"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "Why is echolocation advantageous for bats?",
+          "options": [
+            "It enables navigation and hunting in darkness without competing with daytime hunters",
+            "It eliminates their need to consume flying insects for energy",
+            "It allows them to see visible light better than diurnal animals"
+          ],
+          "answer": 0,
+          "explanation_tr": "Ekolokasyon yarasaların karanlıkta yön bulmasını, avlanmasını ve gündüz avcılarıyla doğrudan rekabet etmemesini sağlar."
+        }
+      },
+      {
+        "id": "rw-complete-photosynthesis-009",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Photosynthesis is the fundamental mechanism that converts solar radiation into biochemical energy. Plant leaves contain microscopic chloroplasts with green chlorophyll molecules capable of capturing sunlight. Through this chemical reaction, plants absorb carbon dioxide and release oxygen, sustaining terrestrial life.",
+        "blanks": [
+          {
+            "clue": "fund_______",
+            "answer": "fundamental",
+            "hint": "forming a necessary base or core"
+          },
+          {
+            "clue": "rad______",
+            "answer": "radiation",
+            "hint": "energy emitted as electromagnetic waves"
+          },
+          {
+            "clue": "cap______",
+            "answer": "capturing",
+            "hint": "trapping or catching something"
+          },
+          {
+            "clue": "rea_____",
+            "answer": "reaction",
+            "hint": "a chemical process in which substances change"
+          },
+          {
+            "clue": "sus_______",
+            "answer": "sustaining",
+            "hint": "supporting or maintaining life over time"
+          }
+        ],
+        "question": {
+          "type": "purpose",
+          "prompt": "What is the primary role of photosynthesis described in the text?",
+          "options": [
+            "Transforming solar energy into chemical energy while producing oxygen",
+            "Absorbing all oxygen from the atmosphere to create chlorophyll",
+            "Preventing plants from absorbing carbon dioxide"
+          ],
+          "answer": 0,
+          "explanation_tr": "Metin fotosentezin güneş enerjisini kimyasal enerjiye dönüştürerek oksijen ürettiğini ve yaşamı sürdürdüğünü açıklar."
+        }
+      },
+      {
+        "id": "rw-complete-urbanization-010",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Rapid urbanization has transformed demographic distributions across the globe over the past century. As rural workers migrate toward metropolitan regions in search of employment, municipal governments face substantial infrastructure challenges. City planners must balance housing demands with public transportation and environmental sustainability.",
+        "blanks": [
+          {
+            "clue": "dist_________",
+            "answer": "distributions",
+            "hint": "the way things are spread over an area"
+          },
+          {
+            "clue": "mig____",
+            "answer": "migrate",
+            "hint": "move from one region to settle in another"
+          },
+          {
+            "clue": "mun______",
+            "answer": "municipal",
+            "hint": "relating to a city or town government"
+          },
+          {
+            "clue": "subs_______",
+            "answer": "substantial",
+            "hint": "of considerable importance, size, or worth"
+          },
+          {
+            "clue": "sust__________",
+            "answer": "sustainability",
+            "hint": "ability to be maintained without depleting resources"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What challenge associated with urbanization does the author highlight?",
+          "options": [
+            "Meeting housing and transit needs while preserving the environment",
+            "Convincing urban workers to return to agricultural labor",
+            "Eliminating public transportation systems in growing cities"
+          ],
+          "answer": 0,
+          "explanation_tr": "Metin şehir plancılarının konut, toplu taşıma ve çevresel sürdürülebilirliği dengeleme zorluğunu vurgular."
+        }
+      },
+      {
+        "id": "rw-complete-encryption-011",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Modern cryptography relies on mathematical algorithms to protect confidential communication over the internet. When data is encrypted, readable plaintext is converted into unreadable ciphertext that only authorized recipients can decipher. Without robust encryption protocols, commercial transactions and private records would be vulnerable to interception.",
+        "blanks": [
+          {
+            "clue": "conf________",
+            "answer": "confidential",
+            "hint": "intended to be kept secret or private"
+          },
+          {
+            "clue": "enc______",
+            "answer": "encrypted",
+            "hint": "encoded into a secure, unreadable format"
+          },
+          {
+            "clue": "dec_____",
+            "answer": "decipher",
+            "hint": "convert coded text into intelligible language"
+          },
+          {
+            "clue": "rob___",
+            "answer": "robust",
+            "hint": "strong, sturdy, and reliable"
+          },
+          {
+            "clue": "tran________",
+            "answer": "transactions",
+            "hint": "instances of buying, selling, or exchanging data"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "Why is encryption essential for digital communications?",
+          "options": [
+            "It prevents unauthorized parties from intercepting sensitive records",
+            "It translates foreign languages into readable plaintext automatically",
+            "It replaces the need for mathematical algorithms on the web"
+          ],
+          "answer": 0,
+          "explanation_tr": "Şifreleme, yetkisiz kişilerin gizli verilere ve finansal işlemlere erişmesini ve müdahale etmesini engeller."
+        }
+      },
+      {
+        "id": "rw-complete-hieroglyphs-012",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "For centuries, ancient Egyptian hieroglyphic inscriptions remained an undecipherable enigma to historians. The breakthrough occurred following the discovery of the Rosetta Stone, which presented the identical decree in three scripts. By comparing known Greek phrases with hieroglyphic symbols, scholars successfully unlocked millennia of historical literature.",
+        "blanks": [
+          {
+            "clue": "insc________",
+            "answer": "inscriptions",
+            "hint": "words engraved on stone or metal monuments"
+          },
+          {
+            "clue": "brea________",
+            "answer": "breakthrough",
+            "hint": "a sudden, dramatic, and important discovery"
+          },
+          {
+            "clue": "ide______",
+            "answer": "identical",
+            "hint": "exactly the same in every detail"
+          },
+          {
+            "clue": "dec___",
+            "answer": "decree",
+            "hint": "an official order issued by a legal authority"
+          },
+          {
+            "clue": "sch_____",
+            "answer": "scholars",
+            "hint": "academic specialists or learned persons"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "How did the Rosetta Stone facilitate the deciphering of hieroglyphs?",
+          "options": [
+            "It provided parallel translations of the same text alongside Greek",
+            "It proved that hieroglyphs were purely decorative drawings",
+            "It documented Greek mythology using ancient Egyptian grammar"
+          ],
+          "answer": 0,
+          "explanation_tr": "Rosetta Taşı aynı fermanı Yunanca ve hiyeroglif dahil 3 dilde sunduğu için araştırmacıların karşılaştırma yapmasını sağladı."
+        }
+      },
+      {
+        "id": "rw-complete-biodiversity-013",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Tropical rainforests harbor an astonishing level of biodiversity that remains largely uncataloged by science. Widespread deforestation threatens to fragment these delicate habitats, isolating animal populations and preventing gene flow. Conservationists warn that irreversible extinction cascades may occur unless protective regulations are enforced rigorously.",
+        "blanks": [
+          {
+            "clue": "har___",
+            "answer": "harbor",
+            "hint": "provide a shelter, home, or refuge for"
+          },
+          {
+            "clue": "asto_______",
+            "answer": "astonishing",
+            "hint": "extremely surprising or impressive"
+          },
+          {
+            "clue": "fra_____",
+            "answer": "fragment",
+            "hint": "break or divide into smaller, detached parts"
+          },
+          {
+            "clue": "irre________",
+            "answer": "irreversible",
+            "hint": "impossible to undo, reverse, or alter"
+          },
+          {
+            "clue": "rig_______",
+            "answer": "rigorously",
+            "hint": "strictly, thoroughly, and with exact care"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "According to conservationists, what danger does habitat fragmentation pose?",
+          "options": [
+            "It isolates animal groups and could lead to irreversible extinctions",
+            "It increases the rate of biological cataloging in rainforests",
+            "It accelerates gene flow across neighboring tropical species"
+          ],
+          "answer": 0,
+          "explanation_tr": "Habitat bölünmesi hayvan popülasyonlarını izole eder, gen akışını keser ve geri döndürülemez yok oluşlara yol açabilir."
+        }
+      },
+      {
+        "id": "rw-complete-antibiotics-014",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "The overuse of antibiotic medications in clinical healthcare and livestock agriculture has accelerated bacterial mutation. Resistant strains survive initial drug treatments and multiply rapidly, rendering standard therapies ineffective. Public health organizations emphasize that developing novel antimicrobial compounds is critical to avert global medical crises.",
+        "blanks": [
+          {
+            "clue": "mut_____",
+            "answer": "mutation",
+            "hint": "genetic alteration or change in an organism"
+          },
+          {
+            "clue": "res______",
+            "answer": "resistant",
+            "hint": "opposing, withstanding, or unaffected by something"
+          },
+          {
+            "clue": "mul_____",
+            "answer": "multiply",
+            "hint": "increase greatly in number or reproduce"
+          },
+          {
+            "clue": "ren______",
+            "answer": "rendering",
+            "hint": "causing something to become or be in a specified state"
+          },
+          {
+            "clue": "nov__",
+            "answer": "novel",
+            "hint": "new, original, and unusual"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What is the primary concern raised about antibiotic resistance?",
+          "options": [
+            "Resistant bacteria make existing treatments ineffective, requiring new drugs",
+            "Antibiotics are no longer produced for livestock agriculture",
+            "Bacterial mutations have completely stopped in clinical settings"
+          ],
+          "answer": 0,
+          "explanation_tr": "Dirençli bakterilerin standart tedavileri etkisiz kıldığı ve yeni bileşikler geliştirilmesinin acil olduğu vurgulanmıştır."
+        }
+      },
+      {
+        "id": "rw-complete-renaissance-015",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "During the Italian Renaissance, painters pioneered linear perspective to create convincing three-dimensional illusions on flat surfaces. By establishing a central vanishing point along a simulated horizon line, artists could accurately scale objects relative to distance. This mathematical approach revolutionized composition and visual realism throughout European painting.",
+        "blanks": [
+          {
+            "clue": "pio______",
+            "answer": "pioneered",
+            "hint": "developed or introduced a new technique first"
+          },
+          {
+            "clue": "ill______",
+            "answer": "illusions",
+            "hint": "deceptive appearances or impressions"
+          },
+          {
+            "clue": "hor____",
+            "answer": "horizon",
+            "hint": "the line where Earth's surface and sky appear to meet"
+          },
+          {
+            "clue": "revo__________",
+            "answer": "revolutionized",
+            "hint": "changed radically and fundamentally"
+          },
+          {
+            "clue": "comp_______",
+            "answer": "composition",
+            "hint": "the arrangement of artistic elements in a work"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "How did linear perspective influence European art?",
+          "options": [
+            "It allowed artists to portray realistic 3D depth on two-dimensional surfaces",
+            "It replaced mathematical principles with random brushwork",
+            "It eliminated horizon lines from landscape paintings"
+          ],
+          "answer": 0,
+          "explanation_tr": "Çizgisel perspektif düz yüzeylerde derinlik ve 3 boyutlu gerçekçi görsel kompozisyonlar oluşturmayı sağladı."
+        }
+      },
+      {
+        "id": "rw-complete-deepsea-016",
+        "difficulty": "C1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Deep-sea hydrothermal vents create thriving biological oases in complete absence of solar illumination. Specialized bacteria utilize chemosynthesis, oxidizing hydrogen sulfide expelled from tectonic fissures to manufacture organic molecules. These primary producers sustain complex food webs, including giant tube worms and blind crustaceans adapted to extreme hydrostatic pressure.",
+        "blanks": [
+          {
+            "clue": "illu________",
+            "answer": "illumination",
+            "hint": "lighting or supply of light"
+          },
+          {
+            "clue": "spec_______",
+            "answer": "specialized",
+            "hint": "adapted to a particular function or condition"
+          },
+          {
+            "clue": "fis_____",
+            "answer": "fissures",
+            "hint": "long, narrow openings or cracks in rock"
+          },
+          {
+            "clue": "crus_______",
+            "answer": "crustaceans",
+            "hint": "hard-shelled aquatic creatures like crabs and shrimp"
+          },
+          {
+            "clue": "hydr_______",
+            "answer": "hydrostatic",
+            "hint": "relating to the pressure exerted by fluids at rest"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What enables life to flourish near deep-sea hydrothermal vents?",
+          "options": [
+            "Chemosynthetic bacteria that generate organic matter without sunlight",
+            "Sunlight penetrating through the hydrostatic depths",
+            "Terrestrial plants that drift downward into tectonic fissures"
+          ],
+          "answer": 0,
+          "explanation_tr": "Güneş ışığı olmadan, kemosentez yapan bakterilerin sülfürü oksitleyerek besin zincirini başlatması yaşamı mümkün kılar."
+        }
+      },
+      {
+        "id": "rw-complete-exoplanets-017",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Astronomers discover exoplanets by observing slight dips in starlight as planets transit across their parent stars. If an exoplanet orbits within the circumstellar habitable zone, liquid water could theoretically persist on its surface. Spectroscopic analysis of planetary atmospheres helps researchers detect biosignatures like oxygen, methane, and carbon compounds.",
+        "blanks": [
+          {
+            "clue": "astr_______",
+            "answer": "astronomers",
+            "hint": "scientists who study celestial objects and space"
+          },
+          {
+            "clue": "tra____",
+            "answer": "transit",
+            "hint": "pass across the face of another celestial body"
+          },
+          {
+            "clue": "hab______",
+            "answer": "habitable",
+            "hint": "suitable or good enough to live in"
+          },
+          {
+            "clue": "per____",
+            "answer": "persist",
+            "hint": "continue to exist over an extended period"
+          },
+          {
+            "clue": "det___",
+            "answer": "detect",
+            "hint": "discover or identify the presence of something"
+          }
+        ],
+        "question": {
+          "type": "purpose",
+          "prompt": "Why do astronomers perform spectroscopic analysis on exoplanet atmospheres?",
+          "options": [
+            "To identify chemical signatures that may indicate potential life",
+            "To redirect the orbits of distant parent stars",
+            "To measure the exact weight of telescope mirrors"
+          ],
+          "answer": 0,
+          "explanation_tr": "Spektroskopik analiz, gezegen atmosferindeki oksijen veya metan gibi biyolojik yaşam izlerini tespit etmek için yapılır."
+        }
+      },
+      {
+        "id": "rw-complete-peerreview-018",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Peer review is the cornerstone of scholarly publishing that ensures scientific rigor and validity. Before an article is published, independent experts evaluate the author's methodology, data analysis, and conclusions. This rigorous scrutiny filters out flawed research and prevents premature dissemination of unsubstantiated claims.",
+        "blanks": [
+          {
+            "clue": "corn_______",
+            "answer": "cornerstone",
+            "hint": "an essential foundation or basic element"
+          },
+          {
+            "clue": "val_____",
+            "answer": "validity",
+            "hint": "the quality of being logically or factually sound"
+          },
+          {
+            "clue": "meth_______",
+            "answer": "methodology",
+            "hint": "system of methods used in a particular area of study"
+          },
+          {
+            "clue": "scr_____",
+            "answer": "scrutiny",
+            "hint": "critical and thorough examination or inspection"
+          },
+          {
+            "clue": "diss_________",
+            "answer": "dissemination",
+            "hint": "the act of spreading information widely"
+          }
+        ],
+        "question": {
+          "type": "purpose",
+          "prompt": "What is the primary function of peer review in academic research?",
+          "options": [
+            "To evaluate research methodology and prevent false claims from being published",
+            "To guarantee that every submitted article is published immediately",
+            "To replace the need for experimental data in scientific investigations"
+          ],
+          "answer": 0,
+          "explanation_tr": "Akran değerlendirmesi, araştırma metodolojisini denetleyip hatalı ya da kanıtsız iddiaların yayımlanmasını önlemeyi amaçlar."
+        }
+      },
+      {
+        "id": "rw-complete-microbiome-019",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "The human gastrointestinal tract is colonized by trillions of symbiotic microbes collectively known as the gut microbiome. These microorganisms synthesize essential vitamins, break down indigestible dietary fibers, and train host immune cells. Disruptions in microbial balance have been correlated with metabolic syndromes and chronic inflammation.",
+        "blanks": [
+          {
+            "clue": "col______",
+            "answer": "colonized",
+            "hint": "populated and inhabited by living organisms"
+          },
+          {
+            "clue": "syn_______",
+            "answer": "synthesize",
+            "hint": "produce chemical compounds through biological processes"
+          },
+          {
+            "clue": "indi________",
+            "answer": "indigestible",
+            "hint": "incapable of being digested by the stomach"
+          },
+          {
+            "clue": "cor_______",
+            "answer": "correlated",
+            "hint": "connected or having a mutual relationship"
+          },
+          {
+            "clue": "infl________",
+            "answer": "inflammation",
+            "hint": "localized physical condition of swelling and redness"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "Which beneficial function of gut microbes is mentioned in the text?",
+          "options": [
+            "Synthesizing essential vitamins and training immune defenses",
+            "Preventing all food digestion in the human body",
+            "Replacing the need for dietary fibers completely"
+          ],
+          "answer": 0,
+          "explanation_tr": "Bağırsak mikrobiyotasının temel vitaminleri sentezlediği, lifleri parçaladığı ve bağışıklık hücrelerini eğittiği belirtilmiştir."
+        }
+      },
+      {
+        "id": "rw-complete-industrial-020",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "The Industrial Revolution catalyzed a profound shift from agrarian economies to mechanized urban manufacturing. The invention of the commercial steam engine enabled factories to operate continuously regardless of seasonal water currents. Consequently, production output expanded exponentially, transforming global trade networks and labor relations.",
+        "blanks": [
+          {
+            "clue": "cat______",
+            "answer": "catalyzed",
+            "hint": "caused or accelerated an action or reaction"
+          },
+          {
+            "clue": "pro_____",
+            "answer": "profound",
+            "hint": "very great, intense, or significant"
+          },
+          {
+            "clue": "agr_____",
+            "answer": "agrarian",
+            "hint": "relating to cultivated land or agricultural societies"
+          },
+          {
+            "clue": "expo_________",
+            "answer": "exponentially",
+            "hint": "at an increasingly rapid and tremendous rate"
+          },
+          {
+            "clue": "tran________",
+            "answer": "transforming",
+            "hint": "making a marked change in form or nature"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "Why was the steam engine pivotal during the Industrial Revolution?",
+          "options": [
+            "It allowed factories to operate steadily without relying on water currents",
+            "It forced all manufacturing to relocate exclusively back to farms",
+            "It completely halted the growth of international trade"
+          ],
+          "answer": 0,
+          "explanation_tr": "Buhar makinesi, fabrikaların mevsimsel su akıntılarına bağımlı kalmadan kesintisiz üretim yapabilmesini sağladı."
+        }
+      },
+      {
+        "id": "rw-complete-machinelearning-021",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Machine learning algorithms extract statistical patterns from large datasets rather than relying on explicit hand-crafted rules. In deep neural networks, computational layers iteratively adjust numerical weights to minimize prediction error. As training progresses, models achieve superhuman accuracy in speech recognition, medical diagnostics, and language translation.",
+        "blanks": [
+          {
+            "clue": "ext____",
+            "answer": "extract",
+            "hint": "draw out, obtain, or deduce from a source"
+          },
+          {
+            "clue": "stat_______",
+            "answer": "statistical",
+            "hint": "relating to the collection and analysis of numerical data"
+          },
+          {
+            "clue": "iter_______",
+            "answer": "iteratively",
+            "hint": "by repeating a sequence of operations step by step"
+          },
+          {
+            "clue": "min_____",
+            "answer": "minimize",
+            "hint": "reduce something to the smallest possible amount"
+          },
+          {
+            "clue": "diag_______",
+            "answer": "diagnostics",
+            "hint": "methods used for identifying diseases or problems"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "How do deep neural networks improve their predictions during training?",
+          "options": [
+            "By repeatedly adjusting weights to minimize prediction errors",
+            "By permanently deleting all numerical datasets after one pass",
+            "By relying strictly on human-written static rules"
+          ],
+          "answer": 0,
+          "explanation_tr": "Yapay sinir ağları, hata oranını en aza indirmek için ağırlık parametrelerini yinelemeli olarak günceller."
+        }
+      },
+      {
+        "id": "rw-complete-glaciers-022",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Mountain glaciers act as natural reservoirs, storing winter precipitation and releasing fresh water during arid summer months. Global atmospheric warming has accelerated glacial retreat worldwide, threatening downstream agricultural irrigation. Furthermore, the rapid influx of melted ice into oceans contributes substantially to rising sea levels.",
+        "blanks": [
+          {
+            "clue": "res_______",
+            "answer": "reservoirs",
+            "hint": "places where water is collected and stored"
+          },
+          {
+            "clue": "prec_________",
+            "answer": "precipitation",
+            "hint": "rain, snow, or hail that falls to the ground"
+          },
+          {
+            "clue": "a___",
+            "answer": "arid",
+            "hint": "extremely dry with little or no rain"
+          },
+          {
+            "clue": "ret____",
+            "answer": "retreat",
+            "hint": "the process of moving back or melting away"
+          },
+          {
+            "clue": "inf___",
+            "answer": "influx",
+            "hint": "an arrival or entry of large amounts of something"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What environmental threat is caused by melting glaciers?",
+          "options": [
+            "Reduced water for agriculture in summer and rising sea levels",
+            "Excessive accumulation of winter snowfall in lowlands",
+            "The permanent stoppage of ocean wave movements"
+          ],
+          "answer": 0,
+          "explanation_tr": "Buzulların erimesi yazın tarımsal sulama suyunu tehlikeye atar ve deniz seviyelerinin yükselmesine yol açar."
+        }
+      },
+      {
+        "id": "rw-complete-language-023",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Developmental linguists emphasize that young children acquire spoken language through natural social immersion rather than formal grammar memorization. According to the critical period hypothesis, neuroplasticity in early childhood provides unique cognitive flexibility for phoneme discrimination. After puberty, acquiring native-like pronunciation becomes significantly more arduous.",
+        "blanks": [
+          {
+            "clue": "imm______",
+            "answer": "immersion",
+            "hint": "deep involvement or exposure in an environment"
+          },
+          {
+            "clue": "hyp_______",
+            "answer": "hypothesis",
+            "hint": "a proposed explanation based on limited evidence"
+          },
+          {
+            "clue": "flex_______",
+            "answer": "flexibility",
+            "hint": "the ability to adapt and change easily"
+          },
+          {
+            "clue": "pub____",
+            "answer": "puberty",
+            "hint": "the stage of physical transition into adulthood"
+          },
+          {
+            "clue": "ard____",
+            "answer": "arduous",
+            "hint": "requiring strenuous effort; difficult and tiring"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "What does the critical period hypothesis suggest about language acquisition?",
+          "options": [
+            "Young childhood offers brain flexibility that makes mastering pronunciation easier",
+            "Children only learn grammar through rigorous adult lectures",
+            "Language learning is easiest after puberty has concluded"
+          ],
+          "answer": 0,
+          "explanation_tr": "Kritik dönem hipotezi, erken çocukluktaki beyin plastisitesinin anadil düzeyinde telaffuz ve ses ayrımı kazanımını kolaylaştırdığını savunur."
+        }
+      },
+      {
+        "id": "rw-complete-gothic-024",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Medieval Gothic architecture replaced heavy stone walls with luminous stained-glass windows and soaring vaulted ceilings. Master builders engineered external flying buttresses to distribute outward thrust away from structural pillars toward masonry piers. This innovative structural design enabled cathedrals to attain unprecedented height while maximizing natural illumination.",
+        "blanks": [
+          {
+            "clue": "lum_____",
+            "answer": "luminous",
+            "hint": "full of or shedding bright light"
+          },
+          {
+            "clue": "vau____",
+            "answer": "vaulted",
+            "hint": "constructed with curved arches overhead"
+          },
+          {
+            "clue": "dis_______",
+            "answer": "distribute",
+            "hint": "spread or disperse weight or load evenly"
+          },
+          {
+            "clue": "inn_______",
+            "answer": "innovative",
+            "hint": "featuring new, creative, and advanced methods"
+          },
+          {
+            "clue": "unpr_________",
+            "answer": "unprecedented",
+            "hint": "never done or known before"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "What was the structural role of flying buttresses in Gothic architecture?",
+          "options": [
+            "They redirected weight away from walls, allowing taller buildings with large windows",
+            "They blocked all natural daylight from entering cathedral halls",
+            "They replaced stained-glass windows with solid heavy stones"
+          ],
+          "answer": 0,
+          "explanation_tr": "Uçan payandalar duvarlardaki baskıyı dış sütunlara aktararak daha yüksek ve geniş pencereli katedraller inşa edilmesini sağladı."
+        }
+      },
+      {
+        "id": "rw-complete-supplydemand-025",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "In market economics, price equilibrium is achieved when consumer demand equals the quantity supplied by producers. If commodity prices rise excessively, consumer purchasing power diminishes and demand contracts. Conversely, unexpected supply shortages cause prices to escalate until consumption stabilizes.",
+        "blanks": [
+          {
+            "clue": "equi_______",
+            "answer": "equilibrium",
+            "hint": "a state in which opposing forces or quantities are balanced"
+          },
+          {
+            "clue": "com______",
+            "answer": "commodity",
+            "hint": "a basic good or raw material that can be bought and sold"
+          },
+          {
+            "clue": "dim_______",
+            "answer": "diminishes",
+            "hint": "becomes smaller, less, or reduced"
+          },
+          {
+            "clue": "sho______",
+            "answer": "shortages",
+            "hint": "states in which something needed cannot be obtained in sufficient amounts"
+          },
+          {
+            "clue": "esc_____",
+            "answer": "escalate",
+            "hint": "increase rapidly or rise in intensity/price"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What happens when a market experiences a shortage in supply?",
+          "options": [
+            "Prices escalate until consumption reaches a stable balance",
+            "Producers immediately stop manufacturing goods",
+            "Consumer demand expands without limit"
+          ],
+          "answer": 0,
+          "explanation_tr": "Arz kıtlığı yaşandığında fiyatlar hızla yükselir ve talep dengelenene kadar bu artış devam eder."
+        }
+      },
+      {
+        "id": "rw-complete-caffeine-026",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Caffeine functions as a central nervous system stimulant by binding to brain receptors that normally recognize adenosine. Adenosine accumulates throughout wakeful hours to promote drowsiness, but caffeine temporarily blocks this signaling cascade. As a consequence, alertness increases, cognitive fatigue diminishes, and reaction times improve.",
+        "blanks": [
+          {
+            "clue": "sti______",
+            "answer": "stimulant",
+            "hint": "a substance that raises levels of physiological or nervous activity"
+          },
+          {
+            "clue": "rec______",
+            "answer": "receptors",
+            "hint": "cells or structures on cell surfaces that respond to specific chemicals"
+          },
+          {
+            "clue": "dro_______",
+            "answer": "drowsiness",
+            "hint": "feeling sleepy and lethargic"
+          },
+          {
+            "clue": "ale______",
+            "answer": "alertness",
+            "hint": "the state of being awake, aware, and attentive"
+          },
+          {
+            "clue": "fat____",
+            "answer": "fatigue",
+            "hint": "extreme tiredness resulting from mental or physical exertion"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "How does caffeine reduce drowsiness in the brain?",
+          "options": [
+            "By blocking adenosine receptors that signal sleepiness",
+            "By permanently stopping all nervous system activity",
+            "By replacing the body's need for sleep indefinitely"
+          ],
+          "answer": 0,
+          "explanation_tr": "Kafein, uykululuk hissini tetikleyen adenozin reseptörlerini geçici olarak bloke ederek uyanıklığı artırır."
+        }
+      },
+      {
+        "id": "rw-complete-archaeology-027",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "Radiocarbon dating is an indispensable chronological tool utilized by archaeologists to estimate the age of organic specimens. Living organisms absorb atmospheric carbon-14 until death, after which the radioactive isotope decays at a known steady rate. By measuring remaining isotopic concentrations, researchers calculate precise dates for ancient artifacts.",
+        "blanks": [
+          {
+            "clue": "indi_________",
+            "answer": "indispensable",
+            "hint": "absolutely necessary and essential"
+          },
+          {
+            "clue": "chro_________",
+            "answer": "chronological",
+            "hint": "relating to the arrangement of events in order of time"
+          },
+          {
+            "clue": "spe______",
+            "answer": "specimens",
+            "hint": "individual animals, plants, or objects used for scientific study"
+          },
+          {
+            "clue": "dec___",
+            "answer": "decays",
+            "hint": "undergoes gradual radioactive breakdown"
+          },
+          {
+            "clue": "art______",
+            "answer": "artifacts",
+            "hint": "objects made by human beings of historical interest"
+          }
+        ],
+        "question": {
+          "type": "detail",
+          "prompt": "How do scientists determine the age of organic samples with radiocarbon dating?",
+          "options": [
+            "By calculating the remaining concentration of decayed carbon-14 isotopes",
+            "By heating the artifact until it turns into gas",
+            "By counting the number of written records carved on the specimen"
+          ],
+          "answer": 0,
+          "explanation_tr": "Canlının ölümünden sonra karbon-14'ün sabit bir hızla bozunması ve kalan izotop oranının ölçülmesiyle yaş hesaplanır."
+        }
+      },
+      {
+        "id": "rw-complete-labprotocol-028",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "University chemistry laboratories enforce strict safety protocols to prevent accidental chemical spills and personal contamination. Students must wear protective goggles, nitrile gloves, and closed-toe shoes at all times. In case of toxic chemical contact, students should immediately rinse affected areas at emergency eye wash stations.",
+        "blanks": [
+          {
+            "clue": "enf____",
+            "answer": "enforce",
+            "hint": "compel observance of or compliance with a rule"
+          },
+          {
+            "clue": "cont_________",
+            "answer": "contamination",
+            "hint": "the state of being polluted, poisoned, or infected"
+          },
+          {
+            "clue": "gog____",
+            "answer": "goggles",
+            "hint": "protective eyewear against hazardous splashes"
+          },
+          {
+            "clue": "tox__",
+            "answer": "toxic",
+            "hint": "poisonous and harmful to living organisms"
+          },
+          {
+            "clue": "eme______",
+            "answer": "emergency",
+            "hint": "a serious, unexpected, and often dangerous situation"
+          }
+        ],
+        "question": {
+          "type": "purpose",
+          "prompt": "What is the primary objective of the laboratory guidelines?",
+          "options": [
+            "To protect students from dangerous chemical contamination and injury",
+            "To eliminate all practical chemistry experiments from the curriculum",
+            "To teach students how to dispose of glassware without wearing gear"
+          ],
+          "answer": 0,
+          "explanation_tr": "Laboratuvar kuralları kimyasal sıçramalara ve tehlikeli maddelerle temasa karşı öğrencilerin güvenliğini sağlamak içindir."
+        }
+      },
+      {
+        "id": "rw-complete-pollination-029",
+        "difficulty": "B1",
+        "skill_group": "complete_context_spelling",
+        "passage": "Insect pollinators, particularly honeybees and solitary wasps, are essential for global agricultural food production. While foraging for floral nectar, insects transfer pollen grains between blossoms, enabling fruit and seed development. Widespread pesticide usage and habitat loss have caused concerning pollinator population declines worldwide.",
+        "blanks": [
+          {
+            "clue": "poll_______",
+            "answer": "pollinators",
+            "hint": "animals that carry pollen from one plant to another"
+          },
+          {
+            "clue": "for_____",
+            "answer": "foraging",
+            "hint": "searching widely for food or provisions"
+          },
+          {
+            "clue": "nec___",
+            "answer": "nectar",
+            "hint": "sugary fluid produced by flowers to attract pollinators"
+          },
+          {
+            "clue": "pes______",
+            "answer": "pesticide",
+            "hint": "a substance used for destroying insects and pests"
+          },
+          {
+            "clue": "dec_____",
+            "answer": "declines",
+            "hint": "gradual and continuous decreases in number or quality"
+          }
+        ],
+        "question": {
+          "type": "cause_effect",
+          "prompt": "What threat to pollinators is identified in the text?",
+          "options": [
+            "Pesticide exposure and destruction of natural habitats",
+            "Excessive blossom and fruit production in agricultural fields",
+            "Too many flowers producing sweet nectar"
+          ],
+          "answer": 0,
+          "explanation_tr": "Pestisit kullanımı ve doğal habitat kaybı, polen taşıyıcı böcek popülasyonlarının azalmasının başlıca nedenleridir."
+        }
+      },
+      {
+        "id": "rw-complete-desalination-030",
+        "difficulty": "B2",
+        "skill_group": "complete_context_spelling",
+        "passage": "As global freshwater supplies face unprecedented strain, coastal regions increasingly rely on seawater desalination facilities. In reverse osmosis plants, saline water is forced through semipermeable membranes that filter out dissolved mineral salts. Although the process requires significant electrical energy, recent engineering innovations have substantially improved thermal and mechanical efficiency.",
+        "blanks": [
+          {
+            "clue": "fac_______",
+            "answer": "facilities",
+            "hint": "buildings or complexes designed for a specific service or process"
+          },
+          {
+            "clue": "sal___",
+            "answer": "saline",
+            "hint": "containing or consisting of salt"
+          },
+          {
+            "clue": "mem______",
+            "answer": "membranes",
+            "hint": "thin pliable sheets or layers acting as selective barriers"
+          },
+          {
+            "clue": "dis______",
+            "answer": "dissolved",
+            "hint": "melted into or integrated into a liquid solution"
+          },
+          {
+            "clue": "inno_______",
+            "answer": "innovations",
+            "hint": "new methods, technological ideas, or advanced designs"
+          }
+        ],
+        "question": {
+          "type": "main_idea",
+          "prompt": "What is the passage mainly about?",
+          "options": [
+            "How reverse osmosis desalination produces freshwater and its energy efficiency improvements",
+            "Why mineral salts should be dumped directly into freshwater rivers",
+            "The complete abandonment of coastal water treatment facilities"
+          ],
+          "answer": 0,
+          "explanation_tr": "Metin ters ozmoz ile deniz suyundan tatlı su elde etme sürecini ve enerji verimliliğindeki gelişmeleri açıklar."
         }
       }
     ],

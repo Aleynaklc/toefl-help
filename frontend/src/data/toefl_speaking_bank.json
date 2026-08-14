@@ -1,0 +1,308 @@
+{
+  "metadata": {
+    "version": "2026.1",
+    "title": "TOEFL iBT 2026 Speaking Item Bank",
+    "description": "Listen & Repeat and Independent Interview speaking drills with model answers and lexical targets."
+  },
+  "listen_repeat": [
+    {
+      "id": "spk-rep-001",
+      "sentence": "The lecture will begin in the main auditorium at nine o'clock sharp.",
+      "translation_tr": "Ders tam saat dokuzda ana oditoryumda başlayacak.",
+      "level": "B1",
+      "category": "Kampüs Yaşamı",
+      "key_words": ["lecture", "auditorium", "nine o'clock", "sharp"],
+      "target_seconds": 8
+    },
+    {
+      "id": "spk-rep-002",
+      "sentence": "Students who registered late should confirm their laboratory section today.",
+      "translation_tr": "Geç kayıt yaptıran öğrenciler laboratuvar şubelerini bugün onaylamalıdır.",
+      "level": "B1",
+      "category": "Akademik İdare",
+      "key_words": ["registered", "confirm", "laboratory section"],
+      "target_seconds": 9
+    },
+    {
+      "id": "spk-rep-003",
+      "sentence": "Although the library is being renovated, digital course reserves remain available online.",
+      "translation_tr": "Kütüphane tadilatta olmasına rağmen, dijital ders kaynakları çevrim içi olarak erişilebilir kalmaktadır.",
+      "level": "B2",
+      "category": "Kütüphane & Kaynaklar",
+      "key_words": ["renovated", "digital course reserves", "available online"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-004",
+      "sentence": "The professor argues that urban wetlands reduce flooding while preserving local biodiversity.",
+      "translation_tr": "Profesör, kentsel sulak alanların yerel biyoçeşitliliği korurken taşkınları azalttığını savunuyor.",
+      "level": "B2",
+      "category": "Çevre Bilimi",
+      "key_words": ["urban wetlands", "reduce flooding", "preserving biodiversity"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-005",
+      "sentence": "Because the initial experiment produced inconsistent data, the research team repeated the procedure under stricter conditions.",
+      "translation_tr": "İlk deney tutarsız veriler ürettiği için araştırma ekibi prosedürü daha sıkı koşullar altında tekrarladı.",
+      "level": "C1",
+      "category": "Bilimsel Araştırma",
+      "key_words": ["inconsistent data", "research team", "procedure", "stricter conditions"],
+      "target_seconds": 12
+    },
+    {
+      "id": "spk-rep-006",
+      "sentence": "When universities evaluate online learning platforms, they must consider accessibility and academic integrity.",
+      "translation_tr": "Üniversiteler çevrim içi öğrenme platformlarını değerlendirirken erişilebilirlik ve akademik dürüstlüğü göz önünde bulundurmalıdır.",
+      "level": "B2",
+      "category": "Eğitim Teknolojisi",
+      "key_words": ["evaluate", "online learning", "accessibility", "academic integrity"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-007",
+      "sentence": "The museum's new exhibit demonstrates how ancient trade networks influenced artistic styles across continents.",
+      "translation_tr": "Müzenin yeni sergisi, antik ticaret ağlarının kıtalar genelinde sanatsal stilleri nasıl etkilediğini gösteriyor.",
+      "level": "B2",
+      "category": "Sanat & Tarih",
+      "key_words": ["exhibit", "trade networks", "artistic styles", "ancient civilizations"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-008",
+      "sentence": "Cognitive psychologists suggest that spaced repetition significantly enhances long-term memory retention.",
+      "translation_tr": "Bilişsel psikologlar, aralıklı tekrarın uzun süreli hafızada tutmayı önemli ölçüde artırdığını öne sürüyor.",
+      "level": "C1",
+      "category": "Psikoloji",
+      "key_words": ["cognitive psychologists", "spaced repetition", "memory retention"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-009",
+      "sentence": "Renewable energy sources are becoming increasingly cost-effective compared to traditional fossil fuels.",
+      "translation_tr": "Yenilenebilir enerji kaynakları geleneksel fosil yakıtlara kıyasla giderek daha uygun maliyetli hale geliyor.",
+      "level": "B2",
+      "category": "Enerji & Ekonomi",
+      "key_words": ["renewable energy", "cost-effective", "fossil fuels"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-010",
+      "sentence": "The international symposium on climate adaptation will host keynote speakers from twelve different countries.",
+      "translation_tr": "İklim uyumu konulu uluslararası sempozyum, on iki farklı ülkeden açılış konuşmacılarını ağırlayacak.",
+      "level": "C1",
+      "category": "Uluslararası Etkinlik",
+      "key_words": ["symposium", "climate adaptation", "keynote speakers"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-011",
+      "sentence": "Photosynthesis enables green plants to convert solar radiation into chemical energy.",
+      "translation_tr": "Fotosentez, yeşil bitkilerin güneş radyasyonunu kimyasal enerjiye dönüştürmesini sağlar.",
+      "level": "B2",
+      "category": "Biyoloji",
+      "key_words": ["photosynthesis", "solar radiation", "chemical energy"],
+      "target_seconds": 9
+    },
+    {
+      "id": "spk-rep-012",
+      "sentence": "Macroeconomic indicators indicate that consumer spending has stabilized over the past two quarters.",
+      "translation_tr": "Makroekonomik göstergeler, tüketici harcamalarının son iki çeyrekte dengelendiğini gösteriyor.",
+      "level": "C1",
+      "category": "Ekonomi",
+      "key_words": ["macroeconomic indicators", "consumer spending", "stabilized", "quarters"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-013",
+      "sentence": "Urban planners must incorporate adequate green spaces to mitigate the urban heat island effect.",
+      "translation_tr": "Şehir plancıları, kentsel ısı adası etkisini hafifletmek için yeterli yeşil alanları dahil etmelidir.",
+      "level": "C1",
+      "category": "Şehir Planlama",
+      "key_words": ["urban planners", "adequate green spaces", "mitigate", "heat island effect"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-014",
+      "sentence": "Early submission of your thesis proposal guarantees timely feedback from your advisory committee.",
+      "translation_tr": "Tez önerinizin erken teslim edilmesi, danışma kurulunuzdan zamanında geri bildirim almanızı garanti eder.",
+      "level": "B2",
+      "category": "Akademik Yazım",
+      "key_words": ["thesis proposal", "guarantees", "timely feedback", "advisory committee"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-015",
+      "sentence": "Marine biologists discovered a previously undocumented species of coral near the volcanic ridge.",
+      "translation_tr": "Deniz biyologları, volkanik sırtın yakınında daha önce belgelenmemiş bir mercan türü keşfetti.",
+      "level": "B2",
+      "category": "Deniz Biyolojisi",
+      "key_words": ["marine biologists", "undocumented species", "coral", "volcanic ridge"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-016",
+      "sentence": "Despite severe budget cuts, the department maintained high standards of undergraduate instruction.",
+      "translation_tr": "Ciddi bütçe kesintilerine rağmen, bölüm lisans öğretiminde yüksek standartları korudu.",
+      "level": "B2",
+      "category": "Üniversite Yönetimi",
+      "key_words": ["budget cuts", "maintained", "undergraduate instruction"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-017",
+      "sentence": "Archaeological excavations reveal that the settlement possessed an advanced irrigation network.",
+      "translation_tr": "Arkeolojik kazılar, yerleşimin gelişmiş bir sulama ağına sahip olduğunu ortaya koyuyor.",
+      "level": "C1",
+      "category": "Arkeoloji",
+      "key_words": ["archaeological excavations", "settlement", "irrigation network"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-018",
+      "sentence": "Telescopic observations confirmed that the exoplanet orbits within its star's habitable zone.",
+      "translation_tr": "Teleskopik gözlemler, ötegezegenin yıldızının yaşanabilir bölgesi içinde yörüngede döndüğünü doğruladı.",
+      "level": "C1",
+      "category": "Astronomi",
+      "key_words": ["telescopic observations", "exoplanet orbits", "habitable zone"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-019",
+      "sentence": "Interdisciplinary collaboration allows scientists to tackle multifaceted global challenges more effectively.",
+      "translation_tr": "Disiplinler arası iş birliği, bilim insanlarının çok yönlü küresel zorluklarla daha etkili bir şekilde başa çıkmasını sağlar.",
+      "level": "C2",
+      "category": "Bilimsel Araştırma",
+      "key_words": ["interdisciplinary collaboration", "multifaceted", "global challenges"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-020",
+      "sentence": "The financial aid office will distribute merit-based scholarships before the beginning of the semester.",
+      "translation_tr": "Mali yardım ofisi, dönem başlamadan önce başarıya dayalı bursları dağıtacaktır.",
+      "level": "B1",
+      "category": "Burs & Finans",
+      "key_words": ["financial aid", "distribute", "merit-based scholarships", "semester"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-021",
+      "sentence": "Subterranean aquifers supply freshwater to agricultural regions experiencing prolonged droughts.",
+      "translation_tr": "Yeraltı akiferleri, uzun süreli kuraklık yaşayan tarım bölgelerine tatlı su sağlar.",
+      "level": "C2",
+      "category": "Jeoloji & Çevre",
+      "key_words": ["subterranean aquifers", "freshwater", "agricultural", "prolonged droughts"],
+      "target_seconds": 11
+    },
+    {
+      "id": "spk-rep-022",
+      "sentence": "Students must demonstrate proficiency in analytical reasoning before enrolling in advanced statistics.",
+      "translation_tr": "Öğrenciler ileri istatistik dersine kaydolmadan önce analitik akıl yürütme yeterliliği göstermelidir.",
+      "level": "B2",
+      "category": "Matematik & İstatistik",
+      "key_words": ["demonstrate proficiency", "analytical reasoning", "advanced statistics"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-023",
+      "sentence": "Acoustic engineers modified the concert hall's ceiling panels to eliminate unwanted echoes.",
+      "translation_tr": "Akustik mühendisleri, istenmeyen yankıları ortadan kaldırmak için konser salonunun tavan panellerini değiştirdi.",
+      "level": "B2",
+      "category": "Mühendislik & Ses",
+      "key_words": ["acoustic engineers", "modified", "eliminate unwanted echoes"],
+      "target_seconds": 10
+    },
+    {
+      "id": "spk-rep-024",
+      "sentence": "Behavioral economists examine how psychological biases undermine rational decision-making in markets.",
+      "translation_tr": "Davranışsal iktisatçılar, psikolojik önyargıların piyasalardaki rasyonel karar almayı nasıl zedelediğini inceler.",
+      "level": "C2",
+      "category": "Ekonomi & Davranış",
+      "key_words": ["behavioral economists", "psychological biases", "undermine rational decision-making"],
+      "target_seconds": 12
+    },
+    {
+      "id": "spk-rep-025",
+      "sentence": "The historical archive contains handwritten correspondence between notable eighteenth-century philosophers.",
+      "translation_tr": "Tarihi arşiv, on sekizinci yüzyılın önde gelen filozofları arasındaki el yazması yazışmaları içermektedir.",
+      "level": "C1",
+      "category": "Tarih & Felsefe",
+      "key_words": ["historical archive", "handwritten correspondence", "notable philosophers"],
+      "target_seconds": 11
+    }
+  ],
+  "interview": [
+    {
+      "id": "spk-int-001",
+      "prompt": "Some students prefer studying alone in a quiet room, while others prefer studying in groups with classmates. Which study environment do you believe is more effective, and why?",
+      "prompt_tr": "Bazı öğrenciler sessiz bir odada tek başına çalışmayı tercih ederken, bazıları sınıf arkadaşlarıyla grup halinde çalışmayı tercih eder. Hangi çalışma ortamının daha verimli olduğunu düşünüyorsunuz ve neden?",
+      "category": "Eğitim & Çalışma Alışkanlıkları",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["deep concentration", "eliminate distractions", "collaborative brainstorming", "diverse perspectives"],
+      "signal_words": ["Personally, I firmly believe that", "First of all", "For instance", "Furthermore", "In conclusion"],
+      "sample_response": "Personally, I firmly believe that studying alone is far more effective than group study. First of all, individual study eliminates distractions and allows deep concentration. When I study by myself, I can work at my own pace and focus on challenging concepts without interruptions. For instance, while preparing for my calculus midterm last semester, studying alone enabled me to review difficult formulas thoroughly. Furthermore, group sessions often turn into social conversations rather than productive study. Therefore, studying alone provides better academic results.",
+      "sample_response_tr": "Kişisel olarak tek başına çalışmanın grup çalışmasından çok daha etkili olduğuna kesinlikle inanıyorum. Öncelikle bireysel çalışma dikkat dağıtıcı unsurları ortadan kaldırır ve derin odaklanma sağlar..."
+    },
+    {
+      "id": "spk-int-002",
+      "prompt": "Do you agree or disagree with the statement that universities should require all students to complete an internship before graduation? Support your opinion with specific reasons and examples.",
+      "prompt_tr": "Üniversitelerin tüm öğrencilerin mezun olmadan önce bir staj tamamlamasını zorunlu kılması gerektiği fikrine katılıyor musunuz? Görüşünüzü gerekçelerle destekleyin.",
+      "category": "Kariyer & Üniversite Politikası",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["hands-on experience", "competitive job market", "bridge the gap", "professional networking"],
+      "signal_words": ["I strongly agree that", "The primary reason is", "To illustrate", "In addition", "For these reasons"],
+      "sample_response": "I strongly agree that universities should require mandatory internships for all students. The primary reason is that internships provide indispensable hands-on experience that bridges theoretical knowledge with real-world application. To illustrate, when university graduates apply for entry-level positions, employers prioritize candidates who already understand workplace dynamics and practical skills. In addition, internships offer valuable networking opportunities with industry mentors, which significantly increases post-graduation employment rates. For these reasons, requiring internships is vital for student career readiness.",
+      "sample_response_tr": "Üniversitelerin tüm öğrenciler için stajı zorunlu kılması gerektiğine kesinlikle katılıyorum. Başlıca neden, stajların teorik bilgi ile gerçek dünya uygulaması arasında köprü kurmasıdır..."
+    },
+    {
+      "id": "spk-int-003",
+      "prompt": "Some people believe that technology has made communication between people easier and more meaningful, while others argue it has weakened personal relationships. What is your view?",
+      "prompt_tr": "Bazı insanlar teknolojinin insanlar arasındaki iletişimi daha kolay ve anlamlı kıldığını düşünürken, bazıları kişisel ilişkileri zayıflattığını savunuyor. Sizin görüşünüz nedir?",
+      "category": "Teknoloji & Toplum",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["instant connectivity", "geographical barriers", "superficial interactions", "maintain meaningful relationships"],
+      "signal_words": ["In my perspective", "On one hand", "Most importantly", "As an example", "To sum up"],
+      "sample_response": "In my perspective, technology has made communication significantly more accessible, though it requires mindful usage. Most importantly, digital platforms eliminate geographical barriers, enabling people to maintain close relationships regardless of physical distance. As an example, video conferencing and messaging apps allow international students like myself to converse daily with family members overseas. While some critics argue that screen time reduces face-to-face depth, technology ultimately provides constant support and vital connectivity when used responsibly. To sum up, technology enhances modern human connection.",
+      "sample_response_tr": "Benim bakış açıma göre teknoloji, bilinçli kullanıldığında iletişimi önemli ölçüde daha erişilebilir kılmıştır. En önemlisi, dijital platformlar coğrafi engelleri ortadan kaldırır..."
+    },
+    {
+      "id": "spk-int-004",
+      "prompt": "If your university received a substantial financial grant, would you recommend spending it on upgrading athletic and recreational facilities, or on modernizing campus scientific laboratories? Explain your choice.",
+      "prompt_tr": "Üniversiteniz yüklü bir mali hibe alsaydı, bunun spor ve rekreasyon tesislerini yenilemeye mi yoksa bilim laboratuvarlarını modernize etmeye mi harcanmasını önerirdiniz?",
+      "category": "Kampüs Kaynakları",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["academic excellence", "cutting-edge equipment", "scientific breakthrough", "attract top faculty"],
+      "signal_words": ["Without hesitation, I would recommend", "First and foremost", "Specifically", "Moreover", "In conclusion"],
+      "sample_response": "Without hesitation, I would recommend investing the grant in modernizing scientific laboratories. First and foremost, a university's core mission is academic excellence and scientific discovery. Equipping laboratories with cutting-edge technology directly enhances research quality and attracts top-tier faculty and graduate researchers. Specifically, updated equipment enables students to conduct sophisticated experiments that prepare them for advanced careers in medicine and engineering. Moreover, groundbreaking lab research brings prestige and further grants to the university. Therefore, modernizing laboratories provides far greater institutional value.",
+      "sample_response_tr": "Tereddüt etmeden hibenin bilimsel laboratuvarların modernizasyonuna yatırılmasını önerirdim. Her şeyden önce bir üniversitenin temel misyonu akademik mükemmeliyettir..."
+    },
+    {
+      "id": "spk-int-005",
+      "prompt": "Describe a difficult challenge or problem you encountered in your academic life, how you resolved it, and what you learned from the experience.",
+      "prompt_tr": "Akademik hayatınızda karşılaştığınız zor bir durumu veya problemi, bunu nasıl çözdüğünüzü ve bu deneyimden ne öğrendiğinizi anlatın.",
+      "category": "Kişisel Deneyim & Problem Çözme",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["overcome obstacles", "time management", "consult the professor", "resilience and adaptability"],
+      "signal_words": ["One of the most demanding challenges was", "To tackle this issue", "Specifically", "Ultimately", "This experience taught me that"],
+      "sample_response": "One of the most demanding challenges I encountered was struggling with an advanced academic statistics course during my sophomore year. To tackle this issue, I recognized that passive reading was insufficient, so I scheduled weekly office hours with my professor and organized a dedicated peer review routine. Specifically, I broke down complex analytical formulas into daily practice exercises. Ultimately, I improved my performance from a failing grade to an A minus on the final exam. This experience taught me that proactive communication and persistent discipline can overcome any academic hurdle.",
+      "sample_response_tr": "Karşılaştığım en zorlu durumlardan biri, ikinci sınıfta ileri istatistik dersinde zorlanmamdı. Bu sorunu çözmek için pasif okumanın yetersiz olduğunu fark ettim..."
+    },
+    {
+      "id": "spk-int-006",
+      "prompt": "Some people prefer living in vibrant, bustling metropolitan cities, while others prefer living in tranquil small towns or rural areas. Which lifestyle do you prefer, and why?",
+      "prompt_tr": "Bazı insanlar hareketli büyük metropollerde yaşamayı tercih ederken, bazıları sakin kasabalarda veya kırsal bölgelerde yaşamayı tercih eder. Siz hangi yaşam tarzını tercih edersiniz?",
+      "category": "Yaşam Tarzı & Toplum",
+      "prep_seconds": 15,
+      "speak_seconds": 45,
+      "key_vocabulary": ["cultural diversity", "career opportunities", "public infrastructure", "vibrant lifestyle"],
+      "signal_words": ["I unequivocally prefer", "The main advantage is", "For example", "In addition", "Consequently"],
+      "sample_response": "I unequivocally prefer living in a bustling metropolitan city. The main advantage is the unparalleled abundance of educational, cultural, and professional opportunities. Metropolitan centers host major international companies, diverse cultural institutions, and extensive public transit networks. For example, living in a major city allows me to attend academic seminars, visit world-class museums, and network with industry professionals on a regular basis. In addition, cities offer unmatched diversity and dynamic community events. Consequently, city life fosters greater personal and professional growth.",
+      "sample_response_tr": "Kesinlikle hareketli bir metropolde yaşamayı tercih ederim. En büyük avantaj, eğitim, kültür ve kariyer fırsatlarının benzersiz zenginliğidir..."
+    }
+  ]
+}

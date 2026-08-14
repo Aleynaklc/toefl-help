@@ -1,0 +1,784 @@
+{
+  "version": "2026.1",
+  "title": "TOEFL iBT 2026 Full-Featured Mini Mock Exams",
+  "scoring_model": {
+    "sections": ["reading", "listening", "writing", "speaking"],
+    "section_max": 30,
+    "total_max": 120,
+    "band_range": [1.0, 6.0]
+  },
+  "exams": [
+    {
+      "id": "mock-001",
+      "title": "2026 Mini Deneme Sınavı 1",
+      "subtitle": "Doğa Bilimleri, Kampüs Yaşamı ve Çevre Politikası",
+      "target_minutes": 38,
+      "reading": {
+        "title": "Section 1 · Reading",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "complete_words",
+            "title": "Task 1: Complete the Words",
+            "instruction": "Pasajdaki eksik harfleri bağlamdan yola çıkarak doğru şekilde tamamlayın.",
+            "passage": "A wetland can absorb excess rainwater and release it slowly into nearby rivers. This natural process reduces flooding in cities and creates habitats for migratory birds. However, many wetlands have been drained for construction, which has made urban areas more vulnerable to severe storms.",
+            "blanks": [
+              { "id": "b1", "clue": "abs___", "answer": "absorb", "prefix": "abs", "suffix": "orb", "hint": "sıvıyı veya bilgiyi içine çekmek" },
+              { "id": "b2", "clue": "rel___", "answer": "release", "prefix": "rel", "suffix": "ease", "hint": "serbest bırakmak / salmak" },
+              { "id": "b3", "clue": "hab____", "answer": "habitats", "prefix": "hab", "suffix": "itats", "hint": "doğal yaşam alanları" },
+              { "id": "b4", "clue": "mig_____", "answer": "migratory", "prefix": "mig", "suffix": "ratory", "hint": "mevsimsel göç eden" },
+              { "id": "b5", "clue": "vul_______", "answer": "vulnerable", "prefix": "vul", "suffix": "nerable", "hint": "kolayca zarar görebilen / savunmasız" }
+            ],
+            "explanation_tr": "Sulak alanlar fazla yağmur suyunu emer (absorb) ve yavaşça salar (release). Kuşlar için doğal yaşam alanı (habitats) oluştururken göçmen (migratory) türleri destekler. Kurutulmaları şehirleri fırtınalara karşı savunmasız (vulnerable) hale getirir."
+          },
+          {
+            "type": "read_daily_life",
+            "title": "Task 2: Read in Daily Life",
+            "instruction": "Aşağıdaki kütüphane çalışma odası rezervasyon duyurusunu okuyup soruları yanıtlayın.",
+            "material_title": "Campus Library: Group Study Room Policy Update",
+            "material_text": "Starting next Monday, students may reserve group study rooms up to 72 hours in advance via the university portal. A minimum of three registered students is required to maintain a booking. If a group fails to check in within 15 minutes of their scheduled time, the reservation will be automatically cancelled and made available to walk-in groups. Individual study is strictly prohibited in these rooms.",
+            "questions": [
+              {
+                "id": "m1-r-q1",
+                "question": "What is the earliest a group can book a study room?",
+                "options": [
+                  "15 minutes before the session starts",
+                  "24 hours prior to use",
+                  "72 hours in advance",
+                  "One week before next Monday"
+                ],
+                "correct": 2,
+                "explanation_tr": "Metinde 'students may reserve group study rooms up to 72 hours in advance' (72 saat öncesine kadar) ifadesi açıkça belirtilmiştir."
+              },
+              {
+                "id": "m1-r-q2",
+                "question": "What happens if a reserved group arrives 20 minutes late?",
+                "options": [
+                  "They receive an academic penalty fee.",
+                  "Their booking is forfeited and offered to other students.",
+                  "They must present individual student IDs at the circulation desk.",
+                  "The room remains locked until the next hour."
+                ],
+                "correct": 1,
+                "explanation_tr": "15 dakika içinde giriş (check-in) yapılmazsa rezervasyon otomatik iptal edilir ve bekleyen diğer öğrencilere açılır ('automatically cancelled and made available to walk-in groups')."
+              }
+            ]
+          },
+          {
+            "type": "read_academic_passage",
+            "title": "Task 3: Read an Academic Passage",
+            "instruction": "Güneş enerjisi teknolojisine dair kısa akademik pasajı okuyup soruları cevaplayın.",
+            "passage_title": "Solar Photovoltaic Efficiency and Degradation",
+            "passage_text": "Modern photovoltaic (PV) cells convert solar radiation into electricity through the photovoltaic effect. While silicon-based cells achieve commercial efficiencies around 22 percent, operational longevity remains constrained by thermal degradation. Sustained exposure to high operating temperatures accelerates material fatigue in cell junctions. Consequently, material scientists are developing perovskite-silicon tandem configurations that optimize absorption across the broader solar spectrum while mitigating heat-induced efficiency losses.",
+            "questions": [
+              {
+                "id": "m1-r-q3",
+                "question": "The word 'constrained' in the passage is closest in meaning to:",
+                "options": ["enhanced", "limited", "measured", "accelerated"],
+                "correct": 1,
+                "explanation_tr": "'Constrained' kısıtlanmış, sınırlandırılmış anlamına gelir; bu bağlamda en yakın karşılığı 'limited'dır."
+              },
+              {
+                "id": "m1-r-q4",
+                "question": "According to the passage, why are scientists researching perovskite-silicon tandem cells?",
+                "options": [
+                  "To replace solar power with thermal geothermal heating",
+                  "To eliminate the need for silicon-based semiconductor materials entirely",
+                  "To broaden light absorption while reducing heat-related performance decline",
+                  "To lower commercial manufacturing costs below traditional fossil fuel plants"
+                ],
+                "correct": 2,
+                "explanation_tr": "Metnin son cümlesinde tandem yapıların 'optimize absorption across the broader solar spectrum while mitigating heat-induced efficiency losses' (spektrumu genişletip ısı kaynaklı kayıpları azaltma) amacıyla geliştirildiği ifade edilmiştir."
+              }
+            ]
+          }
+        ]
+      },
+      "listening": {
+        "title": "Section 2 · Listening",
+        "time_seconds": 600,
+        "tasks": [
+          {
+            "type": "choose_response",
+            "title": "Task 1: Choose a Response",
+            "audio_text": "Excuse me, professor, do you have a few minutes to clarify the grading rubric for the term paper before Friday?",
+            "context": "A student approaches her biology professor after class.",
+            "question": "Which response is most appropriate?",
+            "options": [
+              "I already submitted the final grades to the registrar yesterday afternoon.",
+              "Certainly. Please stop by my office hours tomorrow between two and four.",
+              "No, the textbook does not contain any supplementary practice questions.",
+              "You should purchase a parking permit at the student center."
+            ],
+            "correct": 1,
+            "explanation_tr": "Öğrenci dönem ödevi rubriği hakkında soru sormaktadır. Profesörün uygun yanıtı yarınki ofis saatlerine davet etmektir."
+          },
+          {
+            "type": "conversation",
+            "title": "Task 2: Campus Conversation",
+            "context": "A student speaks with a laboratory safety coordinator regarding missing orientation credentials.",
+            "dialogue": [
+              { "speaker": "Student", "text": "Hi, I was told I cannot access the organic chemistry lab today because my safety certification isn't showing in the system." },
+              { "speaker": "Coordinator", "text": "Let me check. It looks like you completed the lecture module, but you haven't done the practical hazardous waste disposal quiz." },
+              { "speaker": "Student", "text": "Oh, I thought that was optional for introductory courses. Can I take it online right now?" },
+              { "speaker": "Coordinator", "text": "Yes, it takes about ten minutes on the portal. Once you submit it and score at least eighty percent, the badge syncs with your ID immediately." }
+            ],
+            "questions": [
+              {
+                "id": "m1-l-q1",
+                "question": "Why was the student initially denied entry to the laboratory?",
+                "options": [
+                  "He arrived after the designated laboratory start time.",
+                  "He had not completed the required hazardous waste disposal quiz.",
+                  "He forgot to bring his protective safety goggles.",
+                  "His course tuition fee was past due."
+                ],
+                "correct": 1,
+                "explanation_tr": "Koordinatör 'you haven't done the practical hazardous waste disposal quiz' diyerek giriş izninin bu eksiklik yüzünden verilmediğini açıklar."
+              },
+              {
+                "id": "m1-l-q2",
+                "question": "What must the student do to gain access to the lab today?",
+                "options": [
+                  "Reschedule the lab session for next week.",
+                  "Obtain a written signature from the head of department.",
+                  "Score at least 80% on a short online portal quiz.",
+                  "Pay an administrative orientation processing fee."
+                ],
+                "correct": 2,
+                "explanation_tr": "Koordinatör online portaldaki testi çözüp en az %80 puan alması gerektiğini ('score at least eighty percent') belirtir."
+              }
+            ]
+          },
+          {
+            "type": "academic_talk",
+            "title": "Task 3: Academic Talk (Marine Biology)",
+            "context": "A marine biology professor delivers a short lecture on coral bleaching mechanisms.",
+            "audio_text": "Coral bleaching is often misunderstood as the immediate death of coral colonies. In reality, it represents a breakdown in the symbiotic partnership between the coral host and microscopic algae known as zooxanthellae. When ocean temperatures rise by merely one or two degrees Celsius above seasonal maximums, the algae produce toxic reactive oxygen species. To protect itself, the coral polyp expels the algae, losing its vibrant pigmentation and primary nutrient source. If elevated thermal stress persists for several weeks, the coral starves; however, if temperatures normalize promptly, corals can reacquire algae and fully recover.",
+            "questions": [
+              {
+                "id": "m1-l-q3",
+                "question": "What is the primary cause of coral bleaching explained in the lecture?",
+                "options": [
+                  "Predation by invasive deep-sea species",
+                  "The coral polyp expelling its symbiotic algae due to elevated water temperatures",
+                  "Mechanical damage caused by commercial marine shipping",
+                  "A permanent genetic mutation occurring in cold ocean waters"
+                ],
+                "correct": 1,
+                "explanation_tr": "Metinde mercan ağarmasının ana sebebinin artan sıcaklık sonucu polipin algleri dışarı atması ('coral polyp expels the algae') olduğu anlatılır."
+              },
+              {
+                "id": "m1-l-q4",
+                "question": "What happens if water temperatures return to normal relatively quickly?",
+                "options": [
+                  "The coral permanently fossilizes into limestone.",
+                  "The coral can reacquire algae and recover.",
+                  "The algae become toxic to surrounding fish populations.",
+                  "The colony must be relocated by researchers."
+                ],
+                "correct": 1,
+                "explanation_tr": "Son cümlede 'if temperatures normalize promptly, corals can reacquire algae and fully recover' (hızla normale dönerse iyileşebilir) denmektedir."
+              }
+            ]
+          }
+        ]
+      },
+      "writing": {
+        "title": "Section 3 · Writing",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "build_sentence",
+            "title": "Task 1: Build a Sentence (3 Soru)",
+            "instruction": "Verilen kelimeleri doğru gramer sırasına dizin ve 1 adet çeldirici kelimeyi dışarıda bırakın.",
+            "items": [
+              {
+                "id": "m1-w-b1",
+                "tokens": ["although", "the", "experiment", "failed", "initially", "provided", "it", "valuable", "insights", "because"],
+                "decoy": "because",
+                "correct_sentence": "Although the experiment failed initially it provided valuable insights.",
+                "explanation_tr": "'Although' ile başlayan zıtlık yan cümleciği ana cümleye bağlanır; 'because' çeldiricidir."
+              },
+              {
+                "id": "m1-w-b2",
+                "tokens": ["students", "must", "submit", "their", "proposals", "before", "the", "deadline", "yesterday"],
+                "decoy": "yesterday",
+                "correct_sentence": "Students must submit their proposals before the deadline.",
+                "explanation_tr": "Gereklilik kipi 'must submit' geleceğe/genel kurala bakar; 'yesterday' çeldiricidir."
+              },
+              {
+                "id": "m1-w-b3",
+                "tokens": ["renewable", "energy", "reduces", "carbon", "emissions", "substantially", "while", "pollutes"],
+                "decoy": "pollutes",
+                "correct_sentence": "Renewable energy reduces carbon emissions substantially.",
+                "explanation_tr": "'Renewable energy reduces carbon emissions substantially.' cümlesinde 'pollutes' fazlalıktır."
+              }
+            ]
+          },
+          {
+            "type": "email",
+            "title": "Task 2: Write an Email",
+            "instruction": "Aşağıdaki senaryoyu okuyup 3 hedef maddeyi eksiksiz içeren 80-120 kelimelik bir e-posta yazın.",
+            "scenario": "You are living in a university dormitory, and the Wi-Fi connection on your floor has been intermittent for three days, interfering with your online exam preparations.",
+            "recipient": "Campus IT Support Coordinator",
+            "bullets": [
+              "Sorunu ve kaç gündür devam ettiğini net açıklayın (Describe the problem and duration).",
+              "Bu arızanın akademik çalışmalarınızı nasıl etkilediğini belirtin (Explain how it impacts your study).",
+              "Teknik inceleme veya geçici çözüm talep edin (Request a technician visit or alternative access)."
+            ],
+            "min_words": 80,
+            "max_words": 130,
+            "sample_solution": "Dear IT Support Team,\n\nI am writing to report a persistent internet connectivity issue on the fourth floor of West Hall dormitory. For the past three days, the Wi-Fi signal has been repeatedly dropping every few minutes.\n\nThis disruption is severely affecting my academic coursework, as I am currently preparing for upcoming midterm examinations and need continuous access to lecture recordings and online research databases.\n\nCould you please dispatch a technician to inspect the floor router as soon as possible, or provide temporary access to an alternative network? Thank you for your assistance.\n\nSincerely,\nAlex Morgan"
+          },
+          {
+            "type": "academic_discussion",
+            "title": "Task 3: Write for an Academic Discussion",
+            "instruction": "Profesörün sorusunu ve öğrencilerin görüşlerini okuyup en az 100 kelimelik akademik bir katkı sunun.",
+            "professor_question": "Should municipal governments allocate major transportation funds toward expanding bicycle lanes and pedestrian paths, or toward upgrading public subway and bus transit? Share your reasoned opinion.",
+            "student_a": { "name": "Lena", "text": "Investing in bike lanes promotes personal health and drastically reduces short-distance carbon emissions at a relatively low construction cost." },
+            "student_b": { "name": "David", "text": "Subways and buses are far more essential because they support high-capacity commutes across long distances, regardless of harsh weather." },
+            "min_words": 100,
+            "sample_solution": "In this debate, I firmly align with David's perspective that upgrading public subway and bus transit delivers superior long-term socio-economic benefits. While Lena makes a valid point regarding the health advantages and low installation costs of bicycle lanes, cycling is fundamentally limited by extreme weather conditions and long suburban commute distances. In contrast, a modern, reliable public transit network serves thousands of daily commuters simultaneously, reducing highway congestion and ensuring equitable mobility for low-income residents who cannot bike long distances. For instance, expanding rapid transit lines encourages workers to leave their cars at home, thereby cutting greenhouse gas emissions on a much larger scale. Consequently, public transit upgrades should remain the primary municipal priority."
+          }
+        ]
+      },
+      "speaking": {
+        "title": "Section 4 · Speaking",
+        "time_seconds": 300,
+        "tasks": [
+          {
+            "type": "listen_repeat",
+            "title": "Task 1: Listen & Repeat",
+            "sentence": "The professor argues that urban wetlands reduce flooding while preserving local biodiversity.",
+            "translation_tr": "Profesör, kentsel sulak alanların yerel biyoçeşitliliği korurken taşkınları azalttığını savunuyor.",
+            "key_words": ["urban wetlands", "reduce flooding", "preserving biodiversity"]
+          },
+          {
+            "type": "interview",
+            "title": "Task 2: Independent Interview",
+            "prompt": "Some students prefer studying alone in a quiet room, while others prefer studying in groups with classmates. Which study environment do you believe is more effective, and why?",
+            "prep_seconds": 15,
+            "speak_seconds": 45,
+            "key_vocabulary": ["deep concentration", "eliminate distractions", "academic efficiency"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock-002",
+      "title": "2026 Mini Deneme Sınavı 2",
+      "subtitle": "Bilişsel Psikoloji, Kariyer ve Yapay Zeka Etiği",
+      "target_minutes": 38,
+      "reading": {
+        "title": "Section 1 · Reading",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "complete_words",
+            "title": "Task 1: Complete the Words",
+            "instruction": "Pasajdaki eksik harfleri bağlamdan yola çıkarak tamamlayın.",
+            "passage": "When universities publish course evaluations, students gain useful information about workload and teaching style. Still, evaluations can be misleading if they reflect popularity rather than instructional quality. For that reason, many departments combine student ratings with peer observation.",
+            "blanks": [
+              { "id": "m2-b1", "clue": "eva_______", "answer": "evaluations", "prefix": "eva", "suffix": "luations", "hint": "resmi değerlendirmeler" },
+              { "id": "m2-b2", "clue": "wor_____", "answer": "workload", "prefix": "wor", "suffix": "kload", "hint": "ödev ve iş yükü" },
+              { "id": "m2-b3", "clue": "mis_______", "answer": "misleading", "prefix": "mis", "suffix": "leading", "hint": "yanıltıcı" },
+              { "id": "m2-b4", "clue": "ins___________", "answer": "instructional", "prefix": "ins", "suffix": "tructional", "hint": "öğretimsel / pedagojik" },
+              { "id": "m2-b5", "clue": "rat____", "answer": "ratings", "prefix": "rat", "suffix": "ings", "hint": "puanlamalar" }
+            ],
+            "explanation_tr": "Ders değerlendirmeleri (evaluations) iş yükü (workload) hakkında bilgi verir; ancak popülerliği yansıtırsa yanıltıcı (misleading) olabilir. Bu yüzden öğretimsel (instructional) kalite için akran gözlemiyle puanlar (ratings) birleştirilir."
+          },
+          {
+            "type": "read_daily_life",
+            "title": "Task 2: Read in Daily Life",
+            "instruction": "Öğrenci kariyer ve staj fuarı ilanını inceleyip soruları yanıtlayın.",
+            "material_title": "Annual STEM & Humanities Career Expo Announcement",
+            "material_text": "The Spring Career Expo will take place this Thursday from 10:00 AM to 3:00 PM at the Student Center Ballroom. Professional business attire is mandatory for admission. Students must register on the CareerLink app before Wednesday midnight to receive an entry badge. Over fifty corporate employers and non-profit organizations will conduct on-site preliminary interviews for summer internships. Bring at least ten printed copies of your resume.",
+            "questions": [
+              {
+                "id": "m2-r-q1",
+                "question": "What is required for students to enter the Career Expo?",
+                "options": [
+                  "Payment of a student entrance fee",
+                  "Advance online app registration and professional attire",
+                  "A recommendation letter from a department chair",
+                  "A minimum academic grade point average"
+                ],
+                "correct": 1,
+                "explanation_tr": "Metinde 'Professional business attire is mandatory' ve 'register on the CareerLink app before Wednesday midnight' şartları açıkça belirtilmiştir."
+              },
+              {
+                "id": "m2-r-q2",
+                "question": "What opportunity will employers offer during the event?",
+                "options": [
+                  "Immediate full-time executive contracts",
+                  "Free professional headshot photography",
+                  "Preliminary on-site interviews for summer internships",
+                  "Discounted textbooks for the upcoming semester"
+                ],
+                "correct": 2,
+                "explanation_tr": "Metne göre 50'den fazla işveren yaz stajları için yerinde ön mülakatlar ('on-site preliminary interviews for summer internships') yapacaktır."
+              }
+            ]
+          },
+          {
+            "type": "read_academic_passage",
+            "title": "Task 3: Read an Academic Passage",
+            "instruction": "Antik ticaret ağları hakkındaki akademik metni okuyup soruları cevaplayın.",
+            "passage_title": "Cross-Cultural Diffusion Along Ancient Maritime Routes",
+            "passage_text": "Ancient Indian Ocean trade routes facilitated not only the exchange of physical commodities like spices and ceramics, but also the profound diffusion of architectural and linguistic conventions. Coastal port settlements evolved into cosmopolitan enclaves where merchant guilds negotiated commercial agreements across diverse cultural boundaries. Archaeological findings of hybrid pottery motifs demonstrate that local artisans actively synthesized foreign aesthetics rather than merely imitating imported prototypes.",
+            "questions": [
+              {
+                "id": "m2-r-q3",
+                "question": "The word 'diffusion' in the passage is closest in meaning to:",
+                "options": ["preservation", "spread", "interruption", "taxation"],
+                "correct": 1,
+                "explanation_tr": "'Diffusion' yayılma, dağılma anlamındadır ve en yakın eşanlamlısı 'spread'dir."
+              },
+              {
+                "id": "m2-r-q4",
+                "question": "What do the archaeological findings of hybrid pottery motifs suggest?",
+                "options": [
+                  "Local craftsmen developed entirely independent techniques without foreign influence.",
+                  "Imported ceramics were deemed inferior to indigenous pottery.",
+                  "Artisans creatively combined foreign styles with local traditions.",
+                  "Maritime trade was restricted solely to raw mineral shipments."
+                ],
+                "correct": 2,
+                "explanation_tr": "'Artisans actively synthesized foreign aesthetics' ifadesi, yerel zanaatkârların yabancı stilleri yerel geleneklerle yaratıcı biçimde birleştirdiğini gösterir."
+              }
+            ]
+          }
+        ]
+      },
+      "listening": {
+        "title": "Section 2 · Listening",
+        "time_seconds": 600,
+        "tasks": [
+          {
+            "type": "choose_response",
+            "title": "Task 1: Choose a Response",
+            "audio_text": "Would you mind reviewing my draft introduction before I submit it to the conference committee?",
+            "context": "A graduate student asks a senior peer for academic feedback.",
+            "question": "Which response is most appropriate?",
+            "options": [
+              "The conference takes place in Boston every four years.",
+              "Not at all. Send it to my email and I will take a look this evening.",
+              "I already returned the library book two weeks ago.",
+              "The cafeteria closes at eight on weeknights."
+            ],
+            "correct": 1,
+            "explanation_tr": "'Would you mind reviewing...' (taslağımı incelemenin sakıncası var mı) ricasına uygun olumlu yanıt 'Not at all. Send it to my email...' (Asla sakıncası yok, e-postama gönder) şeklindedir."
+          },
+          {
+            "type": "conversation",
+            "title": "Task 2: Campus Conversation",
+            "context": "A student consults an academic advisor regarding adding a minor in computational linguistics.",
+            "dialogue": [
+              { "speaker": "Advisor", "text": "Hello Clara, I see you want to discuss declaring a minor in computational linguistics." },
+              { "speaker": "Student", "text": "Yes, I'm currently a computer science major, but I'm really interested in natural language processing." },
+              { "speaker": "Advisor", "text": "That's a great combination. You will need eighteen credits, including two syntax courses and an advanced algorithms seminar." },
+              { "speaker": "Student", "text": "Will my introductory Python course count toward the prerequisite requirement?" },
+              { "speaker": "Advisor", "text": "Yes, it fulfills the programming foundation so you can enroll directly in the core linguistics track." }
+            ],
+            "questions": [
+              {
+                "id": "m2-l-q1",
+                "question": "What is Clara's primary purpose for meeting with the advisor?",
+                "options": [
+                  "To request an extension on a computer science assignment",
+                  "To explore adding a computational linguistics minor",
+                  "To withdraw from her introductory programming course",
+                  "To apply for a graduate teaching assistantship"
+                ],
+                "correct": 1,
+                "explanation_tr": "Öğrenci bilgisayar mühendisliği ana dalına ek olarak hesaplamalı dilbilim yan dalı ekleme planını danışmaktadır."
+              },
+              {
+                "id": "m2-l-q2",
+                "question": "How will Clara's completed Python course help her?",
+                "options": [
+                  "It waives all eighteen required minor credits.",
+                  "It satisfies the programming prerequisite for the minor.",
+                  "It qualifies her for an immediate department scholarship.",
+                  "It allows her to skip the advanced algorithms seminar."
+                ],
+                "correct": 1,
+                "explanation_tr": "Danışman 'It fulfills the programming foundation so you can enroll directly' diyerek ön koşulu sağladığını teyit eder."
+              }
+            ]
+          },
+          {
+            "type": "academic_talk",
+            "title": "Task 3: Academic Talk (Behavioral Economics)",
+            "context": "An economics professor explains the concept of 'loss aversion'.",
+            "audio_text": "In neoclassical economics, individuals were assumed to evaluate gains and losses symmetrically. However, behavioral experiments pioneered by Kahneman and Tversky demonstrate that human decision-making exhibits profound loss aversion. Psychologically, the pain of losing one hundred dollars is felt roughly twice as intensely as the joy of gaining the exact same amount. This cognitive bias explains why investors often hold onto plummeting stocks too long in hopes of breaking even, or why consumers are disproportionately reluctant to give up trial subscriptions.",
+            "questions": [
+              {
+                "id": "m2-l-q3",
+                "question": "What is the core premise of loss aversion as described in the talk?",
+                "options": [
+                  "Gains and losses produce identical psychological reactions.",
+                  "The psychological pain of a loss is significantly greater than the pleasure of an equivalent gain.",
+                  "Financial markets always behave in a perfectly rational manner.",
+                  "Consumers prefer losing money over taking financial risks."
+                ],
+                "correct": 1,
+                "explanation_tr": "Kayıptan kaçınma kuramı, bir kaybın acısının aynı miktardaki kazancın hazzından yaklaşık iki kat daha yoğun hissedildiğini ('roughly twice as intensely') belirtir."
+              },
+              {
+                "id": "m2-l-q4",
+                "question": "What real-world example of loss aversion does the professor mention?",
+                "options": [
+                  "Government treasury bond auctions",
+                  "Investors holding declining assets too long to avoid realizing a loss",
+                  "Corporate mergers in the telecommunications sector",
+                  "International currency exchange fluctuations"
+                ],
+                "correct": 1,
+                "explanation_tr": "Metinde yatırımcıların zararı kabullenmemek için düşen hisseleri çok uzun süre ellerinde tutmaları örneği verilir."
+              }
+            ]
+          }
+        ]
+      },
+      "writing": {
+        "title": "Section 3 · Writing",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "build_sentence",
+            "title": "Task 1: Build a Sentence (3 Soru)",
+            "instruction": "Kelimeleri doğru sıraya dizip çeldiriciyi eleyin.",
+            "items": [
+              {
+                "id": "m2-w-b1",
+                "tokens": ["cognitive", "psychologists", "suggest", "that", "spaced", "repetition", "improves", "memory", "forgetting"],
+                "decoy": "forgetting",
+                "correct_sentence": "Cognitive psychologists suggest that spaced repetition improves memory.",
+                "explanation_tr": "'forgetting' çeldiricidir; doğru dizilim hafızanın aralıklı tekrarla geliştiğini ifade eder."
+              },
+              {
+                "id": "m2-w-b2",
+                "tokens": ["the", "symposium", "featured", "keynote", "speakers", "from", "various", "countries", "tomorrow"],
+                "decoy": "tomorrow",
+                "correct_sentence": "The symposium featured keynote speakers from various countries.",
+                "explanation_tr": "Geçmiş zaman fiili 'featured' nedeniyle 'tomorrow' çeldiricidir."
+              },
+              {
+                "id": "m2-w-b3",
+                "tokens": ["regular", "exercise", "enhances", "both", "physical", "and", "mental", "health", "slowly"],
+                "decoy": "slowly",
+                "correct_sentence": "Regular exercise enhances both physical and mental health.",
+                "explanation_tr": "'both X and Y' yapısında 'slowly' fazlalıktır."
+              }
+            ]
+          },
+          {
+            "type": "email",
+            "title": "Task 2: Write an Email",
+            "instruction": "Ders kayıt sisteminde yaşanan aksaklık nedeniyle profesörünüze 80-120 kelimelik bir e-posta yazın.",
+            "scenario": "You attempted to register for an advanced seminar course, but the university registration portal experienced a server crash on the opening day, leaving you on the waiting list.",
+            "recipient": "Professor Harrison",
+            "bullets": [
+              "Dersine olan ilginizi ve portal arızasını anlatın (State your interest and the technical glitch).",
+              "Bu dersin mezuniyet gereksinimleriniz için önemini vurgulayın (Explain why the course is vital for graduation).",
+              "Sınıf kontenjanını aşma veya izin kodu talebinde bulunun (Politely request a course capacity override or add code)."
+            ],
+            "min_words": 80,
+            "max_words": 130,
+            "sample_solution": "Dear Professor Harrison,\n\nI am writing to express my strong interest in taking your Advanced Environmental Policy seminar this semester. Unfortunately, when registration opened yesterday morning, the online student portal crashed, and by the time it was restored, the seminar was already filled.\n\nTaking this course is essential for my academic plan because it satisfies the final upper-level requirement for my environmental studies major ahead of my planned spring graduation.\n\nCould you please consider granting me a course override permission code so that I may enroll? I would be extremely grateful for your understanding.\n\nBest regards,\nJordan Taylor"
+          },
+          {
+            "type": "academic_discussion",
+            "title": "Task 3: Write for an Academic Discussion",
+            "instruction": "Profesörün sorusunu ve öğrencilerin görüşlerini okuyup en az 100 kelimelik akademik bir katkı sunun.",
+            "professor_question": "Should universities permit students to use generative AI writing tools for drafting and brainstorming coursework, provided they formally disclose how the tool was utilized? Share your perspective.",
+            "student_a": { "name": "Hana", "text": "Generative AI is an inevitable workplace tool. Universities should teach students responsible prompting and critical evaluation rather than imposing ineffective bans." },
+            "student_b": { "name": "Mateo", "text": "Allowing AI undermines genuine critical thinking and makes it impossible for educators to assess authentic student writing and analytical reasoning." },
+            "min_words": 100,
+            "sample_solution": "I strongly concur with Hana's perspective that universities should embrace generative AI as an educational tool accompanied by strict transparency guidelines. While Mateo raises a legitimate concern regarding academic integrity and the preservation of authentic analytical skills, outright bans are both impractical to enforce and counterproductive in preparing students for contemporary careers. In today's digital economy, artificial intelligence is rapidly becoming ubiquitous across professional industries; therefore, higher education institutions must equip students with the skills to prompt effectively, cross-verify automated outputs, and refine AI-assisted drafts critically. For instance, requiring students to submit an appendix detailing how AI contributed to their research process fosters honesty while developing technological literacy. By teaching ethical utilization, universities cultivate responsible scholarship without compromising academic rigor."
+          }
+        ]
+      },
+      "speaking": {
+        "title": "Section 4 · Speaking",
+        "time_seconds": 300,
+        "tasks": [
+          {
+            "type": "listen_repeat",
+            "title": "Task 1: Listen & Repeat",
+            "sentence": "Because the initial experiment produced inconsistent data, the research team repeated the procedure under stricter conditions.",
+            "translation_tr": "İlk deney tutarsız veriler ürettiği için araştırma ekibi prosedürü daha sıkı koşullar altında tekrarladı.",
+            "key_words": ["inconsistent data", "research team", "stricter conditions"]
+          },
+          {
+            "type": "interview",
+            "title": "Task 2: Independent Interview",
+            "prompt": "Do you agree or disagree with the statement that universities should require all students to complete an internship before graduation? Support your opinion with specific reasons.",
+            "prep_seconds": 15,
+            "speak_seconds": 45,
+            "key_vocabulary": ["hands-on experience", "competitive advantage", "professional networking"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "mock-003",
+      "title": "2026 Mini Deneme Sınavı 3",
+      "subtitle": "Kentsel İklim, Astronomi ve Kaynak Yönetimi",
+      "target_minutes": 38,
+      "reading": {
+        "title": "Section 1 · Reading",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "complete_words",
+            "title": "Task 1: Complete the Words",
+            "instruction": "Pasajdaki eksik harfleri bağlamdan yola çıkarak tamamlayın.",
+            "passage": "Urban planners must incorporate adequate green spaces to mitigate the urban heat island effect. Vegetated areas absorb solar radiation through evapotranspiration, thereby reducing surface temperatures. Without such interventions, densely populated districts face severe ecological stress.",
+            "blanks": [
+              { "id": "m3-b1", "clue": "inc________", "answer": "incorporate", "prefix": "inc", "suffix": "orporate", "hint": "dahil etmek / bünyesine katmak" },
+              { "id": "m3-b2", "clue": "ade_____", "answer": "adequate", "prefix": "ade", "suffix": "quate", "hint": "yeterli / elverişli" },
+              { "id": "m3-b3", "clue": "mit_____", "answer": "mitigate", "prefix": "mit", "suffix": "igate", "hint": "hafifletmek / etkisini azaltmak" },
+              { "id": "m3-b4", "clue": "sol__", "answer": "solar", "prefix": "sol", "suffix": "ar", "hint": "güneş ile ilgili" },
+              { "id": "m3-b5", "clue": "pop______", "answer": "populated", "prefix": "pop", "suffix": "ulated", "hint": "nüfuslu / yerleşimli" }
+            ],
+            "explanation_tr": "Şehir plancıları ısı adası etkisini hafifletmek (mitigate) için yeterli (adequate) yeşil alanları dahil etmelidir (incorporate). Yoğun nüfuslu (populated) bölgeler güneş (solar) radyasyonu kaynaklı stresle karşılaşır."
+          },
+          {
+            "type": "read_daily_life",
+            "title": "Task 2: Read in Daily Life",
+            "instruction": "Mezuniyet töreni duyurusunu okuyup soruları cevaplayın.",
+            "material_title": "Commencement Ceremony Ticket Distribution",
+            "material_text": "Graduating seniors may claim up to four complimentary guest tickets for the Spring Commencement Ceremony starting May first. All ticket requests must be submitted through the Commencement Portal by May fifteenth. Due to municipal fire safety capacity limits in the arena, extra tickets cannot be purchased through the university. An overflow live-stream viewing hall with open seating will be available in the adjacent Alumni Auditorium for unregistered guests.",
+            "questions": [
+              {
+                "id": "m3-r-q1",
+                "question": "What is the deadline for claiming complimentary commencement tickets?",
+                "options": [
+                  "May first",
+                  "May fifteenth",
+                  "The day of graduation",
+                  "June first"
+                ],
+                "correct": 1,
+                "explanation_tr": "Duyuruda 'All ticket requests must be submitted through the Commencement Portal by May fifteenth' (15 Mayıs'a kadar) denmektedir."
+              },
+              {
+                "id": "m3-r-q2",
+                "question": "What arrangement has been made for guests who do not possess arena tickets?",
+                "options": [
+                  "They may purchase premium tickets at the stadium box office.",
+                  "They can watch a live stream in an adjacent auditorium.",
+                  "They will be seated in the university faculty lounge.",
+                  "They must submit a written appeal to the university chancellor."
+                ],
+                "correct": 1,
+                "explanation_tr": "Bileti olmayan misafirler için yan binadaki Alumni Auditorium'da canlı yayın izleme salonu ('overflow live-stream viewing hall') ayarlanmıştır."
+              }
+            ]
+          },
+          {
+            "type": "read_academic_passage",
+            "title": "Task 3: Read an Academic Passage",
+            "instruction": "Ötegezegen araştırmaları hakkındaki akademik metni okuyup soruları yanıtlayın.",
+            "passage_title": "Atmospheric Spectroscopy of Terrestrial Exoplanets",
+            "passage_text": "The detection of exoplanetary atmospheres relies heavily on transmission spectroscopy, a technique measuring the subtle dimming of starlight as a planet transits its host star. When starlight filters through the planetary atmosphere, specific chemical compounds absorb characteristic wavelengths, leaving spectroscopic fingerprints. Identifying biosignature gases such as methane in conjunction with oxygen remains challenging because non-biological geological processes can occasionally mimic atmospheric disequilibria.",
+            "questions": [
+              {
+                "id": "m3-r-q3",
+                "question": "The word 'subtle' in the passage is closest in meaning to:",
+                "options": ["slight", "destructive", "sudden", "predictable"],
+                "correct": 0,
+                "explanation_tr": "'Subtle' hafif, ince, göze çarpmayan anlamındadır; en yakın karşılığı 'slight'tır."
+              },
+              {
+                "id": "m3-r-q4",
+                "question": "Why is confirming the presence of extraterrestrial life from atmospheric gases challenging?",
+                "options": [
+                  "Transmission spectroscopy cannot detect oxygen under any conditions.",
+                  "Non-biological geological phenomena can produce gas signatures resembling life.",
+                  "Planets in the habitable zone never transit their parent stars.",
+                  "Atmospheric temperatures instantly degrade all chemical compounds."
+                ],
+                "correct": 1,
+                "explanation_tr": "Metinde biyolojik olmayan jeolojik süreçlerin de benzer gaz dengesizlikleri üretebildiği ('non-biological geological processes can occasionally mimic...') vurgulanmıştır."
+              }
+            ]
+          }
+        ]
+      },
+      "listening": {
+        "title": "Section 2 · Listening",
+        "time_seconds": 600,
+        "tasks": [
+          {
+            "type": "choose_response",
+            "title": "Task 1: Choose a Response",
+            "audio_text": "Do you know if the financial aid office has finalized the merit scholarship disbursements for the upcoming term?",
+            "context": "A student inquires with a financial services officer.",
+            "question": "Which response is most appropriate?",
+            "options": [
+              "The chemistry laboratory requires closed-toe footwear.",
+              "Yes, award notifications were sent out to student email inboxes this morning.",
+              "No, the basketball team won the championship game last night.",
+              "You should return the equipment to the athletic storage locker."
+            ],
+            "correct": 1,
+            "explanation_tr": "Burs ödemelerinin kesinleşip kesinleşmediği sorusuna en mantıklı yanıt 'Yes, award notifications were sent out...' (Evet, bildirimler bu sabah e-posta ile gönderildi) şeklindedir."
+          },
+          {
+            "type": "conversation",
+            "title": "Task 2: Campus Conversation",
+            "context": "A student club president discusses budget allocations with a student government treasurer.",
+            "dialogue": [
+              { "speaker": "President", "text": "Hi Marcus, our Robotics Club submitted a special funding request for the regional competition travel expenses." },
+              { "speaker": "Treasurer", "text": "I saw your application. While the finance committee approved your registration fee, we had to cap the lodging reimbursement at fifty percent." },
+              { "speaker": "President", "text": "I see. Can we fundraise the remaining lodging balance independently?" },
+              { "speaker": "Treasurer", "text": "Absolutely. You can host bake sales or seek corporate sponsorships, provided all external funds are deposited through the student union account." }
+            ],
+            "questions": [
+              {
+                "id": "m3-l-q1",
+                "question": "What part of the funding request did the finance committee approve in full?",
+                "options": [
+                  "Hotel lodging accommodations",
+                  "Competition registration fees",
+                  "Airline transportation tickets",
+                  "Robotics hardware development kits"
+                ],
+                "correct": 1,
+                "explanation_tr": "Sayman 'approved your registration fee' diyerek kayıt ücretinin tam onaylandığını söyler."
+              },
+              {
+                "id": "m3-l-q2",
+                "question": "What rule must the club follow when raising independent funds?",
+                "options": [
+                  "All funds must be deposited through the student union account.",
+                  "They cannot accept any corporate sponsorships.",
+                  "Fundraising must be completed within forty-eight hours.",
+                  "The university will match all independently raised donations."
+                ],
+                "correct": 0,
+                "explanation_tr": "Tüm harici fonların öğrenci birliği hesabı üzerinden yatırılması gerektiği ('deposited through the student union account') belirtilir."
+              }
+            ]
+          },
+          {
+            "type": "academic_talk",
+            "title": "Task 3: Academic Talk (Architectural Acoustics)",
+            "context": "An architecture professor lectures on reverberation time in concert hall design.",
+            "audio_text": "Reverberation time, denoted as RT60, is defined as the time required for sound energy in an enclosed space to decay by sixty decibels. In symphonic concert halls, an optimal reverberation time between 1.8 and 2.2 seconds creates warmth and acoustic blend. However, for spaces intended primarily for speech, such as lecture halls and drama theaters, a much shorter reverberation time of under one second is essential to prevent reflected sound from smearing consonants and compromising verbal intelligibility.",
+            "questions": [
+              {
+                "id": "m3-l-q3",
+                "question": "What is the primary function of a short reverberation time in lecture halls?",
+                "options": [
+                  "To amplify bass musical frequencies",
+                  "To ensure speech clarity and verbal intelligibility",
+                  "To eliminate the need for sound-absorbing wall insulation",
+                  "To reflect sound equally into adjacent corridors"
+                ],
+                "correct": 1,
+                "explanation_tr": "Kısa yankılanma süresinin dersliklerde konuşma netliğini ve anlaşılabilirliğini ('verbal intelligibility') sağlamak için zorunlu olduğu açıklanır."
+              },
+              {
+                "id": "m3-l-q4",
+                "question": "What is the recommended reverberation time for a symphonic concert hall?",
+                "options": [
+                  "Less than 0.5 seconds",
+                  "Between 1.8 and 2.2 seconds",
+                  "Exactly 5.0 seconds",
+                  "Zero seconds in total"
+                ],
+                "correct": 1,
+                "explanation_tr": "Metinde senfonik konser salonları için ideal sürenin 1.8 ile 2.2 saniye arası ('between 1.8 and 2.2 seconds') olduğu belirtilmiştir."
+              }
+            ]
+          }
+        ]
+      },
+      "writing": {
+        "title": "Section 3 · Writing",
+        "time_seconds": 720,
+        "tasks": [
+          {
+            "type": "build_sentence",
+            "title": "Task 1: Build a Sentence (3 Soru)",
+            "instruction": "Kelimeleri doğru sıraya dizip çeldiriciyi eleyin.",
+            "items": [
+              {
+                "id": "m3-w-b1",
+                "tokens": ["telescopic", "observations", "confirmed", "that", "the", "exoplanet", "orbits", "a", "star", "brightly"],
+                "decoy": "brightly",
+                "correct_sentence": "Telescopic observations confirmed that the exoplanet orbits a star.",
+                "explanation_tr": "'brightly' çeldiricidir; doğru dizilim ötegezegenin bir yıldızın etrafında döndüğünü doğrular."
+              },
+              {
+                "id": "m3-w-b2",
+                "tokens": ["acoustic", "engineers", "modified", "the", "ceiling", "panels", "to", "reduce", "echoes", "loudly"],
+                "decoy": "loudly",
+                "correct_sentence": "Acoustic engineers modified the ceiling panels to reduce echoes.",
+                "explanation_tr": "'loudly' çeldiricidir; akustik mühendislerinin yankıyı azaltmak için panelleri değiştirdiği ifade edilir."
+              },
+              {
+                "id": "m3-w-b3",
+                "tokens": ["early", "submission", "of", "your", "thesis", "guarantees", "timely", "feedback", "frequently"],
+                "decoy": "frequently",
+                "correct_sentence": "Early submission of your thesis guarantees timely feedback.",
+                "explanation_tr": "'frequently' çeldiricidir."
+              }
+            ]
+          },
+          {
+            "type": "email",
+            "title": "Task 2: Write an Email",
+            "instruction": "Kütüphaneden nadir bir araştırma kaynağının temini için 80-120 kelimelik bir e-posta yazın.",
+            "scenario": "You are writing a senior research thesis and need access to an out-of-print historical manuscript held in the university's special collections archive.",
+            "recipient": "Special Collections Head Librarian",
+            "bullets": [
+              "Tez konunuzu ve ilgili kaynağı belirtin (Mention your thesis topic and the specific manuscript).",
+              "Arşiv odasında inceleme yapmak için randevu talep edin (Request a supervised viewing appointment).",
+              "Sayfaları dijital ortama aktarma izni rica edin (Ask about non-flash photography or digital scan policies)."
+            ],
+            "min_words": 80,
+            "max_words": 130,
+            "sample_solution": "Dear Special Collections Librarian,\n\nI am currently working on my senior history thesis focusing on nineteenth-century municipal water infrastructure. I am writing to request access to the out-of-print archival manuscript titled 'City Waterworks Records (1882)' held in your special collections department.\n\nCould I schedule an appointment next Tuesday afternoon to examine this volume in the reading room? Furthermore, could you please let me know whether non-flash photography is permitted for taking reference notes from these archival pages?\n\nThank you very much for your time and assistance.\n\nSincerely,\nElena Rostova"
+          },
+          {
+            "type": "academic_discussion",
+            "title": "Task 3: Write for an Academic Discussion",
+            "instruction": "Profesörün sorusunu ve öğrencilerin görüşlerini okuyup en az 100 kelimelik akademik bir katkı sunun.",
+            "professor_question": "If a university receives a substantial unrestricted financial endowment, should it prioritize expanding quiet individual study spaces or modern recreational lounges? State and defend your choice.",
+            "student_a": { "name": "Leah", "text": "Expanding quiet study rooms is essential because deep concentration is the primary foundation for academic success, especially during exam periods." },
+            "student_b": { "name": "Omar", "text": "Recreational lounges should take priority because student mental health and community bonding are just as crucial for overall university retention." },
+            "min_words": 100,
+            "sample_solution": "While Omar raises a compelling argument regarding the vital role of mental wellness and peer interaction on campus, I firmly endorse Leah's view that investing in quiet individual study spaces is the more prudent allocation of university funds. An academic institution's primary purpose is to cultivate scholarship and intellectual rigor, which require environments free from noise and distractions. With rising enrollment, students frequently struggle to find tranquil workspaces in overcrowded campus libraries, impairing their ability to engage in deep reading and complex problem-solving. For instance, universities that provide dedicated silent cubicles and reservable study carrels report higher student satisfaction during midterm and final exam weeks. While recreational spaces are beneficial, off-campus cafes and dormitories already offer social venues, making quiet, academically focused facilities a far more unique and indispensable campus asset."
+          }
+        ]
+      },
+      "speaking": {
+        "title": "Section 4 · Speaking",
+        "time_seconds": 300,
+        "tasks": [
+          {
+            "type": "listen_repeat",
+            "title": "Task 1: Listen & Repeat",
+            "sentence": "When universities evaluate online learning platforms, they must consider accessibility and academic integrity.",
+            "translation_tr": "Üniversiteler çevrim içi öğrenme platformlarını değerlendirirken erişilebilirlik ve akademik dürüstlüğü göz önünde bulundurmalıdır.",
+            "key_words": ["evaluate", "online learning", "accessibility", "academic integrity"]
+          },
+          {
+            "type": "interview",
+            "title": "Task 2: Independent Interview",
+            "prompt": "Some people prefer living in vibrant, bustling metropolitan cities, while others prefer living in tranquil small towns. Which lifestyle do you prefer, and why?",
+            "prep_seconds": 15,
+            "speak_seconds": 45,
+            "key_vocabulary": ["cultural diversity", "career opportunities", "dynamic lifestyle"]
+          }
+        ]
+      }
+    }
+  ]
+}
